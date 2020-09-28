@@ -1,0 +1,59 @@
+html, body {
+  /*color: #ffffff !important;
+  background-color: #2b3136 !important;*/
+  height: 100%;
+}
+
+#app {
+  min-height:100%;
+  position:relative;
+}
+
+#contentbody {
+  padding-bottom: 65px;   /* Height of the footer */
+}
+
+footer {
+  position:absolute;
+  bottom:0;
+  width:100%;
+  min-height: 65px;   /* Height of the footer */
+  padding: 5px 15px;
+  border-top: 1px solid #9aa2a87d !important;
+}
+
+
+@media screen and (max-width: 768px) { /* Specific to this particular image */
+  #contentbody {
+    padding-bottom: 130px;   /* Height of the footer */
+  }
+
+  footer {
+    min-height: 130px;   /* Height of the footer */
+  }
+
+  .text-block {
+    width: 100%;
+  }
+
+  #theme {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+
+  #locale {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+}
+
+
+/* Dark Theme CSS
+ *
+ *
+ */
+
+.darktheme {
+  background-color: $darkBgColor;
+  color: $darkThemeTextColor;
+}
