@@ -1,0 +1,62 @@
+server:
+  port: ${PORT:9095}
+spring:
+  profiles:
+    active: myschool-mysql
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+myschool:
+  contact:
+    email: ENC(juW91U3lr0feLS/oUFqlR+BlWkfPWhIH5M9AZuJTPf8=)
+    phone:
+  jwtSecret:  hamarasecret
+  jwtExpirationMs:  86400000
+  security:
+    enabled: true
+  root-dir: .
+  contactUsFile: Contacted_Us.json
+
+jasypt:
+  encryptor:
+    password: ==1k1kc-ur-a55==
+    algorithm: PBEWithSHA1AndRC2_128
+    keyObtentionIterations: 1000
+    poolSize: 1
+    saltGeneratorClassname: org.jasypt.salt.RandomSaltGenerator
+    stringOutputType: base64
+    proxyPropertySources: false
+
+logging:
+  level:
+    root: info
+    com.myschool: debug
+  file:
+    path: ${project.build.directory}/logs/
+    name: myschool-adminservice.log
+    config: classpath:logback-spring.xml
+  #  pattern.level: "%-50mdc{operationId:-no operationId} %5p"
+
+---
+
+spring:
+  profiles: myschool-mysql
+  datasource:
+    url: jdbc:mysql://localhost:3306/myschool_admin?createDatabaseIfNotExist=true&serverTimezone=UTC&useSSL=false
+    username: root
+    password: password1!
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    initialization-mode: always
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+logging:
+  level:
+    root: info
+    com.myschool: debug
+---
