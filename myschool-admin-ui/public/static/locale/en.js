@@ -23,7 +23,8 @@ const messages = {
             save: 'SAVE',
             contactsinfo: 'Contacts Info',
             here: 'here',
-            settings: 'Settings'
+            settings: 'Settings',
+            userprofile: 'USER PROFILE'
         },
 
         //Page titles, card titles, headers, etc

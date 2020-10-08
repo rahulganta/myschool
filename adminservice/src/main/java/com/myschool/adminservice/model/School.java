@@ -19,7 +19,9 @@ public class School {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
 
+    @Column(name = "name", nullable = false, unique = true)
     String name;
+
     String displayName;
     String franchiseName;
     String correspondent;

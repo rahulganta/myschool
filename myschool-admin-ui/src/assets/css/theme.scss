@@ -22,6 +22,68 @@ footer {
   border-top: 1px solid #9aa2a87d !important;
 }
 
+.mi-page-title {
+  padding-bottom: 10px;
+}
+
+.mi-searchbox {
+  box-shadow: 0 1px 6px 0 rgba(32, 33, 36, .28);
+}
+//Text and BG colors
+.mi-text-primary {
+  color: $primaryColor !important;
+}
+.mi-text-secondary {
+  color: $secondaryColor !important;
+}
+
+//Buttons
+.mi-primarybtn {
+  background-color: $primaryColor !important;
+  color: $onPrimary !important;
+  padding: 10px 20px;
+  min-width: 88px;
+  border-radius: 2px;
+  /*font-family: 'Roboto Medium', 'Roboto Regular', 'Roboto';*/
+
+  -moz-box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.349019607843137);
+  -webkit-box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.349019607843137);
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.349019607843137);
+}
+
+.mi-primarybtn:hover, .mi-primarybtn:active {
+  background-color: $primaryVariant !important;
+  color: $onPrimary !important;
+}
+
+a.mi-linkbtn, a:not([href]):not([tabindex]).mi-linkbtn,
+button.mi-linkbtn {
+  display: inline-block;
+  color: $primaryColor !important;
+  padding: 10px 20px;
+  text-decoration: none;
+  /*font-family: 'Roboto Medium', 'Roboto Regular', 'Roboto';*/
+  font-weight: 600;
+}
+
+a.mi-linkbtn:focus, a:not([href]):not([tabindex]).mi-linkbtn:focus, a:not([href]):not([tabindex]).mi-linkbtn:hover,
+a.mi-linkbtn:hover,
+button.mi-linkbtn:focus,
+button.mi-linkbtn:hover {
+  cursor: pointer;
+  background-color: #c4d5f3;
+  padding: 10px 20px;
+}
+
+//Modal
+/* To fix the the issue of masking the page on modal close */
+.modal-backdrop {
+  position: relative;
+}
+
+.mi-error-label {
+  color: $errorColor;
+}
 
 @media screen and (max-width: 768px) { /* Specific to this particular image */
   #contentbody {
@@ -48,12 +110,98 @@ footer {
 }
 
 
-/* Dark Theme CSS
- *
- *
+/* ********************************
+ * Dark Theme CSS
+ * ********************************
  */
-
 .darktheme {
   background-color: $darkBgColor;
   color: $darkThemeTextColor;
+
+  & #appheader {
+    background-color: $darkThemeColor;
+  }
+
+  & footer {
+    border-color: $darkThemeColor !important;
+  }
+
+  & #appheader .navbar-brand {
+    color: $darkThemeTextColor;
+  }
+
+  & #appheader .navbar-toggler {
+    color: $darkThemeTextColor;
+    border: none;
+  }
+
+  & #appheader .nav-item .nav-link {
+    color: $darkThemeTextColor;
+  }
+
+  & #appheader .nav-item .nav-link:hover {
+    background-color: $darkThemeVariant;
+  }
+
+  & #appheader .nav-item .router-link-exact-active {
+    border-bottom: $darkThemeTextColor solid 1px;
+  }
+
+  //Text and BG colors
+  .mi-text-primary {
+    color: $darkThemePrimaryColor !important;
+  }
+
+  .mi-text-secondary {
+    color: $darkThemeSecondaryColor !important;
+  }
+
+  //Buttons
+  & .mi-primarybtn {
+    color: $darkBgColor !important;
+    background-color: $darkThemePrimaryColor !important;
+  }
+
+  & .mi-primarybtn:hover, .mi-primarybtn:active {
+    color: $darkThemeOnPrimaryVariant !important;
+    background-color: $darkThemePrimaryVariant !important;
+  }
+
+  & a.mi-linkbtn, a:not([href]):not([tabindex]).mi-linkbtn,
+  button.mi-linkbtn {
+    color: $darkThemePrimaryColor !important;
+  }
+
+  & a.mi-linkbtn:focus, a:not([href]):not([tabindex]).mi-linkbtn:focus, a:not([href]):not([tabindex]).mi-linkbtn:hover,
+  a.mi-linkbtn:hover,
+  button.mi-linkbtn:focus,
+  button.mi-linkbtn:hover {
+    color: $darkThemePrimaryVariant !important;
+    background-color: $darkThemeOnPrimaryVariant !important;
+  }
+
+  //Inputs
+  input, textarea, select {
+    background-color: $darkThemeColor;
+    color: $darkThemeTextColor;
+    border: none;
+  }
+
+  & .mi-error-label {
+    color: $darkThemeErrorColor;
+  }
+
+  & .form-control:focus {
+    color: $darkThemeTextColor;
+    background-color: $darkThemeVariant;
+    border-color: $darkThemeVariant /*#80bdff*/;
+    box-shadow: 0 0 0 0.2rem $darkThemeVariant;
+  }
+
+  //Modals
+  & .mi-custom-modal .modal-container {
+    background-color: $darkBgColor;
+  }
+
+
 }

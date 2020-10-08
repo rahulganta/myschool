@@ -2,7 +2,6 @@ package com.myschool.adminservice.services;
 
 import com.myschool.adminservice.model.School;
 import com.myschool.adminservice.repository.SchoolRepository;
-import com.sun.xml.bind.v2.TODO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

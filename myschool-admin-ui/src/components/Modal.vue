@@ -4,7 +4,7 @@
       <div class="modal-wrapper">
         <div class="modal-container">
 
-          <div class="my-modal-header">
+          <div class="mi-modal-header">
             <h1>{{tittle}}</h1>
             <slot name="header">
               default header

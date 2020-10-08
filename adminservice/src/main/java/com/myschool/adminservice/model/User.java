@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -34,6 +35,7 @@ public class User {
 
     private String lang;
 
+    @Column(columnDefinition = "varchar(255) default 'defaulttheme'", nullable = false)
     private String theme;
 
 }

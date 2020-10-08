@@ -1,11 +1,11 @@
 <template type="text/x-template">
   <form>
-    <modal class="my-custom-modal addschool-modal">
-      <div slot="header" class="my-custom-header">
+    <modal class="mi-custom-modal addschool-modal">
+      <div slot="header" class="mi-custom-header">
         <div class="row">
           <h3 class="col-10 title">Add School</h3>
           <div class="col-2 text-right">
-            <i class="fas fa-times iconBtn" @click="close"></i>
+            <a class="btn mi-linkbtn" @click="close"><i class="fas fa-times"/></a>
           </div>
         </div>
       </div>
@@ -48,8 +48,8 @@
         </div>-->
       </template>
       <div slot="footer">
-        <button type="button" class="btn btn-link" @click="close" id="cancel-button">Cancel</button>
-        <button type="button" class="btn btn-primary" id="add-button" @click="addSchool">Add School</button>
+        <button type="button" class="btn mi-linkbtn mx-3" @click="close" id="cancel-button">Cancel</button>
+        <button type="button" class="btn mi-primarybtn" id="add-button" @click="addSchool">Add School</button>
       </div>
     </modal>
   </form>
@@ -95,8 +95,6 @@ import Modal from '@/components/Modal';
               vm.error = true;
               vm.errorMsg = error.response.error +": " + error.message;
             });
-
-
       },
       close() {
         this.$emit("close")

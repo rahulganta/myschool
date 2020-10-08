@@ -1,11 +1,40 @@
 /* Default Theme */
-$themeColor: #0a078af0;
-$themeHoverColor: #050354f7;
+$bgColor: #FFFFFFD4;
 $textColor: #000000;
-$redColor: #b60d21;
+
+$themeColor: #6200EE;
+$themeVariant: #3700B3;
+$onTheme: #FFFFFF;
+
+$primaryColor: #6200EE;
+$primaryVariant: #3700B3;
+$onPrimary: #FFFFFF;
+
+$secondaryColor: #03DAC6;
+$secondaryVariant: #018786;
+$onSecondary: #000000;
+
+$errorColor: #B00020;
+$onError: #FFFFFF;
 
 /* Dark Theme */
-$darkthemeColor: /*#001628*/ #0d344ae8 /*#061F2F*/;
-$darkThemeHoverColor: /*#010e18*/ #042131e8;
-$darkBgColor: /*#022C43*/ #18242B;
-$darkThemeTextColor: #FFFFFFD4 /*#84C9FB*/
+$darkBgColor: #191919 /*#121212*/;
+$darkThemeTextColor: #FFFFFFD4 /*#84C9FB*/;
+
+$darkThemeColor: #111;
+$darkThemeVariant: #000000;
+$onDarkTheme: #FFFFFFD4;
+
+
+$darkThemePrimaryColor: #BB86FC /*#3700B3*/;
+$darkThemePrimaryVariant: #3700B3;
+$darkThemeOnPrimary: #000000 /*#3700B3*/;
+$darkThemeOnPrimaryVariant: #FFFFFF;
+
+$darkThemeSecondaryColor: #03DAC5;
+$darkThemeOnSecondary: #000000;
+
+$darkThemeErrorColor: #CF6679;
+$darkThemeOnError: #000000;
+
+/* Next Theme */

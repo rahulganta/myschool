@@ -11,10 +11,10 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav">
             <li class="nav-item active">
-              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/">{{$t('nav.home')}}<span class="sr-only">(current)</span></router-link>
+              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/"><i class="fas fa-home d-inline d-sm-none" /> {{$t('nav.home')}}<span class="sr-only">(current)</span></router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/about">{{$t('nav.aboutus')}}</router-link>
+              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/about"><i class="fas fa-address-card d-inline d-sm-none" /> {{$t('nav.aboutus')}}</router-link>
             </li>
             <!--<li class="nav-item">
               <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/products">{{$t('nav.products')}}</router-link>
@@ -26,35 +26,49 @@
               <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/contact">{{$t('nav.contact')}}</router-link>
             </li>-->
             <li class="nav-item">
-              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/test">DEV TEST AREA</router-link>
+              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/test"><i class="fas fa-futbol d-inline d-sm-none" /> DEV TEST AREA</router-link>
             </li>
 
           </ul>
 
           <!--Right Links -->
-          <form class="right-nav ml-auto">
+          <!--<form class="right-nav ml-auto">
             <select class="form-control" id="theme" v-model="theme">
               <option value="defaulttheme">{{$t('option.defaulttheme')}}</option>
               <option value="darktheme">{{$t('option.darktheme')}}</option>
             </select>
-          </form>
+          </form>-->
 
-          <ul class="navbar-nav">
+          <ul class="right-nav ml-auto navbar-nav">
             <li class="nav-item" v-if="!currentLoggedInUser">
-              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/login">{{$t('btn.login')}}</router-link>
+              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/login"><i class="fas fa-sign-in-alt d-inline d-sm-none"/> {{$t('btn.login')}}</router-link>
             </li>
             <li class="nav-item" v-else>
               <div class="userprofilemenu dropdown">
-                <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="fas fa-user-circle fa-2x"></i>
+                <a class="nav-link btn dropdown-toggle d-flex align-items-center" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fas fa-user-circle fa-2x"></i><span class="d-inline d-sm-none ml-2" style="font-weight: 700;">{{$t('btn.userprofile')}}</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
                   <!--Display Logedin User Name-->
-                  <div class="dropdown-item">{{ $t('label.username') }}: <strong>{{currentLoggedInUser.userName}}</strong></div>
+                  <div class="dropdown-item"><!--{{ $t('label.username') }}:--> <strong>{{currentLoggedInUser.userName}}</strong></div>
                   <div class="dropdown-divider"></div>
-                  <router-link class="dropdown-item" data-toggle="collapse" data-target=".navbar-collapse.show" to="/settings">{{$t('btn.settings')}}</router-link>
-                  <!--<a class="dropdown-item" data-toggle="collapse" data-target=".navbar-collapse.show" href="allcontacts"><i class="fas fa-sign-out-alt"/> Check Contacts</a>-->
+                  <router-link class="dropdown-item" data-toggle="collapse" data-target=".navbar-collapse.show" to="/settings"><i class="fas fa-cog" /> {{$t('btn.settings')}}</router-link>
                   <a class="dropdown-item" data-toggle="collapse" data-target=".navbar-collapse.show" @click="logOut"><i class="fas fa-sign-out-alt"/> {{$t('btn.signout')}}</a>
+
+                  <form class="mt-1">
+                    <select class="form-control" id="theme1" v-model="theme">
+                      <option value="defaulttheme">{{$t('option.defaulttheme')}}</option>
+                      <option value="darktheme">{{$t('option.darktheme')}}</option>
+                    </select>
+                  </form>
+
+                  <form class="mt-1">
+                    <select class="form-control" id="locale" v-model="locale">
+                      <option value="en">{{$t('localeoption.english')}}</option>
+                      <option value="te-IN">{{$t('localeoption.telugu')}}</option>
+                      <option value="es">{{$t('localeoption.spanish')}}</option>
+                    </select>
+                  </form>
                 </div>
               </div>
             </li>
@@ -65,7 +79,7 @@
       </nav>
     </div>
 
-    <div id="contentbody" class="container-fluid">
+    <div id="contentbody" class="container-fluid pt-2">
       <router-view />
     </div>
 
@@ -73,13 +87,13 @@
       <div class="row footercontent pt-2">
         <div class="col-sm-2"></div>
         <div class="col-sm-8 text-center"> <span class="text-uppercase mi-copyright">{{$t('copyright')}} <!--Copyright © 2020 myschool. All Rights Reserved.--></span></div>
-        <div class="col-sm-2">
+        <!--<div class="col-sm-2">
           <select class="form-control" id="locale" v-model="locale">
             <option value="en">{{$t('localeoption.english')}}</option>
             <option value="te-IN">{{$t('localeoption.telugu')}}</option>
             <option value="es">{{$t('localeoption.spanish')}}</option>
           </select>
-        </div>
+        </div>-->
       </div>
     </footer>
   </div>
