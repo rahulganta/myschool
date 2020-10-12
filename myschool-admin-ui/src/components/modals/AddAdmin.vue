@@ -1,6 +1,6 @@
 <template>
   <form>
-    <modal class="mi-custom-modal addschool-modal">
+    <modal class="mi-custom-modal addadmin-modal">
       <div slot="header" class="mi-custom-header">
         <div class="row no-gutters">
           <h3 class="col-10 title">Add Admin</h3>
@@ -124,5 +124,7 @@ export default {
 </script>
 
 <style lang="scss">
-
+.addadmin-modal .modal-container {
+  max-width: 500px;
+}
 </style>

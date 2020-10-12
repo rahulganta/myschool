@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h2 class="mi-page-title">My Schools</h2>
+    <h2 class="mi-page-title">Home</h2>
     <!--<img alt="Vue logo" src="../assets/logo.png">
     <HelloWorld msg="Welcome to my school App"/>-->
 
@@ -12,12 +12,11 @@
           </div>
           <input type="text" name="search" class="form-control" aria-label="Username" aria-describedby="basic-addon1" v-model="tableSearchString"/>
         </div>
-        <!--<button class="btn mi-linkbtn ml-1" @click="showFilters = !showFilters"><i class="fas fa-filter text-fui-blue align-self-center"></i></button>-->
       </div>
       <div class="col-lg-1 col-sm-3">
-        <button class="btn mi-linkbtn ml-3" @click="showFilters = !showFilters"><i class="fas fa-filter text-fui-blue align-self-center"></i></button>
+        <!--<button class="btn mi-linkbtn" @click="showFilters = !showFilters"><i class="fas fa-filter align-self-center"></i></button>-->
       </div>
-      <div class="col-lg-6 col-sm-12 text-right">
+      <div class="col-lg-6 col-sm-12 col-xs-12 text-right">
         <span class="mr-4" v-if="selectedTableRows.length > 0">{{ selectedTableRows.length }} item(s) selected</span>
 
         <button id="addschool" class="btn mi-linkbtn" @click="showAddSchoolModal = !showAddSchoolModal" :aria-expanded="showAddSchoolModal ? 'true':'false'">
@@ -42,13 +41,13 @@
       </thead>
       <tbody>
       <tr v-for="(rowData, index) in tableFilteredData">
-        <td :id="rowData.schoolName" @click="viewSchool(index, rowData)">{{ rowData.schoolName }}</td>
+        <td :id="rowData.name" @click="viewSchool(index, rowData)">{{ rowData.name }}</td>
         <td :id=" rowData.displayName">{{ rowData.displayName }}</td>
         <td :id="rowData.franchiseName">{{ rowData.franchiseName }}</td>
         <!--This column will be hidden on xs and sm screens-->
         <td :id="rowData.correspondent" class="d-none d-md-block" >{{ rowData.correspondent }}</td>
         <td :id="rowData.status">{{ rowData.status }}</td>
-        <td>
+        <td class="text-right">
           <div class="userprofilemenu dropdown">
             <a class="btn mi-linkbtn" href="#" role="button" id="dropdownMenuButton" name="dropdown" data-toggle="dropdown" aria-haspopup="true"
                aria-expanded="false"> <i class="fas fa-ellipsis-v"></i>
@@ -57,7 +56,9 @@
               <button class="dropdown-item" name="edit" @click="viewSchool(index, rowData)">View School</button>
               <button class="dropdown-item" name="copy" @click="editSchool('edit', rowData)">Edit School</button>
               <hr>
-              <button class="dropdown-item" name="delete">Delete School</button>
+              <button class="dropdown-item" name="delete">Inactivate School</button>
+              <button class="dropdown-item" @click="showAddAdmin(rowData)" :aria-expanded="showAddAdminModal ? 'true':'false'">
+                <i class="fas fa-plus"/> Add Admin</button>
             </div>
           </div>
         </td>
@@ -103,21 +104,22 @@ export default {
         firstName: '',
         lastName: '',
         email: '',
-        roles: 'ROLE_SCHOOLADMIN' /*ROLE_FRANCHISEADMIN*/
+        roles: 'ROLE_SCHOOLADMIN' /*ROLE_FRANCHISEADMIN*/,
+        schoolId: 0
       },
       /*Table Data*/
       sortKey: "schoolName",
       showFilters: false,
       columnsHeaders: [
-        { title: "SCHOOL NAME", sortKey: "schoolName", sortOrder: 1, selectedFilters: []},
+        { title: "SCHOOL NAME", sortKey: "name", sortOrder: 1, selectedFilters: []},
         { title: "DISPLAY NAME", sortKey: "displayName", sortOrder: 1, selectedFilters: []},
         { title: "FRANCHISE NAME", sortKey: "franchiseName", sortOrder: 1, selectedFilters: [],},
         { title: "CORRESPONDENT", sortKey: "correspondent", sortOrder: 1, selectedFilters: [], hideOnScr: 'sm'},
         { title: "STATUS", sortKey: "status", sortOrder: 1, selectedFilters: []},
       ],
       dataList: [
-        { schoolName: "Tiny Tots", displayName: "Tiny Tots", franchiseName: "Alphores", correspondent: "Narendra Reddy", status: "Active", clientFeature: "feature1",},
-        { schoolName: "Alphores eTechno", displayName: "eTechno High School", franchiseName: "Alphores", correspondent: "Narendra Reddy", status: "Active", clientFeature: "feature1",},
+        { id: 1, name: "Tiny Tots", displayName: "Tiny Tots", franchiseName: "Alphores", correspondent: "Narendra Reddy", status: "Active", clientFeature: "feature1",},
+        { id: 2, name: "Alphores eTechno", displayName: "eTechno High School", franchiseName: "Alphores", correspondent: "Narendra Reddy", status: "Active", clientFeature: "feature1",},
       ],
     }
   },
@@ -148,6 +150,10 @@ export default {
     },
     addAdmin () {
 
+    },
+    showAddAdmin (rowData) {
+      this.admin.schoolId = rowData.id;
+      this.showAddAdminModal = true;
     },
     close() {
       this.showAddSchoolModal = false;

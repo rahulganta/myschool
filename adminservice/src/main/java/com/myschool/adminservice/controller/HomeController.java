@@ -50,7 +50,8 @@ public class HomeController {
                 .collect(Collectors.toList());
 
         final String jwt = jwtUtil.generateJwtToken(authentication);
-        return ResponseEntity.ok(new LoginResponse(jwt, username, myUserDetails));
+        return ResponseEntity.ok(new LoginResponse(jwt, username, myUserDetails.getFirstName(), myUserDetails.getLastName(), myUserDetails.getEmail(),
+                roles, myUserDetails.getLastLogin(), myUserDetails.getLang(), myUserDetails.getTheme()));
     }
 
     @RequestMapping(value = "logout", method = RequestMethod.POST)

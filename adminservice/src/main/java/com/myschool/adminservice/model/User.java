@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 
 @Data
 @AllArgsConstructor
@@ -27,6 +28,7 @@ public class User {
 
     private String email;
 
+    @Column(columnDefinition="tinyint(1) default 1")
     private boolean active;
 
     private String roles;
@@ -35,7 +37,19 @@ public class User {
 
     private String lang;
 
-    @Column(columnDefinition = "varchar(255) default 'defaulttheme'", nullable = false)
+    @Column(columnDefinition = "varchar(255) default 'defaulttheme'")
     private String theme;
+
+    @Column(columnDefinition = "BIGINT default 0")
+    private long schoolId;
+
+    @PrePersist
+    void prePersist() {
+        if (this.theme == null || this.theme.trim().isEmpty())
+            this.theme = "defaulttheme";
+
+        if (this.lang == null || this.lang.trim().isEmpty())
+            this.lang = "en";
+    }
 
 }

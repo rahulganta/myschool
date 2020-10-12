@@ -7,6 +7,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     user: JSON.parse(localStorage.getItem('user')) || null,
+    globalError: '',
   },
   getters: {
     loggedIn(state) {
@@ -14,6 +15,9 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    setGlobalError (state, error) {
+      state.globalError = error
+    },
     getJwtToken(state, user) {
       state.user = user;
     },

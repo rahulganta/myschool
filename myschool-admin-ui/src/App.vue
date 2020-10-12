@@ -1,6 +1,6 @@
 <template>
   <div id="app" :class="theme">
-    <div id="appheader" class="sticky-top shadow">
+    <div id="appheader" class="sticky-top shadow" v-if="currentLoggedInUser">
       <nav class="navbar navbar-expand-lg navbar-light">
         <a class="navbar-brand" href="/">{{$t('appname')}}<!--<img src="./assets/img/logo.png" style="width:96px;height:40px;" alt="myschool logo"  class="img-fluid"/>--></a>
         <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -16,19 +16,9 @@
             <li class="nav-item">
               <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/about"><i class="fas fa-address-card d-inline d-sm-none" /> {{$t('nav.aboutus')}}</router-link>
             </li>
-            <!--<li class="nav-item">
-              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/products">{{$t('nav.products')}}</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/services">SERVICES</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/contact">{{$t('nav.contact')}}</router-link>
-            </li>-->
             <li class="nav-item">
               <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/test"><i class="fas fa-futbol d-inline d-sm-none" /> DEV TEST AREA</router-link>
             </li>
-
           </ul>
 
           <!--Right Links -->
@@ -72,9 +62,7 @@
                 </div>
               </div>
             </li>
-
           </ul>
-
         </div>
       </nav>
     </div>
@@ -99,6 +87,7 @@
   </div>
 </template>
 <script>
+
 import {loadLanguageAsync} from './../public/static/locale/i18n.config';
 
 export default {
@@ -158,7 +147,7 @@ export default {
   methods: {
     logOut() {
       this.$store.dispatch('logout');
-      this.$router.push('/');
+      this.$router.push('/login');
     }
   },
 

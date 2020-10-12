@@ -2,7 +2,7 @@
   <form>
     <modal class="mi-custom-modal addschool-modal">
       <div slot="header" class="mi-custom-header">
-        <div class="row">
+        <div class="row no-gutters">
           <h3 class="col-10 title">Add School</h3>
           <div class="col-2 text-right">
             <a class="btn mi-linkbtn" @click="close"><i class="fas fa-times"/></a>
@@ -106,13 +106,5 @@ import Modal from '@/components/Modal';
 <style lang="scss">
 .addschool-modal .modal-container {
   max-width: 500px;
-}
-.iconBtn {
-  cursor: pointer;
-  padding: 10px;
-
-  &:hover {
-    background-color: #eff1f1;
-  }
 }
 </style>

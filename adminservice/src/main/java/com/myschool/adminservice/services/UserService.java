@@ -15,6 +15,9 @@ public class UserService {
 
     public User createUser(User user) {
         /*TODO do all the preliminary checks throw error*/
+        if(!user.isActive()) {
+            user.setActive(true);
+        }
         User createdUser = userRepository.save(user);
         return createdUser;
     }

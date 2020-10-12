@@ -75,6 +75,15 @@ button.mi-linkbtn:hover {
   padding: 10px 20px;
 }
 
+.mi-iconBtn {
+  cursor: pointer;
+  padding: 10px;
+
+  &:hover {
+    background-color: #eff1f1;
+  }
+}
+
 //Modal
 /* To fix the the issue of masking the page on modal close */
 .modal-backdrop {

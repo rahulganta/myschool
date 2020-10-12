@@ -14,7 +14,7 @@
         <div class="form-group">
           <input type="password" class="form-control" id="password" :placeholder="$t('plch.password')" v-model="password" autofocus="autofocus">
         </div>
-        <button type="submit" class="btn mi-bluebtn w-100 mb-3">{{$t('btn.login')}}</button>
+        <button type="submit" class="btn mi-primarybtn w-100 mb-3">{{$t('btn.login')}}</button>
       </form>
     </div>
 
