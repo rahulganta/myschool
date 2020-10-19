@@ -8,6 +8,7 @@ export default new Vuex.Store({
   state: {
     user: JSON.parse(localStorage.getItem('user')) || null,
     globalError: '',
+    school: ''
   },
   getters: {
     loggedIn(state) {
@@ -26,6 +27,9 @@ export default new Vuex.Store({
     },
     logout(state) {
       state.user = null;
+    },
+    saveSchool(state, payload) {
+      state.school = payload.school;
     }
   },
   actions: {

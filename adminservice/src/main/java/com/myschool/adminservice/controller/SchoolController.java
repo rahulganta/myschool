@@ -1,10 +1,16 @@
 package com.myschool.adminservice.controller;
 
 import com.myschool.adminservice.model.School;
+import com.myschool.adminservice.model.User;
 import com.myschool.adminservice.services.SchoolService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.security.RolesAllowed;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/api/myschool")
@@ -20,4 +26,20 @@ public class SchoolController {
         School createdSchool = schoolService.createSchool(school);
         return createdSchool;
     }
+
+    @GetMapping(value = "allschools")
+    /*@RolesAllowed({ "ROLE_SUPERADMIN", "ROLE_FRANCHISEADMIN" })*/
+    /*@PreAuthorize("hasAnyRole('ROLE_SUPERADMIN', 'ROLE_FRANCHISEADMIN')")*/
+    public List<School> getAllSchools() {
+        //TODO Filter the results if the users role is ROLE_FRANCHISEADMIN
+        List<School> schoolList = schoolService.getAllSchools();
+        return schoolList;
+    }
+
+    @GetMapping(value = "school/{schoolId}")
+    public Optional<School> getSchool(@PathVariable("schoolId") Long id) {
+        Optional<School> School = schoolService.getSchool(id);
+        return School;
+    }
+
 }

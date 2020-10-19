@@ -15,7 +15,7 @@ export default {
             var vm = this;
             var data = this.dataList;
             var sortKey = this.sortKey;
-            var filterString = this.searchString && this.searchString.toLowerCase();
+            var filterString = this.tableSearchString && this.tableSearchString.toLowerCase();
             var currentSortOrder = 0;
 
             this.columnsHeaders.forEach(function(columnHeader) {

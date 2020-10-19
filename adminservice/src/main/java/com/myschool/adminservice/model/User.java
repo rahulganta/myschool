@@ -5,10 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.PrePersist;
+import javax.persistence.*;
 
 @Data
 @AllArgsConstructor
@@ -18,6 +15,7 @@ import javax.persistence.PrePersist;
 public class User {
 
     @Id
+    @Column(unique=true)
     private String username;
 
     private String password;
@@ -40,8 +38,12 @@ public class User {
     @Column(columnDefinition = "varchar(255) default 'defaulttheme'")
     private String theme;
 
-    @Column(columnDefinition = "BIGINT default 0")
+    @Column(columnDefinition = "BIGINT default 1")
     private long schoolId;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="schoolId", referencedColumnName = "id", updatable=false, insertable = false)
+    private School school;
 
     @PrePersist
     void prePersist() {

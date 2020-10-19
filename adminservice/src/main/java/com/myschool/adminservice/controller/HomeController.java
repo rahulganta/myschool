@@ -59,7 +59,7 @@ public class HomeController {
         //Invalidate the jwt token and perform necessary actions needed on logout
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication==null || !authentication.isAuthenticated()) {
+        if (authentication == null || !authentication.isAuthenticated()) {
             return ResponseEntity.ok(null);
         }
 

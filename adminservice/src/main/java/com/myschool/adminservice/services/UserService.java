@@ -6,6 +6,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 @Slf4j
 public class UserService {
@@ -21,4 +24,21 @@ public class UserService {
         User createdUser = userRepository.save(user);
         return createdUser;
     }
+
+    public List<User> getAllUsers() {
+        List<User> userList = userRepository.findAll();
+        return userList;
+    }
+
+    public List<User> getAllAdmins() {
+        List<User> adminList = userRepository.findAllAdmin();
+        return adminList;
+    }
+
+    public Optional<User> getUser(String username) {
+        Optional<User> user = userRepository.findById(username);
+        return user;
+    }
+
+
 }

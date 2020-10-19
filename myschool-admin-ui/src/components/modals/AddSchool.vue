@@ -3,7 +3,7 @@
     <modal class="mi-custom-modal addschool-modal">
       <div slot="header" class="mi-custom-header">
         <div class="row no-gutters">
-          <h3 class="col-10 title">Add School</h3>
+          <h4 class="col-10 title">Add School</h4>
           <div class="col-2 text-right">
             <a class="btn mi-linkbtn" @click="close"><i class="fas fa-times"/></a>
           </div>
@@ -58,6 +58,7 @@
 <script>
 const API_URL = "/api/myschool/";
 import Modal from '@/components/Modal';
+
   export default {
     name: "AddSchool",
     components: {
@@ -90,6 +91,7 @@ import Modal from '@/components/Modal';
               /*vm.contact = JSON.parse(JSON.stringify(vm.initContact));*/
               vm.error = false;
               this.$emit("close")
+              this.$emit("addschool")
             },
             error => {
               vm.error = true;

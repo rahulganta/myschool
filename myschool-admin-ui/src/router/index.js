@@ -15,6 +15,12 @@ const routes = [
     meta: { requiresAuth: true }
   },
   {
+    path: "/school/:id",
+    name: "School",
+    component: () => import("../views/School.vue"),
+    meta: {requiresAuth: true}
+  },
+  {
     path: '/about',
     name: 'About',
     // route level code-splitting

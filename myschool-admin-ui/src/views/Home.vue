@@ -21,15 +21,15 @@
 
         <button id="addschool" class="btn mi-linkbtn" @click="showAddSchoolModal = !showAddSchoolModal" :aria-expanded="showAddSchoolModal ? 'true':'false'">
           <i class="fas fa-plus"/> ADD SCHOOL</button>
-        <button id="addadmin" class="btn mi-linkbtn" @click="showAddAdminModal = !showAddAdminModal" :aria-expanded="showAddAdminModal ? 'true':'false'">
-          <i class="fas fa-plus"/> ADD ADMIN</button>
+        <!--<button id="addadmin" class="btn mi-linkbtn" @click="showAddAdminModal = !showAddAdminModal" :aria-expanded="showAddAdminModal ? 'true':'false'">
+          <i class="fas fa-plus"/> ADD ADMIN</button>-->
       </div>
     </div>
 
     <table class="table table-hover" id="schools">
       <thead>
       <tr>
-        <th v-for="columnHeader in columnsHeaders" :class="columnHeader.hideOnScr? 'd-none d-md-block': '' ">
+        <th v-for="columnHeader in columnsHeaders" :class="columnHeader.hideOnScr? 'd-md-block d-none': '' ">
           <a class="mi-text-primary" v-bind:id="columnHeader" v-on:click="sortBy(columnHeader.sortKey)" :class="{ active: sortKey == columnHeader.sortKey }" v-html="columnHeader.title">
             {{ columnHeader.title }}
           </a>
@@ -41,7 +41,7 @@
       </thead>
       <tbody>
       <tr v-for="(rowData, index) in tableFilteredData">
-        <td :id="rowData.name" @click="viewSchool(index, rowData)">{{ rowData.name }}</td>
+        <td :id="rowData.name" @click="viewSchool(index, rowData)"><a class="mi-text-primary">{{ rowData.name }}</a></td>
         <td :id=" rowData.displayName">{{ rowData.displayName }}</td>
         <td :id="rowData.franchiseName">{{ rowData.franchiseName }}</td>
         <!--This column will be hidden on xs and sm screens-->
@@ -53,12 +53,11 @@
                aria-expanded="false"> <i class="fas fa-ellipsis-v"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-right fui-dropdown-menu " aria-labelledby="dropdownMenuButton">
-              <button class="dropdown-item" name="edit" @click="viewSchool(index, rowData)">View School</button>
-              <button class="dropdown-item" name="copy" @click="editSchool('edit', rowData)">Edit School</button>
+              <button class="dropdown-item" name="edit" @click="viewSchool(index, rowData)"><i class="fas fa-info-circle"/> View School</button>
+              <button class="dropdown-item" name="copy" @click="editSchool('edit', rowData)"><i class="fas fa-pen"/> Edit School</button>
               <hr>
-              <button class="dropdown-item" name="delete">Inactivate School</button>
-              <button class="dropdown-item" @click="showAddAdmin(rowData)" :aria-expanded="showAddAdminModal ? 'true':'false'">
-                <i class="fas fa-plus"/> Add Admin</button>
+              <button class="dropdown-item" name="delete"><i class="fas fa-ban"/> Inactivate School</button>
+              <button class="dropdown-item" @click="showAddAdmin(rowData)" :aria-expanded="showAddAdminModal ? 'true':'false'"><i class="fas fa-plus"/> Add AdminUser</button>
             </div>
           </div>
         </td>
@@ -68,16 +67,19 @@
 
     <!--Modals-->
     <AddSchool v-if="showAddSchoolModal" @close="close" :school="school" @addschool="addSchool"></AddSchool>
-    <AddAdmin v-if="showAddAdminModal" @close="close" :admin="admin" @addadmin="addAdmin"></AddAdmin>
+    <AddAdmin v-if="showAddAdminModal" @close="close" :school="school" :admin="admin" @addadmin="addAdmin"></AddAdmin>
   </div>
 </template>
 
 <script>
+const API_URL = "/api/myschool/";
+
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue'
 import AddSchool from "@/components/modals/AddSchool";
 import AddAdmin from "@/components/modals/AddAdmin";
 import TableMixin from "@/mixins/TableMixin";
+
 export default {
   name: 'Home',
   components: {
@@ -86,7 +88,7 @@ export default {
     AddAdmin
   },
   mixins:[TableMixin],
-  data () {
+  data() {
     return {
       error: false,
       errorMsg: "",
@@ -124,6 +126,7 @@ export default {
     }
   },
   created() {
+    this.getAllSchools();
   },
   watch: {
     /**
@@ -139,20 +142,35 @@ export default {
   },
 
   methods: {
-    addSchool () {
-
+    getAllSchools() {
+      let vm = this;
+      this.axios.get(API_URL+ "allschools", {'headers': {'Authorization': 'Bearer ' + this.$store.state.user.token}}).then(
+          response => {
+            let res = response.data;
+            vm.dataList = res;
+            vm.error = false;
+          },
+          error => {
+            this.error = true;
+            this.errorMsg = error.response.data.message;
+          });
+    },
+    addSchool() {
+      this.getAllSchools()
     },
     viewSchool(index, rowData) {
-
+      this.$store.commit('saveSchool', {school: rowData});
+      this.$router.push(`/school/${rowData.id}`)
     },
     editSchool(actionName, rowData) {
 
     },
-    addAdmin () {
+    addAdmin() {
 
     },
-    showAddAdmin (rowData) {
+    showAddAdmin(rowData) {
       this.admin.schoolId = rowData.id;
+      this.school = rowData;
       this.showAddAdminModal = true;
     },
     close() {
