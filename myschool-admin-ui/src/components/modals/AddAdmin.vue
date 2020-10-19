@@ -3,7 +3,7 @@
     <modal class="mi-custom-modal addadmin-modal">
       <div slot="header" class="mi-custom-header">
         <div class="row no-gutters">
-          <h3 class="col-10 title">Add Admin</h3>
+          <h4 class="col-10 title">Add Admin To <br/><small>{{school.name}}</small></h4>
           <div class="col-2 text-right">
             <a class="btn mi-linkbtn" @click="close"><i class="fas fa-times"/></a>
           </div>
@@ -12,13 +12,13 @@
       <template slot="body">
         <div class="form-group">
           <label for="username">Username *  <small id="usernamehelp" class="form-text text-muted">Admin User login id</small></label>
-          <input id="username" type="text" class="form-control" aria-describedby="usernamehelp" v-model="admin.username">
+          <input id="username" type="text" class="form-control" aria-describedby="usernamehelp" v-model.trim="admin.username">
           <!--<small id="schoolNameHelp" class="form-text text-muted">School Name should be unique</small>-->
         </div>
 
         <div class="form-group">
           <label for="password">Password *</label>
-          <input id="password" type="password" class="form-control" v-model="admin.password">
+          <input id="password" type="password" class="form-control" v-model.trim="admin.password">
         </div>
         <div class="form-group">
           <label for="confirmpassword">Confirm Password *</label>
@@ -27,29 +27,29 @@
 
         <div class="form-group">
           <label for="firstname">First Name</label>
-          <input id="firstname" type="text" class="form-control"v-model="admin.firstName">
+          <input id="firstname" type="text" class="form-control"v-model.trim="admin.firstName">
         </div>
 
         <div class="form-group">
           <label for="lastname">Last Name</label>
-          <input id="lastname" type="text" class="form-control" v-model="admin.lastName">
+          <input id="lastname" type="text" class="form-control" v-model.trim="admin.lastName">
         </div>
 
         <div class="form-group">
           <label for="email">Email</label>
-          <input id="email" type="email" class="form-control" v-model="admin.email">
+          <input id="email" type="email" class="form-control" v-model.trim="admin.email">
         </div>
 
         <div class="form-group">
           <label>Roles</label>
           <div class="form-check">
-            <input class="form-check-input" id="schooladmin" type="checkbox" value="ROLE_SCHOOLADMIN" v-model="admin.roles">
+            <input class="form-check-input" id="schooladmin" type="radio" value="ROLE_SCHOOLADMIN" v-model="admin.roles">
             <label class="form-check-label" for="schooladmin">
               School Admin
             </label>
           </div>
           <div class="form-check mt-2">
-            <input class="form-check-input" id="franchiseadmin" type="checkbox" value="ROLE_FRANCHISEADMIN">
+            <input class="form-check-input" id="franchiseadmin" type="radio" value="ROLE_FRANCHISEADMIN" v-model="admin.roles">
             <label class="form-check-label" for="franchiseadmin">
               Franchise Admin
             </label>
@@ -86,6 +86,10 @@ export default {
   },
   props: {
     admin: {
+      type: Object,
+      required: false
+    },
+    school: {
       type: Object,
       required: false
     }
