@@ -31,6 +31,9 @@ public class WebSecurityConfigurator extends WebSecurityConfigurerAdapter {
     @Autowired
     private JwtRequestFilter jwtRequestFiler;
 
+    @Autowired
+    private AuthEntryPoint authEntryPoint;
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.eraseCredentials(false);
@@ -41,6 +44,7 @@ public class WebSecurityConfigurator extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         if(securityEnabled) {
             http.csrf().disable()
+                    .exceptionHandling().authenticationEntryPoint(authEntryPoint).and()
                     .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                     .authorizeRequests().antMatchers("/", "/api/myschool/*","/css/**", "/fonts/*", "/js/**", "/img/**", "/favicon.ico").permitAll()
                     .antMatchers("/secure/api/myschool/**").fullyAuthenticated()

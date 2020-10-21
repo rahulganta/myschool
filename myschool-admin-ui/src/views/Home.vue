@@ -126,7 +126,22 @@ export default {
     }
   },
   created() {
-    this.getAllSchools();
+    let user = this.$store.state.user;
+    const sListUserRoles= ["ROLE_SUPERADMIN", "ROLE_FRANCHISEADMIN", "ROLE_PARENT"];
+    let gotoHomePage = false;
+
+    user.roles.forEach(function (userRole) {
+      if (sListUserRoles.includes(userRole)) {
+        gotoHomePage = true;
+      }
+    });
+
+    if(gotoHomePage) {
+      this.getAllSchools();
+    } else {
+      this.viewSchool(0, user.school)
+    }
+
   },
   watch: {
     /**

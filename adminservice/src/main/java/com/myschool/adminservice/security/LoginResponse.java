@@ -1,5 +1,6 @@
 package com.myschool.adminservice.security;
 
+import com.myschool.adminservice.model.School;
 import lombok.Data;
 
 import java.util.List;
@@ -26,7 +27,10 @@ public class LoginResponse {
 
     private String theme;
 
-    public LoginResponse(String token, String userName, String firstName, String lastName, String email, List<String> roles, long lastLogin, String lang, String theme) {
+    private School school;
+
+    public LoginResponse(String token, String userName, String firstName, String lastName, String email, List<String> roles,
+                         long lastLogin, String lang, String theme, School school) {
         this.token = token;
         this.userName = userName;
         this.firstName = firstName;
@@ -35,5 +39,6 @@ public class LoginResponse {
         this.roles = roles;
         this.lang = lang;
         this.theme = theme;
+        this.school = school;
     }
 }

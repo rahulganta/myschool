@@ -24,7 +24,7 @@ public class MyUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         Optional<com.myschool.adminservice.model.User> user = userRepository.findById(userName);
-        user.orElseThrow(() -> new UsernameNotFoundException("Not found: " + userName));
+        user.orElseThrow(() -> new UsernameNotFoundException("Username:" + userName +  " not found" ));
 
         return user.map(MyUserDetails::new).get();
 

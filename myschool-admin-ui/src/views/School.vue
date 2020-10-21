@@ -3,7 +3,7 @@
   <h2 class="mi-page-title">{{ school.name}}</h2>
   <div class="card mi-card mb-3">
     <div class="card-body">
-      <h4 class="card-title text-uppercase">{{school.name}}</h4>
+      <!--<h4 class="card-title text-uppercase">{{school.name}}</h4>-->
       <div class="card-text row">
         <div class="col-lg-3 col-md-6">
           <p><strong>Display Name: </strong>{{school.displayName}}</p>

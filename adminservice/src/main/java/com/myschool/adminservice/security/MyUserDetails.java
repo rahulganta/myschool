@@ -1,5 +1,6 @@
 package com.myschool.adminservice.security;
 
+import com.myschool.adminservice.model.School;
 import com.myschool.adminservice.model.User;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -34,6 +35,7 @@ public class MyUserDetails implements UserDetails {
 
     private String theme;
 
+    private School school;
 
     public MyUserDetails(User user) {
         this.username = user.getUsername();
@@ -48,6 +50,7 @@ public class MyUserDetails implements UserDetails {
         this.lastLogin = user.getLastLogin();
         this.lang = user.getLang();
         this.theme = user.getTheme();
+        this.school = user.getSchool();
     }
 
     @Override
