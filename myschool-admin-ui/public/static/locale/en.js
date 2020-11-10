@@ -3,13 +3,13 @@ const messages = {
     en: {
         appname: 'MySchool',
         nav: {
-            home: 'HOME',
-            aboutus: 'ABOUT US',
+            home: 'Home',
+            aboutus: 'About Us',
             gallery: 'GALLERY',
             contact: 'CONTACT',
             products: 'PRODUCTS',
             activities: 'ACTIVITIES',
-            test: 'TEST'
+            test: 'Test'
         },
 
         // Buttons and Links

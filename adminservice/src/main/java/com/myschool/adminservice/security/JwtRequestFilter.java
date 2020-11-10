@@ -44,6 +44,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             throw new IOException(e.getMessage(), e);
         }
 
+        //Proceed normally otherwise
         filterChain.doFilter(httpServletRequest, httpServletResponse);
     }
 

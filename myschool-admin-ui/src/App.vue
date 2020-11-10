@@ -1,6 +1,6 @@
 <template>
   <div id="app" :class="theme">
-    <div id="appheader" class="sticky-top shadow" v-if="currentLoggedInUser">
+    <div id="appheader" class="sticky-top mi-card" v-if="currentLoggedInUser">
       <nav class="navbar navbar-expand-lg navbar-light">
         <a class="navbar-brand" href="/">{{$t('appname')}}<!--<img src="./assets/img/logo.png" style="width:96px;height:40px;" alt="myschool logo"  class="img-fluid"/>--></a>
         <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -13,11 +13,32 @@
             <li class="nav-item active">
               <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/"><i class="fas fa-home d-inline d-sm-none" /> {{$t('nav.home')}}<span class="sr-only">(current)</span></router-link>
             </li>
-            <li class="nav-item">
+            <!--<li class="nav-item">
               <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/about"><i class="fas fa-address-card d-inline d-sm-none" /> {{$t('nav.aboutus')}}</router-link>
+            </li>-->
+            <li class="nav-item">
+              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/mycourses"><i class="fas fa-address-card d-inline d-sm-none" />My courses</router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/test"><i class="fas fa-futbol d-inline d-sm-none" /> DEV TEST AREA</router-link>
+              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/messages"><i class="fas fa-address-card d-inline d-sm-none" />Messages</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/teachers"><i class="fas fa-address-card d-inline d-sm-none" />Teachers</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/students"><i class="fas fa-address-card d-inline d-sm-none" />Students</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/attendance"><i class="fas fa-address-card d-inline d-sm-none" />Attendance</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/reports"><i class="fas fa-address-card d-inline d-sm-none" />Reports</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/schedule"><i class="fas fa-address-card d-inline d-sm-none" />Schedule</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/test"><i class="fas fa-futbol d-inline d-sm-none" />{{$t('nav.test')}}</router-link>
             </li>
           </ul>
 
@@ -155,7 +176,8 @@ export default {
 </script>
 <style lang="scss">
 #appheader.sticky-top {
-  top: -1px
+  top: -1px;
+  background-color: #FFF;
 }
 
 #appheader .navbar-brand {

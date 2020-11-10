@@ -1,5 +1,6 @@
 package com.myschool.adminservice.model;
 
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
@@ -8,7 +9,6 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
@@ -16,31 +16,31 @@ import java.time.LocalDate;
 @ToString
 @JsonIgnoreProperties
 @Entity
-@Table(name = "course")
-public class Course {
+@Table
+public class UserMessage {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    private String name;
+    private String subject;
 
-    private String description;
+    private String message;
 
-    private String grade;
+    private String postedBy;
 
-    private String instructor;
+    private Long createdTime;
 
-    private String createdBy;
+    private String priority;
 
-    private LocalDate startDate;
+    @Column(columnDefinition="tinyint(1) default 0")
+    private boolean readStatus;
 
-    private LocalDate endDate;
-
-    private String status;
-
+    //sent to
     @ManyToOne
-    @JoinColumn(name="course_school_id")
+    @JoinColumn(name="to_username")
     @JsonBackReference
-    private School courseSchool;
+    private User user;
+
+
 
 }

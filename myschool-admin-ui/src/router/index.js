@@ -34,17 +34,59 @@ const routes = [
     component: Login
   },
   {
+    path: '/error',
+    name: 'Error',
+    component: () => import('../views/Error'),
+    meta: { }
+  },
+  {
+    path: '/mycourses',
+    name: 'Mycourses',
+    component: () => import('../views/Mycourses'),
+    meta: { requiresAuth: true}
+  },
+  {
+    path: '/messages',
+    name: 'Messages',
+    component: () => import('../views/Messages'),
+    meta: { requiresAuth: true}
+  },
+  {
+    path: '/students',
+    name: 'Students',
+    component: () => import('../views/Students'),
+    meta: { requiresAuth: true}
+  },
+  {
+    path: '/teachers',
+    name: 'Teachers',
+    component: () => import('../views/Teachers'),
+    meta: { requiresAuth: true}
+  },
+  {
+    path: '/schedule',
+    name: 'Schedule',
+    component: () => import('../views/Schedule'),
+    meta: { requiresAuth: true}
+  },
+  {
+    path: '/reports',
+    name: 'Reports',
+    component: () => import('../views/Reports'),
+    meta: { requiresAuth: true}
+  },
+  {
+    path: '/attendance',
+    name: 'Attendance',
+    component: () => import('../views/Attendance'),
+    meta: { requiresAuth: true}
+  },
+  {
     path: '/test',
     name: 'Test',
     component: () => import('../views/Test'),
     meta: { requiresAuth: true, authorize: ['ROLE_SUPERADMIN', 'TEST'] }
   },
-  {
-    path: '/error',
-    name: 'Error',
-    component: () => import('../views/Error'),
-    meta: { }
-  }
 ]
 
 const router = new VueRouter({

@@ -3,7 +3,8 @@
     <modal class="mi-custom-modal addadmin-modal">
       <div slot="header" class="mi-custom-header">
         <div class="row no-gutters">
-          <h4 class="col-10 title">Add Admin To <br/><small>{{school.name}}</small></h4>
+          <h4 class="col-10 title" v-if="action=='update'">Update Admin Of<br/><small>{{school.name}}</small></h4>
+          <h4 class="col-10 title" v-else>Add Admin To<br/><small>{{school.name}}</small></h4>
           <div class="col-2 text-right">
             <a class="btn mi-linkbtn" @click="close"><i class="fas fa-times"/></a>
           </div>
@@ -69,7 +70,7 @@
       </template>
       <div slot="footer">
         <button type="button" class="btn mi-linkbtn mx-3" @click="close" id="cancel-button">Cancel</button>
-        <button type="button" class="btn mi-primarybtn" id="add-button" @click="addAdmin">Add ADMIN</button>
+        <button type="button" class="btn mi-primarybtn" id="add-button" @click="addAdmin"><span v-if="action=='update'">Update</span><span v-else>Add</span> Admin</button>
       </div>
     </modal>
   </form>
@@ -87,10 +88,14 @@ export default {
   props: {
     admin: {
       type: Object,
-      required: false
+      required: true
     },
     school: {
       type: Object,
+      required: false
+    },
+    action: {
+      type: String,
       required: false
     }
   },
@@ -105,6 +110,7 @@ export default {
   methods: {
     addAdmin () {
       let vm = this;
+
       this.axios.post(API_URL+ "addadmin", vm.admin).then(
           response => {
             /*$('.toast').toast('show');*/
@@ -119,6 +125,7 @@ export default {
             vm.error = true;
             vm.errorMsg = error.response.error +": " + error.message;
           });
+
     },
     close() {
       this.$emit("close")

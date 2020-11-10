@@ -3,7 +3,7 @@
     <modal class="mi-custom-modal addschool-modal">
       <div slot="header" class="mi-custom-header">
         <div class="row no-gutters">
-          <h4 class="col-10 title">Add School</h4>
+          <h4 class="col-10 title"><span v-if="action=='update'">Update</span><span v-else>Add</span> School</h4>
           <div class="col-2 text-right">
             <a class="btn mi-linkbtn" @click="close"><i class="fas fa-times"/></a>
           </div>
@@ -49,7 +49,7 @@
       </template>
       <div slot="footer">
         <button type="button" class="btn mi-linkbtn mx-3" @click="close" id="cancel-button">Cancel</button>
-        <button type="button" class="btn mi-primarybtn" id="add-button" @click="addSchool">Add School</button>
+        <button type="button" class="btn mi-primarybtn" id="add-button" @click="addSchool"><span v-if="action=='update'">Update</span><span v-else>Add</span> School</button>
       </div>
     </modal>
   </form>
@@ -67,8 +67,13 @@ import Modal from '@/components/Modal';
     props: {
       school: {
         type: Object,
+        required: true
+      },
+      action: {
+        type: String,
         required: false
       }
+
     },
     data () {
       return {
@@ -82,6 +87,9 @@ import Modal from '@/components/Modal';
       addSchool () {
         /*this.$emit("addschool", this.school)*/
         let vm = this;
+
+        //Update School
+        //Add School
         this.axios.post(API_URL+ "addschool", vm.school).then(
             response => {
               /*$('.toast').toast('show');*/

@@ -8,7 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 @Data
 @AllArgsConstructor
@@ -16,31 +17,25 @@ import java.time.LocalDate;
 @ToString
 @JsonIgnoreProperties
 @Entity
-@Table(name = "course")
-public class Course {
+@Table
+public class CourseMessage {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private long id;
 
-    private String name;
+    private String subject;
 
-    private String description;
+    private String message;
 
-    private String grade;
+    private String postedBy;
 
-    private String instructor;
+    private LocalDateTime createdTimeStamp;
 
-    private String createdBy;
-
-    private LocalDate startDate;
-
-    private LocalDate endDate;
-
-    private String status;
+    private String priority;
 
     @ManyToOne
-    @JoinColumn(name="course_school_id")
+    @JoinColumn(name="course_id")
     @JsonBackReference
-    private School courseSchool;
+    private Course course;
 
 }

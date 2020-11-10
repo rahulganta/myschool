@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface UserRepository extends JpaRepository<User, String> {
 
-    @Query("SELECT n FROM user n where n.roles in ('ROLE_SCHOOLADMIN','ROLE_FRANCHISEADMIN')")
+    @Query("SELECT n FROM User n where n.roles in ('ROLE_SCHOOLADMIN','ROLE_FRANCHISEADMIN')")
     List<User> findAllAdmin();
 }
