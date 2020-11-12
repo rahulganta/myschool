@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,5 +41,15 @@ public class UserController {
     public Optional<User> getUser(@PathVariable("username") String username) {
         Optional<User> user = userService.getUser(username);
         return user;
+    }
+
+    @GetMapping(value = "teachers/{schoolId}")
+    public List<User> getTeachersBySchoolId(@PathVariable("schoolId") long schoolId) {
+        List<User> teachersList = userService.getTeachersBySchoolId(schoolId);
+        return teachersList;
+    }
+
+    public List<User> getUsersByRolesAndSchoolId() {
+        return (new ArrayList<User>());
     }
 }

@@ -77,9 +77,9 @@ export default {
   }
 }
 
-.my-modal-header {
+.mi-modal-header {
   border-bottom: 0px;
-  padding: 0px 15px 15px 0px;
+  padding: 0 1rem;
   display: block;
 }
 

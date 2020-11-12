@@ -17,8 +17,6 @@ import "@fortawesome/fontawesome-free/css/all.css"
 //Custom CSS
 import "./assets/css/theme.scss";
 
-import "./assets/js/bootstrap-select"
-
 Vue.config.productionTip = false
 Vue.prototype.axios = axios;
 

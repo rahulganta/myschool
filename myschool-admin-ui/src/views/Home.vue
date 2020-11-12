@@ -52,7 +52,7 @@
               <a class="btn mi-linkbtn" href="#" role="button" id="dropdownMenuButton" name="dropdown" data-toggle="dropdown" aria-haspopup="true"
                  aria-expanded="false"> <i class="fas fa-ellipsis-v"></i>
               </a>
-              <div class="dropdown-menu dropdown-menu-right fui-dropdown-menu " aria-labelledby="dropdownMenuButton">
+              <div class="dropdown-menu dropdown-menu-right mi-dropdown-menu " aria-labelledby="dropdownMenuButton">
                 <button class="dropdown-item" name="edit" @click="viewSchool(index, rowData)"><i class="fas fa-info-circle"/> View School</button>
                 <button class="dropdown-item" name="copy" @click="showAddSchool('update', rowData)"><i class="fas fa-pen"/> Edit School</button>
                 <hr>
@@ -112,7 +112,7 @@ export default {
         schoolId: 0
       },
       /*Table Data*/
-      sortKey: "schoolName",
+      sortKey: "name",
       showFilters: false,
       columnsHeaders: [
         { title: "SCHOOL NAME", sortKey: "name", sortOrder: 1, selectedFilters: []},

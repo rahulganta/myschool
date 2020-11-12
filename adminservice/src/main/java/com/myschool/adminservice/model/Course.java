@@ -38,8 +38,11 @@ public class Course {
 
     private String status;
 
+    @Column(columnDefinition = "BIGINT default 0")
+    private long courseSchoolId;
+
     @ManyToOne
-    @JoinColumn(name="course_school_id")
+    @JoinColumn(name="courseSchoolId", referencedColumnName = "id", updatable=false, insertable = false)
     @JsonBackReference
     private School courseSchool;
 

@@ -55,6 +55,18 @@
               Franchise Admin
             </label>
           </div>
+          <div class="form-check mt-2">
+            <input class="form-check-input" id="teacher" type="radio" value="ROLE_TEACHER" v-model="admin.roles">
+            <label class="form-check-label" for="teacher">
+              Teacher
+            </label>
+          </div>
+          <div class="form-check mt-2">
+            <input class="form-check-input" id="student" type="radio" value="ROLE_STUDENT" v-model="admin.roles">
+            <label class="form-check-label" for="student">
+              Student
+            </label>
+          </div>
 
           <!--<input id="roles" type="checkbox" class="form-control" v-model="admin.correspondent">-->
         </div>

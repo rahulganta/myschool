@@ -28,8 +28,8 @@
     </div>
 
     <div class="col mb-4">
-      <div class="card mi-card h-100">
-        <div class="card-body">
+      <div class="card mi-card pb-0 h-100">
+        <div class="card-body pb-0">
           <h5 class="card-title">School Info</h5>
           <div class="card-text row">
             <div class="col-lg-6 col-md-6">
@@ -46,6 +46,7 @@
               <p>{{school.city}}, {{school.state}}-{{school.zipcode}}, {{school.country}}</p>
             </div>-->
           </div>
+
           <div class="card-footer mi-card-footer">
             <button id="editschool" class="btn mi-linkbtn" @click="showModal('schoolModal')" :aria-expanded="showAddSchoolModal ? 'true':'false'">
               <i class="fas fa-pen"/> EDIT SCHOOL</button>
@@ -60,61 +61,52 @@
   <h3>My courses</h3>
   <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
     <div class="col mb-4" v-for="(course, index) in courses">
-      <div class="card mi-card h-100" v-bind:style="{backgroundColor:colors[index], color: '#FFF' }"> <!--v-bind:style="{backgroundColor:'#F9AA33',color: '#FFF' }"-->
-        <!--<img src="..." class="card-img-top" alt="...">-->
+      <div class="card mi-card h-100"> <!--v-bind:style="{backgroundColor:'#F9AA33',color: '#FFF' }"-->
         <div class="card-body">
-          <h5 class="card-title">{{course.name}}</h5>
+          <div class="row">
+            <h5 class="col-10" v-bind:style="{color: colors[index] }">{{course.name}}</h5>
+            <div class="col-2 text-right mi-menu dropdown">
+              <a class="btn mi-linkbtn" href="#" role="button" id="dropdownMenuButton" name="dropdown" data-toggle="dropdown" aria-haspopup="true"
+                 aria-expanded="false"> <i class="fas fa-ellipsis-v"></i>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right mi-dropdown-menu " aria-labelledby="dropdownMenuButton">
+                <button class="dropdown-item" name="edit" @click="viewSchool(index, rowData)"><i class="fas fa-info-circle pr-1"/> View Course</button>
+                <button class="dropdown-item" name="copy" @click="showModal('courseModal', 'update', course)"><i class="fas fa-pen pr-1"/> Edit Course</button>
+                <hr>
+                <button class="dropdown-item" name="delete"><i class="fas fa-ban pr-1"/> Inactivate Course</button>
+              </div>
+            </div>
+          </div>
           <div class="card-text">{{course.description}}</div>
           <span>Instructor: {{course.instructor}}</span>
+          <!--<div class="card-footer mi-card-footer">
+            <button id="viewcourse" class="btn mi-linkbtn" @click="showModal('adminModal')" :aria-expanded="showAddAdminModal ? 'true':'false'">
+              <i class="fas fa-plus"/> VIEW COURSE</button>
+            <button id="editcourse" class="btn mi-linkbtn" @click="showModal('schoolModal')" :aria-expanded="showAddSchoolModal ? 'true':'false'">
+              <i class="fas fa-pen"/> EDIT COURSE</button>
+          </div>-->
         </div>
       </div>
     </div>
 
-    <div class="col mb-4">
+
+    <div class="col mb-4" @click="showModal('courseModal', 'add')">
       <div class="card mi-card h-100" > <!--v-bind:style="{backgroundColor:'#37966F',color: '#FFF' }"-->
-        <div class="card-body">
-          <h5 class="card-title" v-bind:style="{color: '#37966F' }">Chemistry</h5>
-          <p class="card-text">This is a short card.</p>
+        <div class="card-body text-center mi-text-primary">
+          <h5 class="card-title">Add</h5>
+          <h5 class="card-title"><i class="fas fa-plus" /> </h5>
+          <h5 class="card-text">Course</h5>
+          <!--<h5 class="card-text"><i class="fas fa-plus" /> Add Course</h5>-->
         </div>
       </div>
     </div>
-    <div class="col mb-4">
-      <div class="card mi-card h-100"> <!--v-bind:style="{backgroundColor:'#AD634F /*#FF0266*/', color: '#FFF' }"-->
-        <div class="card-body">
-          <h5 class="card-title" v-bind:style="{color: '#FF0266' }">Maths</h5>
-          <p class="card-text">This is a short card.</p>
-        </div>
-      </div>
-    </div>
-    <div class="col mb-4">
-      <div class="card mi-card h-100" v-bind:style="{backgroundColor:'#5D1049', color: '#FFF' }">
-        <div class="card-body">
-          <h5 class="card-title">Physics</h5>
-          <p class="card-text">This is a short card.</p>
-        </div>
-      </div>
-    </div>
-    <div class="col mb-4">
-      <div class="card mi-card h-100" v-bind:style="{backgroundColor:'#2F3F3F', color: '#FFF' }">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a short card.</p>
-        </div>
-      </div>
-    </div>
-    <div class="col mb-4">
-      <div class="card mi-card h-100" v-bind:style="{backgroundColor:'#7D9FB7 /*#94A7A7*/ /*#957199*/' , color: '#FFF' }">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a short card.</p>
-        </div>
-      </div>
-    </div>
+
   </div>
 
   <!--Modals-->
   <AddSchool v-if="showAddSchoolModal" @close="close" :school="school" :action="'update'" @addschool="addSchool"></AddSchool>
   <AddAdmin v-if="showAddAdminModal" @close="close" :school="school" :admin="admin" @addadmin="addAdmin"></AddAdmin>
+  <AddCourse v-if="showAddCourseModal" @close="close" :course="course" :action="action" @addCourse="addCourse"></AddCourse>
 </div>
 </template>
 
@@ -122,19 +114,23 @@
 const API_URL = "/api/myschool/";
 import AddSchool from "@/components/modals/AddSchool";
 import AddAdmin from "@/components/modals/AddAdmin";
+import AddCourse from "@/components/modals/AddCourse";
 
 export default {
   name: "School",
   components: {
     AddSchool,
-    AddAdmin
+    AddAdmin,
+    AddCourse
   },
   data() {
     return {
       error: false,
       errorMsg: '',
+      action: 'add',
       showAddSchoolModal: false,
       showAddAdminModal: false,
+      showAddCourseModal: false,
       school: {},
       admin: {
         username: '',
@@ -144,6 +140,13 @@ export default {
         email: '',
         roles: 'ROLE_SCHOOLADMIN',
         schoolId: 0
+      },
+      course: {
+        name: '',
+        description: '',
+        grade: '',
+        instructor: '',
+        courseSchoolId: 0
       },
       schoolMessages:[],
       courses:[],
@@ -196,13 +199,25 @@ export default {
             this.errorMsg = error.response.message;
           });
     },
-    showModal(modal) {
+    showModal(modal, action, data) {
       if(modal === 'adminModal') {
         this.admin.schoolId = this.school.id;
         this.showAddAdminModal = true;
       }
+
       if(modal === 'schoolModal') {
         this.showAddSchoolModal = true;
+      }
+
+      if(modal === 'courseModal') {
+        this.action = action;
+        if(action === 'update') {
+          this.course = data;
+        } else {
+          this.course = {};
+          this.course.courseSchoolId = this.school.id;
+        }
+        this.showAddCourseModal = true;
       }
     },
     addAdmin() {
@@ -211,9 +226,13 @@ export default {
     addschool() {
 
     },
+    addCourse() {
+      this.getCourses();
+    },
     close() {
       this.showAddSchoolModal = false;
       this.showAddAdminModal = false;
+      this.showAddCourseModal = false;
     }
   }
 }

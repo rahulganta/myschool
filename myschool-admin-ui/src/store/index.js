@@ -9,7 +9,7 @@ export default new Vuex.Store({
     user: JSON.parse(localStorage.getItem('user')) || null,
     globalError: '',
     school: '',
-    colors: ['#F9AA33','#2F3F3F', '#37966F','#FF0266','#AD634F','#5D1049', '#7D9FB7', '#957199', '#94A7A7', '#957199']
+    colors: ['#F9AA33', '#37966F','#FF0266','#AD634F','#5D1049', '#2F3F3F','#7D9FB7', '#957199', '#94A7A7', '#AD634F','#957199']
   },
   getters: {
     loggedIn(state) {
