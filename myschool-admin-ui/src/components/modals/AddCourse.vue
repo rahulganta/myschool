@@ -25,6 +25,14 @@
           <input id="franchiseName" type="text" class="form-control"v-model="course.grade">
         </div>
 
+        <div class="form-group">
+          <label for="instructor">Instructor</label>
+          <select class="form-control" id="instructor" v-model="course.instructor">
+            <option value="">Select</option>
+            <option v-for="(teacher, index) in teachers" :value="teacher.username" selected>{{teacher.firstName}} {{teacher.lastName}}</option>
+          </select>
+        </div>
+
       </template>
       <div slot="footer">
         <button type="button" class="btn mi-linkbtn mx-3" @click="close" id="cancel-button">Cancel</button>
@@ -56,9 +64,11 @@ export default {
   data () {
     return {
       errorMsg: '',
+      teachers: [],
     }
   },
   mounted () {
+    this.getTeachers();
   },
   methods: {
     addCourse() {
@@ -75,6 +85,18 @@ export default {
             vm.errorMsg = '';
             this.$emit("close")
             this.$emit("addCourse")
+          },
+          error => {
+            vm.errorMsg = error.response.error +": " + error.message;
+          });
+    },
+    getTeachers() {
+      let vm = this;
+      let schoolId = this.course.courseSchoolId;
+      this.axios.get(API_URL+ "teachers/"+schoolId, {'headers': {'Authorization': 'Bearer ' + this.$store.state.user.token}}).then(
+          response => {
+            vm.teachers = response.data;
+            vm.errorMsg = '';
           },
           error => {
             vm.errorMsg = error.response.error +": " + error.message;

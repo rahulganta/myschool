@@ -51,7 +51,7 @@
             <button id="editschool" class="btn mi-linkbtn" @click="showModal('schoolModal')" :aria-expanded="showAddSchoolModal ? 'true':'false'">
               <i class="fas fa-pen"/> EDIT SCHOOL</button>
             <button id="addadmin" class="btn mi-linkbtn" @click="showModal('adminModal')" :aria-expanded="showAddAdminModal ? 'true':'false'">
-              <i class="fas fa-plus"/> ADD ADMIN</button>
+              <i class="fas fa-plus"/> ADD USER</button>
           </div>
         </div>
       </div>
@@ -60,7 +60,7 @@
 
   <h3>My courses</h3>
   <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
-    <div class="col mb-4" v-for="(course, index) in courses">
+    <div class="col mb-4" v-for="(course, index) in courses" @click="navToCourse(course.id)">
       <div class="card mi-card h-100"> <!--v-bind:style="{backgroundColor:'#F9AA33',color: '#FFF' }"-->
         <div class="card-body">
           <div class="row">
@@ -70,8 +70,8 @@
                  aria-expanded="false"> <i class="fas fa-ellipsis-v"></i>
               </a>
               <div class="dropdown-menu dropdown-menu-right mi-dropdown-menu " aria-labelledby="dropdownMenuButton">
-                <button class="dropdown-item" name="edit" @click="viewSchool(index, rowData)"><i class="fas fa-info-circle pr-1"/> View Course</button>
                 <button class="dropdown-item" name="copy" @click="showModal('courseModal', 'update', course)"><i class="fas fa-pen pr-1"/> Edit Course</button>
+                <button class="dropdown-item" name="edit" @click="viewSchool(index, rowData)"><i class="fas fa-info-circle pr-1"/> View Course</button>
                 <hr>
                 <button class="dropdown-item" name="delete"><i class="fas fa-ban pr-1"/> Inactivate Course</button>
               </div>
@@ -198,6 +198,9 @@ export default {
             this.error = true;
             this.errorMsg = error.response.message;
           });
+    },
+    navToCourse(id) {
+      this.$router.push('/mycourses/'+id);
     },
     showModal(modal, action, data) {
       if(modal === 'adminModal') {
