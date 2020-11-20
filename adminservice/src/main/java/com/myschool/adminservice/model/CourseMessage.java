@@ -25,6 +25,7 @@ public class CourseMessage {
 
     private String subject;
 
+    @Column(columnDefinition = "TEXT")
     private String message;
 
     private String postedBy;

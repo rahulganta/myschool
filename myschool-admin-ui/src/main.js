@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import axios from "axios";
+import moment from "moment";
 
 import i18n from './../public/static/locale/i18n.config';
 import {loadLanguageAsync} from './../public/static/locale/i18n.config';
@@ -19,6 +20,12 @@ import "./assets/css/theme.scss";
 
 Vue.config.productionTip = false
 Vue.prototype.axios = axios;
+
+Vue.filter('formatDateTime', function(value) {
+  if (value) {
+    return moment(String(value)).format('MMM Do YYYY hh:mm:ss a')
+  }
+})
 
 new Vue({
   router,

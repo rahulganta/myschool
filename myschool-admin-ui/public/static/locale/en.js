@@ -82,7 +82,7 @@ const messages = {
             city: 'Hyderabad',
             state: 'Telangana',
             zip: '1234',
-            contactmessage: 'Write what you are contacting us for',
+            announcement: 'Write school announcement',
         },
 
         //Messages and Error Messages

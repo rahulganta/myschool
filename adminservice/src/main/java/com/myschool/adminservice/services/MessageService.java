@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -39,6 +40,8 @@ public class MessageService {
 
     //SchoolMessages Methods
     public SchoolMessage createSchoolMessage(SchoolMessage schoolMessage) {
+        LocalDateTime now = LocalDateTime.now();
+        schoolMessage.setCreatedTimeStamp(now);
         SchoolMessage createdSchoolMessage = schoolMessageRepository.save(schoolMessage);
         return createdSchoolMessage;
     }

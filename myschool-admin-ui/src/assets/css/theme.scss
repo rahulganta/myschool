@@ -76,6 +76,11 @@ button.mi-linkbtn:hover {
   padding: 10px 20px;
 }
 
+.mi-linkbtn.active, .show>.mi-linkbtn {
+  background-color: $primaryVariant !important;
+  color: $onPrimary !important;
+}
+
 .mi-iconBtn {
   cursor: pointer;
   padding: 10px;

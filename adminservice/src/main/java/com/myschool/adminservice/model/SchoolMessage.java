@@ -2,6 +2,7 @@ package com.myschool.adminservice.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.mysql.cj.protocol.ColumnDefinition;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,6 +26,7 @@ public class SchoolMessage {
 
     private String subject;
 
+    @Column(columnDefinition = "TEXT")
     private String message;
 
     private String postedBy;
@@ -33,8 +35,11 @@ public class SchoolMessage {
 
     private String priority;
 
+    @Column(columnDefinition = "BIGINT default 0")
+    private long schoolId;
+
     @ManyToOne
-    @JoinColumn(name="school_id")
+    @JoinColumn(name="schoolId", referencedColumnName = "id", updatable=false, insertable = false)
     @JsonBackReference
     private School school;
 }
