@@ -34,8 +34,10 @@ public class CourseMessage {
 
     private String priority;
 
+    private long courseId;
+
     @ManyToOne
-    @JoinColumn(name="course_id")
+    @JoinColumn(name="courseId", referencedColumnName = "id", updatable=false, insertable = false)
     @JsonBackReference
     private Course course;
 

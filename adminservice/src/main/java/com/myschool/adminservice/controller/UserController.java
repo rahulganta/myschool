@@ -49,6 +49,12 @@ public class UserController {
         return teachersList;
     }
 
+    @GetMapping(value = "students/{schoolId}")
+    public List<User> getStudentsBySchoolId(@PathVariable("schoolId") long schoolId) {
+        List<User> studentsList = userService.getStudentsBySchoolId(schoolId);
+        return studentsList;
+    }
+
     public List<User> getUsersByRolesAndSchoolId() {
         return (new ArrayList<User>());
     }

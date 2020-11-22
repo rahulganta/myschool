@@ -36,7 +36,7 @@
               <div class="media-body">
                 <strong class="mt-0 mb-1">{{courseMessage.subject}}</strong>
                 <div>{{courseMessage.message}}</div>
-                <p class="text-muted">Posted on: {{ courseMessage.createdTimeStamp | formatDateTime }}</p>
+                <p class="text-muted">Posted: {{ courseMessage.createdTimeStamp | formatDateTime }}</p>
               </div>
             </li>
           </ul>
@@ -54,7 +54,7 @@
               <div class="media-body">
                 <strong class="mt-0 mb-1">{{schoolMessage.subject}}</strong>
                 <div>{{schoolMessage.message}}</div>
-                <p class="text-muted">Posted on: {{ schoolMessage.createdTimeStamp | formatDateTime }}</p>
+                <p class="text-muted">Posted: {{ schoolMessage.createdTimeStamp | formatDateTime }}</p>
               </div>
             </li>
           </ul>
@@ -98,14 +98,14 @@
       <div class="card mi-card h-100"> <!--v-bind:style="{backgroundColor:'#F9AA33',color: '#FFF' }"-->
         <div class="card-body">
           <div class="row">
-            <h5 class="col-10" v-bind:style="{color: colors[index] }">{{course.name}}</h5>
+            <h5 class="col-10" v-bind:style="{color: colors[index] }" @click="navToCourse(course)">{{course.name}} <small>{{course.grade}}</small></h5>
             <div class="col-2 text-right mi-menu dropdown">
               <a class="btn mi-linkbtn" href="#" role="button" id="dropdownMenuButton" name="dropdown" data-toggle="dropdown" aria-haspopup="true"
                  aria-expanded="false"> <i class="fas fa-ellipsis-v"></i>
               </a>
               <div class="dropdown-menu dropdown-menu-right mi-dropdown-menu " aria-labelledby="dropdownMenuButton">
                 <button class="dropdown-item" name="copy" @click="showModal('courseModal', 'update', course)"><i class="fas fa-pen pr-1"/> Edit Course</button>
-                <button class="dropdown-item" name="edit" @click="navToCourse(course.id)"><i class="fas fa-info-circle pr-1"/> View Course</button>
+                <button class="dropdown-item" name="edit" @click="navToCourse(course)"><i class="fas fa-info-circle pr-1"/> View Course</button>
                 <hr>
                 <button class="dropdown-item" name="delete"><i class="fas fa-ban pr-1"/> Inactivate Course</button>
               </div>
@@ -247,8 +247,9 @@ export default {
             this.errorMsg = error.response.message;
           });
     },
-    navToCourse(id) {
-      this.$router.push('/mycourses/'+id);
+    navToCourse(course) {
+      this.$store.commit('saveCourse', {course: course});
+      this.$router.push('/mycourses/'+course.id);
     },
     showModal(modal, action, data) {
       if(modal === 'adminModal') {

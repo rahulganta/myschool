@@ -2,6 +2,7 @@ package com.myschool.adminservice.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -32,8 +33,10 @@ public class Course {
 
     private String createdBy;
 
+    @ApiModelProperty(dataType = "java.lang.String", example = "")
     private LocalDate startDate;
 
+    @ApiModelProperty(dataType = "java.lang.String", example = "")
     private LocalDate endDate;
 
     private String status;
