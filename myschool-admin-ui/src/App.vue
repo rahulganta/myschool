@@ -63,9 +63,6 @@
                   <!--Display Logedin User Name-->
                   <div class="dropdown-item"><!--{{ $t('label.username') }}:--> <strong>{{currentLoggedInUser.userName}}</strong></div>
                   <div class="dropdown-divider"></div>
-                  <router-link class="dropdown-item" data-toggle="collapse" data-target=".navbar-collapse.show" to="/settings"><i class="fas fa-cog" /> {{$t('btn.settings')}}</router-link>
-                  <a class="dropdown-item" data-toggle="collapse" data-target=".navbar-collapse.show" @click="logOut"><i class="fas fa-sign-out-alt"/> {{$t('btn.signout')}}</a>
-
                   <form class="mt-1">
                     <select class="form-control" id="theme1" v-model="theme">
                       <option value="defaulttheme">{{$t('option.defaulttheme')}}</option>
@@ -80,6 +77,9 @@
                       <option value="es">{{$t('localeoption.spanish')}}</option>
                     </select>
                   </form>
+
+                  <router-link class="dropdown-item" data-toggle="collapse" data-target=".navbar-collapse.show" to="/settings"><i class="fas fa-cog" /> {{$t('btn.settings')}}</router-link>
+                  <a class="dropdown-item" data-toggle="collapse" data-target=".navbar-collapse.show" @click="logOut"><i class="fas fa-sign-out-alt"/> {{$t('btn.signout')}}</a>
                 </div>
               </div>
             </li>

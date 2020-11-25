@@ -55,7 +55,7 @@ export default {
       errorMsg: '',
       action: 'add',
       showAddCourseModal: false,
-      schoolId: this.$store.state.user.school.id,
+      school: this.$store.state.user.school,
       courses:[],
       course: {
         name: '',
@@ -76,9 +76,9 @@ export default {
       /*let schoolId = this.$route.params.id;*/
       let school = this.$store.state.school;
       if(school) {
-        vm.schoolId = school.id;
+        vm.school = school;
       }
-      this.axios.get(API_URL+ "schoolcourses/"+vm.schoolId, {'headers': {'Authorization': 'Bearer ' + this.$store.state.user.token}}).then(
+      this.axios.get(API_URL+ "schoolcourses/"+vm.school.id, {'headers': {'Authorization': 'Bearer ' + this.$store.state.user.token}}).then(
           response => {
             vm.courses = response.data;
           },
@@ -90,6 +90,25 @@ export default {
       this.$store.commit('saveCourse', {course: course});
       this.$router.push('/mycourses/'+course.id);
     },
+    addCourse() {
+      this.getCourses();
+    },
+    showModal(modal, action, data) {
+      if(modal === 'courseModal') {
+        this.action = action;
+        if(action === 'update') {
+          this.course = data;
+        } else {
+          this.course = {};
+          this.course.courseSchoolId = this.school.id;
+        }
+
+        this.showAddCourseModal = true;
+      }
+    },
+    close() {
+      this.showAddCourseModal = false;
+    }
   }
 
 }

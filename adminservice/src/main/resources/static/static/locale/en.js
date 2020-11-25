@@ -3,13 +3,13 @@ const messages = {
     en: {
         appname: 'MySchool',
         nav: {
-            home: 'HOME',
-            aboutus: 'ABOUT US',
+            home: 'Home',
+            aboutus: 'About Us',
             gallery: 'GALLERY',
             contact: 'CONTACT',
             products: 'PRODUCTS',
             activities: 'ACTIVITIES',
-            test: 'TEST'
+            test: 'Test'
         },
 
         // Buttons and Links
@@ -23,6 +23,8 @@ const messages = {
             save: 'SAVE',
             contactsinfo: 'Contacts Info',
             here: 'here',
+            settings: 'Settings',
+            userprofile: 'USER PROFILE'
         },
 
         //Page titles, card titles, headers, etc
@@ -80,7 +82,7 @@ const messages = {
             city: 'Hyderabad',
             state: 'Telangana',
             zip: '1234',
-            contactmessage: 'Write what you are contacting us for',
+            announcement: 'Write school announcement',
         },
 
         //Messages and Error Messages
