@@ -2,7 +2,7 @@ server:
   port: ${PORT:9095}
 spring:
   profiles:
-    active: myschool-mysql
+    active: myschool-postgres
   jpa:
     hibernate:
       ddl-auto: update
@@ -37,7 +37,7 @@ logging:
     name: myschool-adminservice.log
     config: classpath:logback-spring.xml
   #  pattern.level: "%-50mdc{operationId:-no operationId} %5p"
-
+  #postgresql-fluffy-79708
 ---
 
 spring:
@@ -59,4 +59,19 @@ logging:
   level:
     root: info
     com.myschool: debug
+---
+
+spring:
+  profiles: myschool-postgres
+  datasource:
+    url: jdbc:postgresql://ec2-3-214-4-151.compute-1.amazonaws.com:5432/dct0h1lf0cpk7v?createDatabaseIfNotExist=true&serverTimezone=UTC&useSSL=false
+    username: ypddwpsogxnuyx
+    password: 9e4f28ff719aa130fd8a5760173889d5f0a059e97840be372ea41c31efc31cd4
+    initialization-mode: always
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
 ---
