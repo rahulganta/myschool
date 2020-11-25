@@ -75,3 +75,19 @@ spring:
     show-sql: true
 
 ---
+
+spring:
+  profiles: myschool-localpostgres
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres?createDatabaseIfNotExist=true&serverTimezone=UTC&useSSL=false
+    username:
+    password:
+    driver-class-name: org.postgresql.Driver
+    initialization-mode: always
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+---

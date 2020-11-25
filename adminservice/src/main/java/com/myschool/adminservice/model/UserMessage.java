@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -29,11 +30,11 @@ public class UserMessage {
 
     private String postedBy;
 
-    private Long createdTime;
+    private LocalDateTime createdTime;
 
     private String priority;
 
-    @Column(columnDefinition="tinyint(1) default 0")
+    @Column(columnDefinition="boolean default false")
     private boolean readStatus;
 
     //sent to

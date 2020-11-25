@@ -39,7 +39,7 @@ public class SchoolMessage {
     private long schoolId;
 
     @ManyToOne
-    @JoinColumn(name="schoolId", referencedColumnName = "id", updatable=false, insertable = false)
+    @JoinColumn(name="schoolId", referencedColumnName = "id", updatable = false, insertable = false)
     @JsonBackReference
     private School school;
 }

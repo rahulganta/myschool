@@ -34,10 +34,11 @@ public class CourseMessage {
 
     private String priority;
 
+    @Column(columnDefinition = "BIGINT default 0")
     private long courseId;
 
     @ManyToOne
-    @JoinColumn(name="courseId", referencedColumnName = "id", updatable=false, insertable = false)
+    @JoinColumn(name="courseId", referencedColumnName = "id", updatable = false, insertable = false)
     @JsonBackReference
     private Course course;
 
