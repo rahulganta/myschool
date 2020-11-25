@@ -53,7 +53,7 @@ spring:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
       ddl-auto: update
-    show-sql: true
+    show-sql: false
 
 logging:
   level:
@@ -72,14 +72,14 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
-    show-sql: true
+    show-sql: false
 
 ---
 
 spring:
   profiles: myschool-localpostgres
   datasource:
-    url: jdbc:postgresql://localhost:5432/postgres?createDatabaseIfNotExist=true&serverTimezone=UTC&useSSL=false
+    url: jdbc:postgresql://localhost:5432/rahul.ganta?createDatabaseIfNotExist=true&serverTimezone=UTC&useSSL=false
     username:
     password:
     driver-class-name: org.postgresql.Driver

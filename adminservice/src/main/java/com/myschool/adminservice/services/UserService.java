@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+import static java.lang.Boolean.TRUE;
+
 @Service
 @Slf4j
 public class UserService {
@@ -19,7 +21,7 @@ public class UserService {
     public User createUser(User user) {
         /*TODO do all the preliminary checks throw error*/
         if(!user.isActive()) {
-            user.setActive(true);
+            user.setActive(TRUE);
         }
         User createdUser = userRepository.save(user);
         return createdUser;

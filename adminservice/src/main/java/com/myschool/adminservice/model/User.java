@@ -29,7 +29,7 @@ public class User {
 
     private String email;
 
-    @Column(columnDefinition="boolean default true")
+    @Column(columnDefinition="boolean default TRUE")
     private boolean active;
 
     private String roles;
