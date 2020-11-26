@@ -42,11 +42,11 @@
         <tbody>
         <tr v-for="(rowData, index) in tableFilteredData">
           <td :id="rowData.name" @click="viewSchool(index, rowData)"><a class="mi-text-primary">{{ rowData.name }}</a></td>
-          <td :id=" rowData.displayName" class="d-none d-md-block">{{ rowData.displayName }}</td>
+          <td :id=" rowData.displayName" class="d-md-block d-none">{{ rowData.displayName }}</td>
           <td :id="rowData.franchiseName">{{ rowData.franchiseName }}</td>
           <!--This column will be hidden on xs and sm screens-->
-          <td :id="rowData.correspondent" class="d-none d-md-block">{{ rowData.correspondent }}</td>
-          <td :id="rowData.status" class="d-none d-md-block">{{ rowData.status }}</td>
+          <td :id="rowData.correspondent" class="d-md-block d-none">{{ rowData.correspondent }}</td>
+          <td :id="rowData.status">{{ rowData.status }}</td>
           <td class="text-right">
             <div class="userprofilemenu dropdown">
               <a class="btn mi-linkbtn" href="#" role="button" id="dropdownMenuButton" name="dropdown" data-toggle="dropdown" aria-haspopup="true"
@@ -119,7 +119,7 @@ export default {
         { title: "DISPLAY NAME", sortKey: "displayName", sortOrder: 1, selectedFilters: [], hideOnScr: 'sm'},
         { title: "FRANCHISE", sortKey: "franchiseName", sortOrder: 1, selectedFilters: [],},
         { title: "CORRESPONDENT", sortKey: "correspondent", sortOrder: 1, selectedFilters: [], hideOnScr: 'sm'},
-        { title: "STATUS", sortKey: "status", sortOrder: 1, selectedFilters: [], hideOnScr: 'sm'},
+        { title: "STATUS", sortKey: "status", sortOrder: 1, selectedFilters: []},
       ],
       dataList: [
         { id: 1, name: "Tiny Tots", displayName: "Tiny Tots", franchiseName: "Alphores", correspondent: "Narendra Reddy", status: "Active", clientFeature: "feature1",},

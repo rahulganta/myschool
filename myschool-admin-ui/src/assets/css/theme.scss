@@ -161,6 +161,8 @@ button.mi-linkbtn:hover {
 @media screen and (max-width: 768px) { /* Specific to this particular image */
   #contentbody {
     padding-bottom: 130px;   /* Height of the footer */
+    padding-right: 5px;
+    padding-left: 5px;
   }
 
   footer {
