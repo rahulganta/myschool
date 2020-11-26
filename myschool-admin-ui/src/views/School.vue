@@ -249,7 +249,7 @@ export default {
     },
     navToCourse(course) {
       this.$store.commit('saveCourse', {course: course});
-      this.$router.push('/mycourses/'+course.id);
+      this.$router.push('/course/'+course.id);
     },
     showModal(modal, action, data) {
       if(modal === 'adminModal') {

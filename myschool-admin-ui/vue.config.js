@@ -1,6 +1,6 @@
 module.exports = {
     devServer: {
-        proxy: 'http://localhost:9095' /*https://myschool.herokuapp.com/*/
+        proxy: 'http://localhost:9095' /*https://gantaedu.herokuapp.com/*/
     },
     css: {
         loaderOptions: {
