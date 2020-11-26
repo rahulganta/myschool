@@ -11,34 +11,34 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav">
             <li class="nav-item active">
-              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/"><i class="fas fa-home d-inline d-sm-none" /> {{$t('nav.home')}}<span class="sr-only">(current)</span></router-link>
+              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/"><i class="fas fa-home fa-2x d-inline d-sm-none mr-2" /> {{$t('nav.home')}}<span class="sr-only">(current)</span></router-link>
             </li>
             <!--<li class="nav-item">
-              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/about"><i class="fas fa-address-card d-inline d-sm-none" /> {{$t('nav.aboutus')}}</router-link>
+              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/about"><i class="fas fa-address-card fa-2x d-inline d-sm-none" /> {{$t('nav.aboutus')}}</router-link>
             </li>-->
             <li class="nav-item">
-              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/mycourses"><i class="fas fa-address-card d-inline d-sm-none" />My courses</router-link>
+              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/mycourses"><i class="fas fa-address-card fa-2x d-inline d-sm-none mr-2" />My courses</router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/messages"><i class="fas fa-address-card d-inline d-sm-none" />Messages</router-link>
+              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/messages"><i class="fas fa-address-card fa-2x d-inline d-sm-none mr-2" />Messages</router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/teachers"><i class="fas fa-address-card d-inline d-sm-none" />Teachers</router-link>
+              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/teachers"><i class="fas fa-address-card fa-2x d-inline d-sm-none mr-2" />Teachers</router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/students"><i class="fas fa-address-card d-inline d-sm-none" />Students</router-link>
+              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/students"><i class="fas fa-address-card fa-2x d-inline d-sm-none mr-2" />Students</router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/attendance"><i class="fas fa-address-card d-inline d-sm-none" />Attendance</router-link>
+              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/attendance"><i class="fas fa-address-card fa-2x d-inline d-sm-none mr-2" />Attendance</router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/reports"><i class="fas fa-address-card d-inline d-sm-none" />Reports</router-link>
+              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/reports"><i class="fas fa-address-card fa-2x d-inline d-sm-none mr-2" />Reports</router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/schedule"><i class="fas fa-address-card d-inline d-sm-none" />Schedule</router-link>
+              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/schedule"><i class="fas fa-address-card fa-2x d-inline d-sm-none mr-2" />Schedule</router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/test"><i class="fas fa-futbol d-inline d-sm-none" />{{$t('nav.test')}}</router-link>
+              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/test"><i class="fas fa-futbol fa-2x d-inline d-sm-none mr-2" />{{$t('nav.test')}}</router-link>
             </li>
           </ul>
 
@@ -52,7 +52,7 @@
 
           <ul class="right-nav ml-auto navbar-nav">
             <li class="nav-item" v-if="!currentLoggedInUser">
-              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/login"><i class="fas fa-sign-in-alt d-inline d-sm-none"/> {{$t('btn.login')}}</router-link>
+              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/login"><i class="fas fa-sign-in-alt d-inline d-sm-none mr-2"/> {{$t('btn.login')}}</router-link>
             </li>
             <li class="nav-item" v-else>
               <div class="userprofilemenu dropdown">
