@@ -140,7 +140,6 @@
 </template>
 
 <script>
-const API_URL = "/api/myschool/";
 import AddSchool from "@/components/modals/AddSchool";
 import AddAdmin from "@/components/modals/AddAdmin";
 import AddCourse from "@/components/modals/AddCourse";
@@ -189,7 +188,7 @@ export default {
       courseMessages:[],
       userMessages:[],
       courses:[],
-      colors: this.$store.state.colors
+      colors: this.$store.state.colors,
     }
   },
   created() {
@@ -205,7 +204,7 @@ export default {
     getSchool() {
       let vm = this;
       let schoolId = this.$route.params.id;
-      this.axios.get(API_URL+ "school/"+schoolId, {'headers': {'Authorization': 'Bearer ' + this.$store.state.user.token}}).then(
+      this.axios.get(this.$constants().BASE_URL + "school/"+schoolId, this.restCallHeaders()).then(
           response => {
             vm.school = response.data;
             vm.$store.commit('saveSchool', {school: vm.school});
@@ -217,7 +216,7 @@ export default {
     getSchoolMessages() {
       let vm = this;
       let schoolId = this.$route.params.id;
-      this.axios.get(API_URL+ "messages/allschoolmessages/"+schoolId, {'headers': {'Authorization': 'Bearer ' + this.$store.state.user.token}}).then(
+      this.axios.get(this.$constants().BASE_URL + "messages/allschoolmessages/"+schoolId, this.restCallHeaders()).then(
           response => {
             vm.schoolMessages = response.data;
           },
@@ -228,7 +227,7 @@ export default {
     getAllCoursesMessages() {
       let vm = this;
       let schoolId = this.$route.params.id;
-      this.axios.get(API_URL+ "messages/allcoursemessages/", {'headers': {'Authorization': 'Bearer ' + this.$store.state.user.token}}).then(
+      this.axios.get(this.$constants().BASE_URL + "messages/allcoursemessages/", this.restCallHeaders()).then(
           response => {
             vm.courseMessages = response.data;
           },
@@ -239,7 +238,7 @@ export default {
     getCourses() {
       let vm = this;
       let schoolId = this.$route.params.id;
-      this.axios.get(API_URL+ "schoolcourses/"+schoolId, {'headers': {'Authorization': 'Bearer ' + this.$store.state.user.token}}).then(
+      this.axios.get(this.$constants().BASE_URL + "schoolcourses/"+schoolId, this.restCallHeaders()).then(
           response => {
             vm.courses = response.data;
           },

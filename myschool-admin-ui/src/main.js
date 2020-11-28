@@ -17,6 +17,8 @@ import "@fortawesome/fontawesome-free/css/all.css"
 
 //Custom CSS
 import "./assets/css/theme.scss";
+import Constants from "@/utils/const";
+Vue.use(Constants);
 
 Vue.config.productionTip = false
 Vue.prototype.axios = axios;

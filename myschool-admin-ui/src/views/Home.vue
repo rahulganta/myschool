@@ -73,8 +73,6 @@
 </template>
 
 <script>
-const API_URL = "/api/myschool/";
-
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue'
 import AddSchool from "@/components/modals/AddSchool";
@@ -161,7 +159,7 @@ export default {
   methods: {
     getAllSchools() {
       let vm = this;
-      this.axios.get(API_URL+ "allschools", {'headers': {'Authorization': 'Bearer ' + this.$store.state.user.token}}).then(
+      this.axios.get(this.$constants().BASE_URL+ "allschools", this.restCallHeaders()).then(
           response => {
             let res = response.data;
             vm.dataList = res;
