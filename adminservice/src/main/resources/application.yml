@@ -64,9 +64,9 @@ logging:
 spring:
   profiles: myschool-postgres
   datasource:
-    url: jdbc:postgresql://ec2-3-214-4-151.compute-1.amazonaws.com:5432/dct0h1lf0cpk7v?createDatabaseIfNotExist=true&serverTimezone=UTC&useSSL=false
-    username: ypddwpsogxnuyx
-    password: 9e4f28ff719aa130fd8a5760173889d5f0a059e97840be372ea41c31efc31cd4
+    url: jdbc:postgresql://${DBHOSTNAME}/${DBSCHEMA}?createDatabaseIfNotExist=true&serverTimezone=UTC&useSSL=false
+    username: ${DBUSERNAME}
+    password: ${DBPASSWORD}
     initialization-mode: always
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect

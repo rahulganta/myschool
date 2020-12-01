@@ -64,9 +64,10 @@ export default new Vuex.Store({
         localStorage.removeItem('user');
         context.commit('logout');
         return new Promise((resolve, reject) => {
-          axios.post('/api/myschool/logout').then( response => {
-            resolve(response);
-          })
+          axios.post('/api/myschool/logout')
+              .then( response => {
+                resolve(response);
+              })
               .catch(error => {
                 reject(error);
               })

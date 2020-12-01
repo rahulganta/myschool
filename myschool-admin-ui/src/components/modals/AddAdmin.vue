@@ -43,31 +43,30 @@
 
         <div class="form-group">
           <label>Roles</label>
-          <div class="form-check">
-            <input class="form-check-input" id="schooladmin" type="radio" value="ROLE_SCHOOLADMIN" v-model="admin.roles">
-            <label class="form-check-label" for="schooladmin">
-              School Admin
-            </label>
-          </div>
           <div class="form-check mt-2">
-            <input class="form-check-input" id="franchiseadmin" type="radio" value="ROLE_FRANCHISEADMIN" v-model="admin.roles">
-            <label class="form-check-label" for="franchiseadmin">
-              Franchise Admin
+            <input class="form-check-input" id="student" type="radio" value="ROLE_STUDENT" v-model="admin.roles">
+            <label class="form-check-label" for="student">
+              STUDENT
             </label>
           </div>
           <div class="form-check mt-2">
             <input class="form-check-input" id="teacher" type="radio" value="ROLE_TEACHER" v-model="admin.roles">
             <label class="form-check-label" for="teacher">
-              Teacher
+              TEACHER
             </label>
           </div>
           <div class="form-check mt-2">
-            <input class="form-check-input" id="student" type="radio" value="ROLE_STUDENT" v-model="admin.roles">
-            <label class="form-check-label" for="student">
-              Student
+            <input class="form-check-input" id="schooladmin" type="radio" value="ROLE_SCHOOLADMIN" v-model="admin.roles">
+            <label class="form-check-label" for="schooladmin">
+              SCHOOL ADMIN
             </label>
           </div>
-
+          <div class="form-check mt-2">
+            <input class="form-check-input" id="franchiseadmin" type="radio" value="ROLE_FRANCHISEADMIN" v-model="admin.roles">
+            <label class="form-check-label" for="franchiseadmin">
+              FRANCHISE ADMIN
+            </label>
+          </div>
           <!--<input id="roles" type="checkbox" class="form-control" v-model="admin.correspondent">-->
         </div>
 

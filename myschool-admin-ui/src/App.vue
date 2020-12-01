@@ -142,11 +142,12 @@ export default {
       return response;
     }, function (error) {
       console.log("The error object is: "+error);
-      if(error.response.status == 403 && (!error.config.url.includes('/login'))) {
+      if(error.response.status == 401 && (!error.config.url.includes('/login'))) {
         vm.$store.dispatch('logout');
         vm.$router.push('/login');
+      } else {
+        return Promise.reject(error);
       }
-      return Promise.reject(error);
     });
 
   },

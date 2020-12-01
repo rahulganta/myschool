@@ -1,5 +1,6 @@
 package com.myschool.adminservice.security;
 
+import com.myschool.adminservice.exceptions.RestResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -27,6 +28,11 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
         try {
             String jwt = parseJwt(httpServletRequest);
+            String requestURL = httpServletRequest.getRequestURI();
+            //while logging in, if expired jwt toke exists clear it
+            if(requestURL.endsWith("login")) {
+                jwt = null;
+            }
 
             if (jwt != null && jwtUtil.validateJwtToken(jwt)) {
                 String username = jwtUtil.getUserNameFromJwtToken(jwt);
@@ -41,7 +47,19 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             }
         } catch (Exception e) {
             logger.error("Cannot set user authentication: {}", e);
-            throw new IOException(e.getMessage(), e);
+            /*String message = RestResponse.builder()
+                    .status(HttpServletResponse.SC_UNAUTHORIZED)
+                    .error("Unauthenticated")
+                    .message("Insufficient authentication details")
+                    .path(httpServletRequest.getRequestURI())
+                    .json();*/
+
+            String  message = new RestResponse(HttpServletResponse.SC_UNAUTHORIZED,"Unauthenticated",e.getMessage(), httpServletRequest.getRequestURI()).toJson();
+
+            httpServletResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            httpServletResponse.setContentType("application/json");
+            httpServletResponse.getWriter().write(message);
+            return;
         }
 
         //Proceed normally otherwise
