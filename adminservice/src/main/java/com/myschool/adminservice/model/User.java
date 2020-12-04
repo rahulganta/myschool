@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -34,7 +36,7 @@ public class User {
 
     private String roles;
 
-    private long lastLogin;
+    private LocalDateTime lastLogin;
 
     private String lang;
 

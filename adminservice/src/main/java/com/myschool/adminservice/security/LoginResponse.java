@@ -3,6 +3,7 @@ package com.myschool.adminservice.security;
 import com.myschool.adminservice.model.School;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -21,7 +22,7 @@ public class LoginResponse {
 
     private List<String> roles;
 
-    private long lastLogin;
+    private LocalDateTime lastLogin;
 
     private String lang;
 
@@ -30,13 +31,14 @@ public class LoginResponse {
     private School school;
 
     public LoginResponse(String token, String userName, String firstName, String lastName, String email, List<String> roles,
-                         long lastLogin, String lang, String theme, School school) {
+                         LocalDateTime lastLogin, String lang, String theme, School school) {
         this.token = token;
         this.userName = userName;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.roles = roles;
+        this.lastLogin = lastLogin;
         this.lang = lang;
         this.theme = theme;
         this.school = school;
