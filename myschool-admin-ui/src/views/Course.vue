@@ -74,7 +74,7 @@ export default {
     getCourse() {
       let vm = this;
       let courseId = this.$route.params.id;
-      this.axios.get(API_URL+ "course/"+courseId, {'headers': {'Authorization': 'Bearer ' + this.$store.state.user.token}}).then(
+      this.axios.get(API_URL+ "course/"+courseId, this.restCallHeaders()).then(
           response => {
             vm.course = response.data;
             vm.$store.commit('saveCourse', {course: vm.course});
@@ -86,7 +86,7 @@ export default {
     getCourseMessages() {
       let vm = this;
       let courseId = this.$route.params.id;
-      this.axios.get(API_URL+ "messages/allcoursemessages/"+courseId, {'headers': {'Authorization': 'Bearer ' + this.$store.state.user.token}}).then(
+      this.axios.get(API_URL+ "messages/allcoursemessages/"+courseId, this.restCallHeaders()).then(
           response => {
             vm.courseMessages = response.data;
           },
@@ -99,7 +99,7 @@ export default {
 </script>
 
 <style scoped>
-  .mi-linkbtn.active {
-    background-color: ;
+  a.mi-linkbtn.active {
+
   }
 </style>

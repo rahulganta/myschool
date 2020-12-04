@@ -122,7 +122,7 @@ export default {
     addAdmin () {
       let vm = this;
 
-      this.axios.post(API_URL+ "addadmin", vm.admin).then(
+      this.axios.post(API_URL+ "addadmin", vm.admin, this.restCallHeaders()).then(
           response => {
             /*$('.toast').toast('show');*/
             let res = response.data;

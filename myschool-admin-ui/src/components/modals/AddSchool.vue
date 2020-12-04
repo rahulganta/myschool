@@ -90,7 +90,7 @@ import Modal from '@/components/Modal';
 
         //Update School
         //Add School
-        this.axios.post(API_URL+ "addschool", vm.school).then(
+        this.axios.post(API_URL+ "addschool", vm.school, this.restCallHeaders()).then(
             response => {
               /*$('.toast').toast('show');*/
               let res = response.data;

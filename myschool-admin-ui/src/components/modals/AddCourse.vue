@@ -75,7 +75,7 @@ export default {
       let vm = this;
       //Update Course
       //Add Course
-      this.axios.post(API_URL+ "addcourse", vm.course).then(
+      this.axios.post(API_URL+ "addcourse", vm.course, this.restCallHeaders()).then(
           response => {
             /*$('.toast').toast('show');*/
             let res = response.data;
@@ -93,7 +93,7 @@ export default {
     getTeachers() {
       let vm = this;
       let schoolId = this.course.courseSchoolId;
-      this.axios.get(API_URL+ "teachers/"+schoolId, {'headers': {'Authorization': 'Bearer ' + this.$store.state.user.token}}).then(
+      this.axios.get(API_URL+ "teachers/"+schoolId, this.restCallHeaders()).then(
           response => {
             vm.teachers = response.data;
             vm.errorMsg = '';
