@@ -17,8 +17,12 @@ import "@fortawesome/fontawesome-free/css/all.css"
 
 //Custom CSS
 import "./assets/css/theme.scss";
+
 import Constants from "@/utils/const";
 Vue.use(Constants);
+
+import ToastsPlugin from "@/utils/toastsPlugin";
+Vue.use(ToastsPlugin);
 
 Vue.config.productionTip = false
 Vue.prototype.axios = axios;

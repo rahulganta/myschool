@@ -5,6 +5,8 @@
       <i class="fas fa-exclamation-triangle" /> Please remove this tab in the production
     </div>
 
+    <a class="mi-linkbtn" @click="submit('Hello All')">Submit</a>
+
     <select class="form-control selectpicker" data-live-search="true" id="state_list" name="">
       <option value="" selected>Manufacturer's Name</option>
       <option value="">Aarkay Engineering Corpot</option>
@@ -15,6 +17,14 @@
       <option value="">SAAB, SWEDEN</option>
     </select>
 
+    <!--<Toasts></Toasts>-->
+    <Toasts
+        :show-progress="true"
+        :rtl="false"
+        :max-messages="7"
+        :time-out="7000"
+        :closeable="true"
+    ></Toasts>
   </div>
 </template>
 
@@ -35,6 +45,9 @@ export default {
   mounted () {
   },
   methods: {
+    submit(message) {
+      this.$toast.success("School added successfully!!");
+    }
 
   }
 }
