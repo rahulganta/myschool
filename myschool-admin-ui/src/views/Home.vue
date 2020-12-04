@@ -69,6 +69,7 @@
     <!--Modals-->
     <AddSchool v-if="showAddSchoolModal" @close="close" :school="school" :action="action" @addschool="addSchool"></AddSchool>
     <AddAdmin v-if="showAddAdminModal" @close="close" :school="school" :admin="admin" :action="action" @addadmin="addAdmin"></AddAdmin>
+    <Toasts></Toasts>
   </div>
 </template>
 
@@ -155,7 +156,6 @@ export default {
       }
     }
   },
-
   methods: {
     getAllSchools() {
       let vm = this;
@@ -169,9 +169,6 @@ export default {
             this.error = true;
             this.errorMsg = error.response.data.message;
           });
-    },
-    addSchool() {
-      this.getAllSchools()
     },
     viewSchool(index, rowData) {
       this.$store.commit('saveSchool', {school: rowData});
@@ -187,6 +184,10 @@ export default {
       this.admin.schoolId = rowData.id;
       this.school = rowData;
       this.showAddAdminModal = true;
+    },
+    addSchool() {
+      this.$toast.success("School added successfully!!")
+      this.getAllSchools()
     },
     addAdmin() {
 
