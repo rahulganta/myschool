@@ -98,7 +98,7 @@
       <div class="card mi-card h-100"> <!--v-bind:style="{backgroundColor:'#F9AA33',color: '#FFF' }"-->
         <div class="card-body">
           <div class="row">
-            <h5 class="col-10" v-bind:style="{color: colors[index] }" @click="navToCourse(course)">{{course.name}} <small>{{course.grade}}</small></h5>
+            <h5 class="col-10" v-bind:style="{color: colors[index] }" @click="navToCourse(course)" style="cursor: pointer">{{course.name}} <small>{{course.grade}}</small></h5>
             <div class="col-2 text-right mi-menu dropdown">
               <a class="btn mi-linkbtn" href="#" role="button" id="dropdownMenuButton" name="dropdown" data-toggle="dropdown" aria-haspopup="true"
                  aria-expanded="false"> <i class="fas fa-ellipsis-v"></i>
@@ -136,6 +136,9 @@
   <AddAdmin v-if="showAddAdminModal" @close="close" :school="school" :admin="admin" @addadmin="addAdmin"></AddAdmin>
   <AddCourse v-if="showAddCourseModal" @close="close" :course="course" :action="action" @addCourse="addCourse"></AddCourse>
   <AddSchoolMessage v-if="showAddSchoolMessage" @close="close" :message="schoolMessage" :action="action" @addMessage="addSchoolMessage"></AddSchoolMessage>
+
+  <!--Toast-->
+  <Toasts></Toasts>
 </div>
 </template>
 
@@ -307,6 +310,6 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss">
 
 </style>

@@ -2,6 +2,8 @@
 const messages = {
     en: {
         appname: 'MySchool',
+        school: "School ",
+        user: 'User | Users',
         nav: {
             home: 'Home',
             aboutus: 'About Us',
@@ -107,8 +109,12 @@ const messages = {
             darktheme: "Dark Theme",
         },
 
+        toast: {
+            added: "added successfully!!",
+            updated: "updated successfully!!",
+            archived: "archived successfully!!",
+        },
         copyright: 'Copyright © 2020 @:appname .  All Rights Reserved.',
-        user: 'User | Users',
         items: 'No Items | one Item | {count} Items',
         linked: '@:message.hello, Welcome to @:nav.ourmission, your id has been created successfully',
     }

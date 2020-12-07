@@ -19,6 +19,7 @@
 
     <!--<Toasts></Toasts>-->
     <Toasts
+        :toastMessage="$tc('user',1) +' '+ $t('toast.added')"
         :show-progress="true"
         :rtl="false"
         :max-messages="7"

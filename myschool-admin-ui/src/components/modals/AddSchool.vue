@@ -1,4 +1,5 @@
 <template type="text/x-template">
+  <div>
   <form>
     <modal class="mi-custom-modal addschool-modal">
       <div slot="header" class="mi-custom-header">
@@ -53,6 +54,8 @@
       </div>
     </modal>
   </form>
+  <Toasts></Toasts>
+  </div>
 </template>
 
 <script>
@@ -98,8 +101,15 @@ import Modal from '@/components/Modal';
               /*event.target.reset();*/
               /*vm.contact = JSON.parse(JSON.stringify(vm.initContact));*/
               vm.error = false;
-              this.$emit("close")
-              this.$emit("addschool")
+
+              if(vm.action == "update") {
+                this.$toast.success("School updated successfully!!");
+              } else {
+                this.$toast.success("School added successfully!!");
+              }
+
+              this.$emit("close");
+              this.$emit("addschool");
             },
             error => {
               vm.error = true;

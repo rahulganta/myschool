@@ -44,6 +44,10 @@
 import { EventBus } from "@/utils/eventBus";
 export default {
   props: {
+    toastMessage: {
+      type: String,
+      required: false
+    },
     showProgress: {
       type: Boolean,
       default: true
@@ -54,7 +58,7 @@ export default {
     },
     maxMessages: {
       type: Number,
-      default: 5
+      default: 7
     },
     timeOut: {
       type: Number,
@@ -96,7 +100,7 @@ export default {
       // message object data
       var messageData = {
         id: this.count++,
-        message: message,
+        message: typeof this.toastMessage !== "undefined" ? this.toastMessage : message,
         type: type,
         showProgress: this.showProgress,
         timeOut: this.timeOut,
