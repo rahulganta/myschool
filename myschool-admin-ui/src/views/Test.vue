@@ -19,7 +19,7 @@
 
     <!--<Toasts></Toasts>-->
     <Toasts
-        :toastMessage="$tc('user',1) +' '+ $t('toast.added')"
+        :toastMessage="$tc('user',1) +' '+ $t(toastMsg)"
         :show-progress="true"
         :rtl="false"
         :max-messages="7"
@@ -39,6 +39,7 @@ export default {
     return {
       error: false,
       errorMsg: '',
+      toastMsg:'toast.added',
     }
   },
   created() {
