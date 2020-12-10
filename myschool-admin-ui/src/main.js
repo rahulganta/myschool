@@ -16,6 +16,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-free/css/all.css"
 
 //Custom CSS
+import "./assets/css/custome.scss";
 import "./assets/css/theme.scss";
 
 import Constants from "@/utils/const";

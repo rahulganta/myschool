@@ -71,12 +71,19 @@ export default {
          * @vuese
          * Used for select data
          */
-        select: function() {
-            this.selected = [];
-            if (!this.selectAll) {
-                for (var i in this.filteredData) {
-                    this.selected.push(this.filteredData[i].name);
+        selectAllRows: function() {
+            this.selectedTableRows = [];
+            if (!this.selectAllTableRows) {
+                for (var i in this.tableFilteredData) {
+                    this.selectedTableRows.push(this.tableFilteredData[i]);
                 }
+            }
+        },
+        selectRow(rowData) {
+            if(this.selectedTableRows.length == this.tableFilteredData.length) {
+                this.selectAllTableRows = true;
+            } else {
+                this.selectAllTableRows = false;
             }
         },
         /**
