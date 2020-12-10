@@ -186,7 +186,6 @@ export default {
       this.showAddAdminModal = true;
     },
     addSchool() {
-      this.$toast.success("School added successfully!!")
       this.getAllSchools()
     },
     addAdmin() {
@@ -196,7 +195,6 @@ export default {
       this.showAddSchoolModal = false;
       this.showAddAdminModal = false;
     },
-
   }
 }
 </script>
