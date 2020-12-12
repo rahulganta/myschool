@@ -52,9 +52,9 @@ export default {
       columnsHeaders: [
         { title: "SCHOOL NAME", sortKey: "name", sortOrder: 1, action: "viewschool", selectedFilters: []},
         { title: "DISPLAY NAME", sortKey: "displayName", sortOrder: 1, selectedFilters: [], hideOnScr: 'sm'},
-        { title: "FRANCHISE", sortKey: "franchiseName", sortOrder: 1, selectedFilters: [],},
-        { title: "CORRESPONDENT", sortKey: "correspondent", sortOrder: 1, selectedFilters: [], hideOnScr: 'sm'},
-        { title: "STATUS", sortKey: "status", sortOrder: 1, selectedFilters: []},
+        { title: "FRANCHISE", sortKey: "franchiseName", sortOrder: 1, selectedFilters: [], },
+        { title: "CORRESPONDENT", sortKey: "correspondent", sortOrder: 1, selectedFilters: [],hideOnScr: 'sm'},
+        { title: "STATUS", sortKey: "status", sortOrder: 1, selectedFilters: [],},
       ],
       tableData: [
         { id: 1, name: "Tiny Tots", displayName: "Tiny Tots", franchiseName: "Alphores", correspondent: "Narendra Reddy", status: "Active", clientFeature: "feature1",},

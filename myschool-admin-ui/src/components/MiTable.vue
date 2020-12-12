@@ -1,5 +1,5 @@
 <template>
-  <div class="mi-card">
+  <div class="mi-datatable">
     <div class="row mb-3">
       <div class="col-lg-5 col-sm-9">
         <div class="input-group input-group-lg" v-if="showSearchInput">

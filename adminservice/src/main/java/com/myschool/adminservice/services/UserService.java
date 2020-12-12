@@ -46,6 +46,12 @@ public class UserService {
         List<User> teacherList = userRepository.findTeachersBySchoolId(schoolId);
         return teacherList;
     }
+
+    public List<User> getAdminsBySchoolId(long schoolId) {
+        List<User> adminList = userRepository.findAdminsBySchoolId(schoolId);
+        return adminList;
+    }
+
     public List<User> getStudentsBySchoolId(long schoolId) {
         List<User> studentList = userRepository.findStudentsBySchoolId(schoolId);
         return studentList;
