@@ -38,7 +38,7 @@
         <th v-if="rowActions"><span class="sr-only">Menu</span></th>
       </tr>
       </thead>
-      <tbody>
+      <tbody v-if="tableFilteredData.length > 0">
       <tr v-for="(rowData, index) in tableFilteredData">
         <td v-if="showRowCheckBox">
           <label class="form-checkbox sr-only">Select row checkbox</label>
@@ -59,6 +59,11 @@
             </div>
           </div>
         </td>
+      </tr>
+      </tbody>
+      <tbody v-else>
+      <tr>
+        <td colspan="100%" class="text-center">{{ noTableDataMessage }}</td>
       </tr>
       </tbody>
     </table>
@@ -102,6 +107,10 @@ export default {
     showSearchInput: {
       type: Boolean,
       default: true
+    },
+    noTableDataMessage: {
+      type: String,
+      default: "No data found"
     }
   },
   data() {

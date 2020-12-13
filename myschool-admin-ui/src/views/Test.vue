@@ -22,8 +22,10 @@
      <span></span>
     </label>
 
-    <MiTable :columns-headers="columnsHeaders" :data-list="tableData" :row-actions="tableRowActions" :table-actions="tableActions" :show-row-check-box="true"
+    <div class="mi-card">
+      <MiTable :columns-headers="columnsHeaders" :data-list="tableData1" :row-actions="tableRowActions" :table-actions="tableActions" :show-row-check-box="true"
              @rowAaction="tableRowAction" @tableAction="tableAction"></MiTable>
+    </div>
 
     <!--<Toasts></Toasts>-->
     <Toasts
@@ -61,6 +63,7 @@ export default {
         { id: 2, name: "Alphores eTechno", displayName: "eTechno High School", franchiseName: "Alphores", correspondent: "Narendra Reddy", status: "Active", clientFeature: "feature1",},
         { id: 3, name: "Trinity Peddaplly", displayName: "Trinity High School", franchiseName: "Trinity", correspondent: "Manohar Reddy", status: "Active", clientFeature: "feature2",},
       ],
+      tableData1:[],
       tableRowActions: [
         { title: "View School", name: "viewschool", icon: "fa-info-circle"},
         { title: "Edit School", name: "editschool", icon: "fa-pen"},
