@@ -20,4 +20,6 @@ public interface UserRepository extends JpaRepository<User, String> {
     @Query("SELECT n FROM User n where n.roles = 'ROLE_STUDENT' and n.schoolId = :schoolId")
     List<User> findStudentsBySchoolId(long schoolId);
 
+    @Query("SELECT n FROM User n where n.schoolId = :schoolId and n.roles in :roles")
+    List<User> findUsersBySchoolIdandRoles(long schoolId, List<String> roles);
 }

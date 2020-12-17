@@ -57,4 +57,9 @@ public class UserService {
         return studentList;
     }
 
+    public List<User> getUsersBySchoolIdAndRoles(long schoolId, List<String> roles) {
+        List<User> userList = userRepository.findUsersBySchoolIdandRoles(schoolId, roles);
+        return userList;
+    }
+
 }

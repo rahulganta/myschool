@@ -1,6 +1,6 @@
 <template>
   <div id="app" :class="theme">
-    <div id="appheader" class="sticky-top mi-card" v-if="currentLoggedInUser">
+    <div id="appheader" class="sticky-top mi-card" v-if="currentLoggedInUser" style="min-height: 0px">
       <nav class="navbar navbar-expand-lg navbar-light">
         <a class="navbar-brand" href="/">{{$t('appname')}}<!--<img src="./assets/img/logo.png" style="width:96px;height:40px;" alt="myschool logo"  class="img-fluid"/>--></a>
         <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">

@@ -23,7 +23,7 @@
     </label>
 
     <div class="mi-card">
-      <MiTable :columns-headers="columnsHeaders" :data-list="tableData1" :row-actions="tableRowActions" :table-actions="tableActions" :show-row-check-box="true"
+      <MiTable :columns-headers="columnsHeaders" :data-list="tableData" :row-actions="tableRowActions" :table-actions="tableActions" :show-row-check-box="true"
              @rowAaction="tableRowAction" @tableAction="tableAction"></MiTable>
     </div>
 
@@ -50,6 +50,8 @@ export default {
     return {
       error: false,
       errorMsg: '',
+      school: this.$store.state.user.school,
+      userList: [],
       toastMsg:'toast.added',
       columnsHeaders: [
         { title: "SCHOOL NAME", sortKey: "name", sortOrder: 1, action: "viewschool", selectedFilters: []},
@@ -76,6 +78,7 @@ export default {
     }
   },
   created() {
+    this.getUsersByRoles();
   },
   mounted () {
   },
@@ -93,6 +96,23 @@ export default {
         console.log("Table Action is: " +actionName+ " Table data is: "+selectedTableData);
       }
     },
+    getUsersByRoles() {
+      let vm = this;
+      let school = this.$store.state.school;
+      if(school) {
+        vm.school = school;
+      }
+      var roles = ['ROLE_SCHOOLADMIN', 'ROLE_TEACHER'];
+      this.axios.get(this.$constants().BASE_URL + "users/"+vm.school.id+"?roles="+roles, this.restCallHeaders()).then(
+          response => {
+            vm.userList = response.data;
+            vm.errorMsg = '';
+          },
+          error => {
+            vm.errorMsg = error.response.error +": " + error.message;
+          });
+    }
+
   }
 }
 </script>

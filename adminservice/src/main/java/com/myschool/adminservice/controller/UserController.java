@@ -61,9 +61,9 @@ public class UserController {
         return adminList;
     }
 
-    @GetMapping(value = "staff/{schoolId}")
-    public List<User> getUsersByRolesAndSchoolId(@PathVariable("schoolId") long schoolId, @RequestParam String[] roles) {
-
-        return (new ArrayList<User>());
+    @GetMapping(value = "users/{schoolId}")
+    public List<User> getUsersBySchoolIdAndRoles(@PathVariable("schoolId") long schoolId, @RequestParam(name = "roles", required = false) List<String> roles) {
+            List<User> userList = userService.getUsersBySchoolIdAndRoles(schoolId, roles);
+            return userList;
     }
 }
