@@ -19,7 +19,7 @@
     <div class="card-footer mi-card-footer">
       <button id="editschool1" class="btn mi-linkbtn" @click="showModal('schoolModal')" :aria-expanded="showAddSchoolModal ? 'true':'false'">
         <i class="fas fa-pen"/> EDIT SCHOOL</button>
-      <button id="addadmin1" class="btn mi-linkbtn" @click="showModal('adminModal')" :aria-expanded="showAddAdminModal ? 'true':'false'">
+      <button id="addadmin1" class="btn mi-linkbtn" @click="showModal('userModal')" :aria-expanded="showAddAdminModal ? 'true':'false'">
         <i class="fas fa-plus"/> ADD USER</button>
     </div>
   </div>
@@ -85,7 +85,7 @@
         <div class="card-footer mi-card-footer">
           <button id="editschool" class="btn mi-linkbtn" @click="showModal('schoolModal')" :aria-expanded="showAddSchoolModal ? 'true':'false'">
             <i class="fas fa-pen"/> EDIT SCHOOL</button>
-          <button id="addadmin" class="btn mi-linkbtn" @click="showModal('adminModal')" :aria-expanded="showAddAdminModal ? 'true':'false'">
+          <button id="addadmin" class="btn mi-linkbtn" @click="showModal('userModal')" :aria-expanded="showAddAdminModal ? 'true':'false'">
             <i class="fas fa-plus"/> ADD USER</button>
         </div>
       </div>
@@ -265,7 +265,7 @@ export default {
       this.$router.push('/course/'+course.id);
     },
     showModal(modal, action, data) {
-      if(modal === 'adminModal') {
+      if(modal === 'userModal') {
         this.admin.schoolId = this.school.id;
         this.showAddAdminModal = true;
       }
