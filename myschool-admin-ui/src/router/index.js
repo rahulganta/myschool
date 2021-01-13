@@ -64,9 +64,9 @@ const routes = [
     meta: { requiresAuth: true}
   },
   {
-    path: '/teachers',
-    name: 'Teachers',
-    component: () => import('../views/Teachers'),
+    path: '/staff',
+    name: 'Staff',
+    component: () => import('../views/Staff'),
     meta: { requiresAuth: true}
   },
   {

@@ -23,7 +23,7 @@
               <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/messages"><i class="fas fa-address-card fa-2x d-inline d-sm-none mr-2" />Messages</router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/teachers"><i class="fas fa-address-card fa-2x d-inline d-sm-none mr-2" />Staff</router-link>
+              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/staff"><i class="fas fa-address-card fa-2x d-inline d-sm-none mr-2" />Staff</router-link>
             </li>
             <li class="nav-item">
               <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/students"><i class="fas fa-address-card fa-2x d-inline d-sm-none mr-2" />Students</router-link>
