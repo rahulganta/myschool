@@ -1,4 +1,5 @@
 <template type="text/x-template">
+  <div>
   <form>
     <modal class="mi-custom-modal addschool-modal">
       <div slot="header" class="mi-custom-header">
@@ -35,13 +36,15 @@
       </div>
     </modal>
   </form>
+    <!--Toast-->
+    <Toasts></Toasts>
+  </div>
 </template>
 
 <script>
 import Modal from '@/components/Modal';
-
 export default {
-  name: "AddSchoolMessage",
+  name: "AddCourseMessage",
   components: {
     Modal
   },
@@ -58,6 +61,7 @@ export default {
   data () {
     return {
       errorMsg: '',
+      /*message: JSON.parse(JSON.stringify(this.messageprop)),*/
     }
   },
   mounted() {
@@ -67,14 +71,17 @@ export default {
       let vm = this;
       //Update Course
       //Add Course
-      this.axios.post(this.$constants().BASE_URL + "messages/addschoolmessage", vm.message).then(
+      this.axios.post(this.$constants().BASE_URL + "messages/addcoursemessage", vm.message).then(
           response => {
-            /*$('.toast').toast('show');*/
             let res = response.data;
-            //Clear the form data
-            /*event.target.reset();*/
-            /*vm.contact = JSON.parse(JSON.stringify(vm.initContact));*/
             vm.errorMsg = '';
+            //Toast
+            if(vm.action == "update") {
+              this.$toast.success("Course announcement updated successfully!!");
+            } else {
+              this.$toast.success("Course announcement added successfully!!");
+            }
+
             this.$emit("close")
             this.$emit("addMessage")
           },

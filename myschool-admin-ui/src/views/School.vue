@@ -28,15 +28,15 @@
     <div class="col-sm-12 mb-4">
       <div class="card mi-card h-100">
         <div class="card-body">
-          <h5 class="card-title">Course Messages</h5>
+          <h5 class="card-title">My Messages</h5>
           <ul class="list-unstyled">
-            <li class="media mb-3" v-for="(courseMessage, index) in courseMessages">
+            <li class="media mb-3" v-for="(userMessage, index) in userMessages">
               <!--<i class="far fa-circle fa-2x mr-2"/>-->
               <div class="numberCircle mr-3" style="border-color: #37966f" ><span style="color: #37966f">{{ index+1 }}</span></div>
               <div class="media-body">
-                <strong class="mt-0 mb-1">{{courseMessage.subject}}</strong>
-                <div>{{courseMessage.message}}</div>
-                <p class="text-muted">Posted: {{ courseMessage.createdTimeStamp | formatDateTime }}</p>
+                <strong class="mt-0 mb-1">{{userMessage.subject}}</strong>
+                <div>{{userMessage.message}}</div>
+                <p class="text-muted">Posted: {{ userMessage.createdTimeStamp | formatDateTime }}</p>
               </div>
             </li>
           </ul>
@@ -199,6 +199,7 @@ export default {
     if(!this.school) {
       this.getSchool();
     }
+    this.getUserMessages();
     this.getAllCoursesMessages();
     this.getSchoolMessages();
     this.getCourses();
@@ -233,6 +234,16 @@ export default {
       this.axios.get(this.$constants().BASE_URL + "messages/allcoursemessages/", this.restCallHeaders()).then(
           response => {
             vm.courseMessages = response.data;
+          },
+          error => {
+            this.errorMsg = error.response.message;
+          });
+    },
+    getUserMessages() {
+      let vm = this;
+      this.axios.get(this.$constants().BASE_URL + "messages/usermessages?username="+vm.$store.state.user.userName, this.restCallHeaders()).then(
+          response => {
+            vm.userMessages = response.data;
           },
           error => {
             this.errorMsg = error.response.message;
@@ -276,11 +287,11 @@ export default {
       }
 
       if(modal === 'schoolMessageModal') {
-
         if(action === 'update') {
           this.action = action;
           this.schoolMessage = data;
         } else {
+          this.action = 'add';
           this.schoolMessage = {}
           this.schoolMessage.priority = 'important',
           this.schoolMessage.schoolId = this.school.id;

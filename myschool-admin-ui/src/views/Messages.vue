@@ -1,14 +1,14 @@
 <template>
   <div class="messages">
     <h2 class="mi-page-title">Messages</h2>
-    <div class="row row-cols-lg-3 row-cols-md-1 row-cols-sm-1">
-      <div class="col-sm-12 mb-4">
+    <div class="row row-cols-lg-2 row-cols-md-1 row-cols-sm-1">
+      <!--<div class="col-sm-12 mb-4">
         <div class="card mi-card">
           <div class="card-body">
             <h5 class="card-title">Course Messages</h5>
             <ul class="list-unstyled">
               <li class="media mb-3" v-for="(courseMessage, index) in courseMessages">
-                <!--<i class="far fa-circle fa-2x mr-2"/>-->
+                &lt;!&ndash;<i class="far fa-circle fa-2x mr-2"/>&ndash;&gt;
                 <div class="numberCircle mr-3" style="border-color: #37966f" ><span style="color: #37966f">{{ index+1 }}</span></div>
                 <div class="media-body">
                   <strong class="mt-0 mb-1">{{courseMessage.subject}}</strong>
@@ -19,20 +19,20 @@
             </ul>
           </div>
         </div>
-      </div>
+      </div>-->
 
       <div class="col-sm-12 mb-4">
         <div class="card mi-card">
           <div class="card-body">
             <h5 class="card-title">Personal Messages</h5>
             <ul class="list-unstyled">
-              <li class="media mb-3" v-for="(courseMessage, index) in courseMessages">
+              <li class="media mb-3" v-for="(userMessage, index) in userMessages">
                 <!--<i class="far fa-circle fa-2x mr-2"/>-->
                 <div class="numberCircle mr-3" style="border-color: #37966f" ><span style="color: #37966f">{{ index+1 }}</span></div>
                 <div class="media-body">
-                  <strong class="mt-0 mb-1">{{courseMessage.subject}}</strong>
-                  <div>{{courseMessage.message}}</div>
-                  <p class="text-muted">Posted: {{ courseMessage.createdTimeStamp | formatDateTime }}</p>
+                  <strong class="mt-0 mb-1">{{userMessage.subject}}</strong>
+                  <div>{{userMessage.message}}</div>
+                  <p class="text-muted">Posted: {{ userMessage.createdTimeStamp | formatDateTime }}</p>
                 </div>
               </li>
             </ul>
@@ -64,14 +64,16 @@
       </div>
     </div>
 
+    <AddSchoolMessage v-if="showAddSchoolMessage" @close="close" :message="schoolMessage" :action="action" @addMessage="addSchoolMessage"></AddSchoolMessage>
   </div>
 </template>
 
 <script>
+import AddSchoolMessage from "@/components/modals/AddSchoolMessage";
 export default {
   name: "Messages",
   components: {
-
+    AddSchoolMessage,
   },
   data() {
     return {
@@ -80,11 +82,18 @@ export default {
       schoolMessages:[],
       courseMessages:[],
       userMessages:[],
+      schoolMessage: {
+        subject: '',
+        message: '',
+        priority: 'important',
+        schoolId: 0
+      },
+      showAddSchoolMessage: false
     }
   },
   created() {
-    this.getAllCoursesMessages();
     this.getSchoolMessages();
+    this.getUserMessages();
   },
   methods: {
     getSchoolMessages() {
@@ -112,6 +121,36 @@ export default {
             this.errorMsg = error.response.message;
           });
     },
+    getUserMessages() {
+      let vm = this;
+      this.axios.get(this.$constants().BASE_URL + "messages/usermessages?username="+vm.$store.state.user.userName, this.restCallHeaders()).then(
+          response => {
+            vm.userMessages = response.data;
+          },
+          error => {
+            this.errorMsg = error.response.message;
+          });
+    },
+    showModal(modal, action, data) {
+      if(modal === 'schoolMessageModal') {
+        if(action === 'update') {
+          this.action = action;
+          this.schoolMessage = data;
+        } else {
+          this.action = 'add';
+          this.schoolMessage = {}
+          this.schoolMessage.priority = 'important',
+              this.schoolMessage.schoolId = this.school.id;
+        }
+        this.showAddSchoolMessage = true;
+      }
+    },
+    addSchoolMessage() {
+      this.getSchoolMessages();
+    },
+    close() {
+      this.showAddSchoolMessage = false;
+    }
   }
 }
 </script>

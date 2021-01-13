@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
 public class UserMessage {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
 
     private String subject;
 
@@ -34,12 +34,14 @@ public class UserMessage {
 
     private String priority;
 
-    @Column(columnDefinition="boolean default false")
+    @Column(columnDefinition="boolean default FALSE")
     private boolean readStatus;
+
+    private String postedTo;
 
     //sent to
     @ManyToOne
-    @JoinColumn(name="to_username")
+    @JoinColumn(name="postedTo", referencedColumnName = "username", updatable = false, insertable = false)
     @JsonBackReference
     private User user;
 

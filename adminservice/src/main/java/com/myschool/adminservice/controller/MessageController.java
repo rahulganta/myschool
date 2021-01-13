@@ -1,11 +1,14 @@
 package com.myschool.adminservice.controller;
 
-import com.myschool.adminservice.model.Course;
 import com.myschool.adminservice.model.CourseMessage;
 import com.myschool.adminservice.model.SchoolMessage;
+import com.myschool.adminservice.model.UserMessage;
+import com.myschool.adminservice.security.MyUserDetails;
 import com.myschool.adminservice.services.MessageService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -46,8 +49,8 @@ public class MessageController {
     }
 
     @GetMapping(value = "allschoolmessages")
-    public List<SchoolMessage> getAllSchoolMessages() {
-        List<SchoolMessage> schoolMessageList = messageService.getAllSchoolMessages();
+    public Iterable<SchoolMessage> getAllSchoolMessages() {
+        Iterable<SchoolMessage> schoolMessageList = messageService.getAllSchoolMessages();
         return schoolMessageList;
     }
 
@@ -55,5 +58,23 @@ public class MessageController {
     public List<SchoolMessage> getMessagesBySchoolId(@PathVariable(value = "schoolId") long schoolId) {
         List<SchoolMessage> schoolMessageList = messageService.getSchoolMessagesBySchoolId(schoolId);
         return schoolMessageList;
+    }
+
+    //UserMessage Endpoints
+    @PostMapping(value = "addusermessage")
+    public UserMessage addUserMessage(@RequestBody UserMessage userMessage) {
+        UserMessage resUserMessage = messageService.createUserMessage(userMessage);
+        return resUserMessage;
+    }
+
+    @GetMapping(value = "usermessages")
+    public List<UserMessage> getUserMessages(@RequestParam(name = "username", required = false) String username) {
+        if(username == null) {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            MyUserDetails myUserDetails = (MyUserDetails) authentication.getPrincipal();
+            username = myUserDetails.getUsername();
+        }
+        List<UserMessage> userMessageList = messageService.getUserMessagesByUsername(username);
+        return userMessageList;
     }
 }

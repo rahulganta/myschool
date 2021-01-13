@@ -78,7 +78,8 @@ export default {
     }
   },
   created() {
-    this.getUsersByRoles();
+    /*this.getUsersByRoles();*/
+    this.getUserMessages();
   },
   mounted () {
   },
@@ -104,6 +105,17 @@ export default {
       }
       var roles = ['ROLE_SCHOOLADMIN', 'ROLE_TEACHER'];
       this.axios.get(this.$constants().BASE_URL + "users/"+vm.school.id+"?roles="+roles, this.restCallHeaders()).then(
+          response => {
+            vm.userList = response.data;
+            vm.errorMsg = '';
+          },
+          error => {
+            vm.errorMsg = error.response.error +": " + error.message;
+          });
+    },
+    getUserMessages() {
+      let vm = this;
+      this.axios.get(this.$constants().BASE_URL + "/messages/usermessages", this.restCallHeaders()).then(
           response => {
             vm.userList = response.data;
             vm.errorMsg = '';
