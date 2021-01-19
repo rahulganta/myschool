@@ -64,6 +64,7 @@
       </div>
     </div>
 
+    <!--Modal Components-->
     <AddSchoolMessage v-if="showAddSchoolMessage" @close="close" :message="schoolMessage" :action="action" @addMessage="addSchoolMessage"></AddSchoolMessage>
   </div>
 </template>

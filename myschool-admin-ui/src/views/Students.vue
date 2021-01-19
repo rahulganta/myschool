@@ -6,21 +6,28 @@
       <MiTable :columns-headers="studentTableColumnsHeaders" :data-list="studentList" :row-actions="studentTableRowActions" :table-actions="studentTableActions" :show-row-check-box="true"
                @rowAaction="tableRowAction" @tableAction="tableAction"></MiTable>
     </div>
+
+    <!--Modal Components-->
+    <AddAdmin v-if="showAddAdminModal" @close="close" :school="school" :action="action" :admin="user" @addadmin="addUser"></AddAdmin>
   </div>
 </template>
 
 <script>
 import MiTable from "@/components/MiTable";
+import AddAdmin from "@/components/modals/AddAdmin";
 
 export default {
   name: "Students",
   components: {
     MiTable,
+    AddAdmin
   },
   data() {
     return {
       errorMsg: '',
       school: this.$store.state.user.school,
+      showAddAdminModal: false,
+      action: 'add',
       studentList: [],
       studentTableColumnsHeaders: [
         { title: "USERNAME", sortKey: "username", sortOrder: 1, action: "viewschool", selectedFilters: []},
@@ -38,6 +45,15 @@ export default {
         { title: "ADD STUDENT", name: "addstudent", icon: "fa-plus"},
         { title: "DELETE STUDENT", name: "deletestudent", icon: "fa-trash"},
       ],
+      user: {
+        username: '',
+        password: '',
+        firstName: '',
+        lastName: '',
+        email: '',
+        roles: 'ROLE_STUDENT',
+        schoolId: 0
+      },
     }
   },
   created() {
@@ -75,15 +91,46 @@ export default {
           });
     },
     tableRowAction(actionName, rowData, index) {
-      console.log("Row action is: "+actionName+ " Row data is: " +rowData.username+ " Index is: "+index);
+      console.debug("Row action is: "+actionName+ " Row data is: " +rowData.username+ " Index is: "+index);
+
+      if(actionName == 'viewstudent') {
+
+      } else if(actionName == 'editstudent') {
+        this.showModal('userModal', 'update', rowData);
+      } else if(actionName == 'deletestudent') {
+
+      } else {
+
+      }
+
     },
     tableAction(actionName, selectedTableData) {
+      if(actionName == 'addstudent') {
+        this.showModal('userModal');
+      }
       if (Array.isArray(selectedTableData) && (selectedTableData.length == 0)) {
         console.log("Empty selected data");
       } else {
         console.log("Table Action is: " +actionName+ " Table data is: "+selectedTableData);
       }
     },
+    showModal(modal, action, data) {
+      if(modal === 'userModal') {
+        this.action = 'add';
+        this.user.schoolId = this.school.id;
+        this.showAddAdminModal = true;
+        if(action == 'update') {
+          this.action = action;
+          this.user = data;
+        }
+      }
+    },
+    addUser() {
+      this.getStudents();
+    },
+    close() {
+      this.showAddAdminModal = false;
+    }
   }
 }
 </script>

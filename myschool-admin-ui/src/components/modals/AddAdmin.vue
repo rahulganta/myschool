@@ -3,8 +3,8 @@
     <modal class="mi-custom-modal addadmin-modal">
       <div slot="header" class="mi-custom-header">
         <div class="row no-gutters">
-          <h4 class="col-10 title" v-if="action=='update'">Update Admin Of<br/><small>{{school.name}}</small></h4>
-          <h4 class="col-10 title" v-else>Add Admin To<br/><small>{{school.name}}</small></h4>
+          <h4 class="col-10 title" v-if="action=='update'">Update User Of<br/><small>{{school.name}}</small></h4>
+          <h4 class="col-10 title" v-else>Add User To<br/><small>{{school.name}}</small></h4>
           <div class="col-2 text-right">
             <a class="btn mi-linkbtn" @click="close"><i class="fas fa-times"/></a>
           </div>
@@ -12,7 +12,7 @@
       </div>
       <template slot="body">
         <div class="form-group">
-          <label for="username">Username *  <small id="usernamehelp" class="form-text text-muted">Admin User login id</small></label>
+          <label for="username">Username *  <small id="usernamehelp" class="form-text text-muted">User login id</small></label>
           <input id="username" type="text" class="form-control" aria-describedby="usernamehelp" v-model.trim="admin.username">
           <!--<small id="schoolNameHelp" class="form-text text-muted">School Name should be unique</small>-->
         </div>
@@ -130,7 +130,8 @@ export default {
             /*event.target.reset();*/
             /*vm.contact = JSON.parse(JSON.stringify(vm.initContact));*/
             vm.error = false;
-            this.$emit("close")
+            this.$emit("close");
+            this.$emit("addadmin")
           },
           error => {
             vm.error = true;
