@@ -58,18 +58,15 @@
       <div class="tab-pane fade" id="pills-classwork" role="tabpanel" aria-labelledby="pills-classwork-tab">
         <div class="card mi-card h-100">
           <div class="card-body">
-            <h5 class="card-title">Class Work</h5>
-            <ul class="list-unstyled">
-              <li class="media mb-3" v-for="(courseMessage, index) in courseMessages">
-                <!--<i class="far fa-circle fa-2x mr-2"/>-->
-                <div class="numberCircle mr-3" style="border-color: #37966f" ><span style="color: #37966f">{{ index+1 }}</span></div>
-                <div class="media-body">
-                  <strong class="mt-0 mb-1">{{courseMessage.subject}}</strong>
-                  <div>{{courseMessage.message}}</div>
-                  <p class="text-muted">Posted on: {{ courseMessage.createdTimeStamp | formatDateTime }}</p>
-                </div>
-              </li>
-            </ul>
+            <div class="row">
+              <div class="col-lg-6 col-sm-12 col-xs-12">
+                <h5 class="card-title">Class Work</h5>
+              </div>
+              <div class="col-lg-6 col-sm-12 col-xs-12 text-right">
+                <button id="createclasswork" class="btn mi-linkbtn" @click="showModal('courseWorkModal', 'add', initialCourseMessage)" :aria-expanded="showAddCourseWorkModal ? 'true':'false'">
+                  <i class="fas fa-plus"/> CREATE CLASS WORK</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -107,6 +104,7 @@ export default {
       errorMsg: '',
       action: 'add',
       showAddCourseMessageModal: false,
+      showAddCourseWorkModal: false,
       school: this.$store.state.user.school,
       course: {},
       courseMessages:[],
@@ -202,6 +200,8 @@ export default {
       this.courseMessage.courseId = this.course.id;
       if(modal == 'courseMessageModal') {
         this.showAddCourseMessageModal = true;
+      } else if(modal == 'courseWorkModal') {
+        this.showAddCourseWorkModal = true;
       }
 
     },
