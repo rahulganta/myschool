@@ -83,7 +83,9 @@
 
     </div>
 
+    <!--Modal Components-->
     <AddCourseMessage v-if="showAddCourseMessageModal" @close="close" :message="courseMessage" :action="action" @addMessage="addCourseMessage"></AddCourseMessage>
+    <AddClassWork v-if="showAddCourseWorkModal" @close="close" :action="action" @AddCourseWork="addCourseWork"></AddClassWork>
     <!--Toast-->
     <Toasts></Toasts>
   </div>
@@ -92,12 +94,14 @@
 <script>
 import AddCourseMessage from "@/components/modals/AddCourseMessage";
 import MiTable from "@/components/MiTable";
+import AddClassWork from "@/components/modals/AddClassWork";
 
 export default {
   name: "Course",
   components: {
     AddCourseMessage,
-    MiTable
+    MiTable,
+    AddClassWork
   },
   data() {
     return {
@@ -169,6 +173,9 @@ export default {
       this.getCourseMessages();
 
     },
+    addCourseWork() {
+
+    },
     getCourseStudents() {
       let vm = this;
       let school = this.$store.state.school;
@@ -207,6 +214,7 @@ export default {
     },
     close() {
       this.showAddCourseMessageModal = false;
+      this.showAddCourseWorkModal = false;
     }
   }
 }
