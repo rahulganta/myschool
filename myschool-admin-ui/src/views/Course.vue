@@ -63,8 +63,15 @@
                 <h5 class="card-title">Class Work</h5>
               </div>
               <div class="col-lg-6 col-sm-12 col-xs-12 text-right">
-                <button id="createclasswork" class="btn mi-linkbtn" @click="showModal('courseWorkModal', 'add', initialCourseMessage)" :aria-expanded="showAddCourseWorkModal ? 'true':'false'">
+                <button id="createclasswork" class="btn mi-linkbtn" @click="showModal('courseWorkModal', 'add', initialCourseWork)" :aria-expanded="showAddCourseWorkModal ? 'true':'false'">
                   <i class="fas fa-plus"/> CREATE CLASS WORK</button>
+              </div>
+            </div>
+            <div v-for="classwork in courseWorkList">
+              <div class="card mi-card">
+                <h5 class="card-title">{{classwork.title}}<br/><small class="text-muted">{{classwork.createdTimeStamp}}</small></h5>
+                <div class="mb-3">{{classwork.description}}</div>
+                <iframe width="320" height="245" v-if="classwork.videoLink" :src="classwork.videoLink"></iframe>
               </div>
             </div>
           </div>
@@ -85,7 +92,7 @@
 
     <!--Modal Components-->
     <AddCourseMessage v-if="showAddCourseMessageModal" @close="close" :message="courseMessage" :action="action" @addMessage="addCourseMessage"></AddCourseMessage>
-    <AddClassWork v-if="showAddCourseWorkModal" @close="close" :action="action" @AddCourseWork="addCourseWork"></AddClassWork>
+    <AddClassWork v-if="showAddCourseWorkModal" @close="close" :course-work="courseWork" :action="action" @AddCourseWork="addCourseWork"></AddClassWork>
     <!--Toast-->
     <Toasts></Toasts>
   </div>
@@ -119,6 +126,36 @@ export default {
         courseId: 0
       },
       courseMessage: {},
+      initialCourseWork: {
+        type: '',
+        title: '',
+        description: '',
+        topic: '',
+        videoLink: '',
+        courseId: 0
+      },
+      courseWork: {},
+      courseWorkList: [
+        {title: 'Material 1',
+        description: 'This is the material for first chapter',
+        topic: 'Algorithms',
+        videoLink: 'https://www.youtube.com/embed/E2vCWDLEkoo',
+        file: '',
+        createdTimeStamp: 'Jan 21st 2021 05:14:13 pm'
+        },
+        {title: 'Material 2',
+          description: 'This is the material for first chapter',
+          topic: 'Algorithms',
+          videoLink: 'https://youtube.com/embed/rL8X2mlNHPM',
+          file: ''
+        },
+        {title: 'Assignment',
+          description: 'This is the material for first chapter',
+          topic: 'Algorithms',
+          videoLink: '',
+          file: ''
+        }
+      ],
       studentList: [],
       studentTableColumnsHeaders: [
         { title: "USERNAME", sortKey: "username", sortOrder: 1, action: "viewschool", selectedFilters: []},
@@ -143,6 +180,7 @@ export default {
       this.getCourse();
     }
     this.getCourseMessages();
+    this.getCourseWorks();
     this.getCourseStudents();
   },
   methods: {
@@ -172,6 +210,17 @@ export default {
     addCourseMessage() {
       this.getCourseMessages();
 
+    },
+    getCourseWorks() {
+      let vm = this;
+      let courseId = this.$route.params.id;
+      this.axios.get(this.$constants().BASE_URL + "allcourseworks/"+courseId, this.restCallHeaders()).then(
+          response => {
+            vm.courseWorkList = response.data;
+          },
+          error => {
+            this.errorMsg = error.response.message;
+          });
     },
     addCourseWork() {
 
@@ -203,11 +252,13 @@ export default {
     },
     showModal(modal, action, data) {
       this.action = action;
-      this.courseMessage = JSON.parse(JSON.stringify(data));
-      this.courseMessage.courseId = this.course.id;
       if(modal == 'courseMessageModal') {
+        this.courseMessage = JSON.parse(JSON.stringify(data));
+        this.courseMessage.courseId = this.course.id;
         this.showAddCourseMessageModal = true;
       } else if(modal == 'courseWorkModal') {
+        this.courseWork = JSON.parse(JSON.stringify(data));
+        this.courseWork.courseId = this.course.id;
         this.showAddCourseWorkModal = true;
       }
 

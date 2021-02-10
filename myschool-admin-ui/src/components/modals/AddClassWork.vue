@@ -11,20 +11,46 @@
       </div>
       <template slot="body">
         <div class="form-group">
-          <p>Title, Description, Topic, Add attachment</p>
+          <b>Type like assignment, study material...etc, Title, Description, Topic, Add attachment, Youtube link and Vimeo link</b><br/>
           <label for="title">Title</label>
-          <input id="title" type="text" class="form-control">
+          <input id="title" type="text" class="form-control" v-model="courseWork.title">
         </div>
+
         <div class="form-group">
           <label for="description">Description</label>
-          <textarea id="description" rows="10" maxlength="10000" class="form-control" :placeholder="$t('plch.announcement')"></textarea>
+          <textarea id="description" rows="5" maxlength="10000" class="form-control" :placeholder="$t('plch.classworkdesc')" v-model="courseWork.description"></textarea>
         </div>
 
         <div class="form-group">
-          <input type="file" id="myfile" name="myfile">
+          <label for="topic">Topic</label>
+          <input id="topic" type="text" class="form-control" v-model="courseWork.topic">
+        </div>
+
+        <div class="form-group">
+          <label for="videolink">Video Link</label>
+          <input id="videolink" type="text" class="form-control" v-model="courseWork.videoLink">
+        </div>
+
+        <!--<div class="form-group">
+          <input type="file" id="myfile" name="myfile" @change="handleFileUpload($event)">
+          <div class="mi-error-label" v-if="fileErrorMsg"><i class="fas fa-exclamation-triangle" /> {{fileErrorMsg}} </div>
+        </div>-->
+
+        <div class="form-group">
+          <!--<label>Attach File</label>-->
+          <div class="input-group">
+            <span class="input-group-btn">
+                  <input id="fileUploadInput" name="uploaded_file" @change="handleFileUpload($event)" style="display: none;" type="file">
+                  <span class="btn uploadFileBtn" @click="uploadFile">ADD FILE...</span>
+            </span>
+            <span class="form-control filenameInput ml-2" v-if="uploadedFileName">{{uploadedFileName}}
+              <i class="far fa-times-circle ml-1 mi-text-primary" @click="deleteFileUpload"/>
+            </span>
+          </div>
+          <div class="mi-error-label" v-if="fileErrorMsg"><i class="fas fa-exclamation-triangle" /> {{fileErrorMsg}} </div>
         </div>
       </template>
-
+s
       <div slot="footer">
         <button type="button" class="btn mi-linkbtn mx-3" @click="close" id="cancel-button">Cancel</button>
         <button type="button" class="btn mi-primarybtn" id="add-button" @click="addClassWork"><span v-if="action=='update'">Update</span><span v-else>Add</span> Classwork</button>
@@ -42,11 +68,11 @@ export default {
     Modal
   },
   props: {
-    /*admin: {
+    courseWork: {
       type: Object,
       required: true
     },
-    school: {
+    /*school: {
       type: Object,
       required: false
     },*/
@@ -57,14 +83,87 @@ export default {
   },
   data () {
     return {
+      uploadedFileName: '',
+      uploadedFile: '',
+      fileErrorMsg: '',
       errorMsg: '',
     }
   },
   mounted () {
   },
   methods: {
+    async handleFileUpload(e) {
+      const allowedFileExtensions = /(\.jpg|\.jpeg|\.png|\.gif|\.doc|\.docx|\.pdf|\.txt|\.text|\.ppt|\.pptx|\.xls|\.xlsx)$/i;
+
+      let files = e.target.files || e.dataTransfer.files;
+      this.fileErrorMsg = '';
+
+      if (!files.length) {
+        return;
+      }
+
+      this.uploadedFile = files[0];
+      this.uploadedFileName = this.uploadedFile.name
+
+      if(!allowedFileExtensions.exec(this.uploadedFileName)) {
+        this.fileErrorMsg = "Wrong file type."
+      }
+
+      if(this.uploadedFile.size > 9000000) {
+        this.fileErrorMsg = 'Too large, max size allowed is 9000kb.'
+      }
+
+      /*this.courseWork.uploadedFile = this.uploadedFile;*/
+
+      let formData = new FormData();
+      formData.append('file', this.uploadedFile);
+    },
+    deleteFileUpload() {
+      this.uploadedFile = '';
+      this.uploadedFileName = '';
+      this.fileErrorMsg = '';
+    },
+    uploadFile() {
+      document.getElementById("fileUploadInput").click();
+    },
     addClassWork() {
       let vm = this;
+
+      this.axios.post(this.$constants().BASE_URL + "addcoursework", this.courseWork, this.restCallHeaders()).then(
+          response => {
+            /*$('.toast').toast('show');*/
+            let res = response.data;
+            //Clear the form data
+            /*event.target.reset();*/
+            /*vm.contact = JSON.parse(JSON.stringify(vm.initContact));*/
+            vm.addClassWorkFile(res);
+
+            vm.errorMsg = '';
+            if(vm.action == "update") {
+              this.$toast.success("Coursework updated successfully!!");
+            } else {
+              this.$toast.success("Coursework added successfully!!");
+            }
+
+            this.$emit("close")
+            this.$emit("AddCourseWork")
+          },
+          error => {
+            vm.errorMsg = error.response.error +": " + error.message;
+          });
+    },
+    addClassWorkFile(classWork) {
+      let vm = this;
+      let formData = new FormData();
+      formData.append("uploadedFile", this.uploadedFile);
+
+      this.axios.post(this.$constants().BASE_URL + "coursework/" + classWork.id + "/addfile", formData).then(
+          response => {
+
+          },
+          error => {
+
+          });
     },
     close() {
       this.$emit("close")
@@ -76,5 +175,24 @@ export default {
 <style lang="scss">
 .addclasswork-modal .modal-container {
   width: 100%;
+}
+.filenameInput {
+  background-color: #e9ecef;
+  border: none;
+}
+
+.uploadFileBtn {
+  background-color: $onPrimary;
+  border: 1px solid $primaryColor;
+  border-radius: 4px;
+  font-family: 'Roboto Bold', 'Roboto Regular', 'Roboto', sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  color: $primaryColor;
+}
+
+.uploadFileBtn:hover {
+  background-color: $onPrimary;
+  color: $primaryVariant;
 }
 </style>

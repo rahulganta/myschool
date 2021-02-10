@@ -85,6 +85,7 @@ const messages = {
             state: 'Telangana',
             zip: '1234',
             announcement: 'Write school announcement',
+            classworkdesc: 'Class Work Description'
         },
 
         //Messages and Error Messages
