@@ -59,7 +59,6 @@
 </template>
 
 <script>
-const API_URL = "/api/myschool/";
 import Modal from '@/components/Modal';
 
   export default {
@@ -93,7 +92,7 @@ import Modal from '@/components/Modal';
 
         //Update School
         //Add School
-        this.axios.post(API_URL+ "addschool", vm.school, this.restCallHeaders()).then(
+        this.axios.post(this.$constants().BASE_URL + "addschool", vm.school, this.restCallHeaders()).then(
             response => {
               /*$('.toast').toast('show');*/
               let res = response.data;

@@ -16,13 +16,13 @@
         </div>
 
         <div class="form-group">
-          <label for="schoolDName">Course Description</label>
-          <input id="schoolDName" type="text" class="form-control" v-model="course.description">
+          <label for="franchiseName">Course Grade</label>
+          <input id="franchiseName" type="text" class="form-control"v-model="course.grade">
         </div>
 
         <div class="form-group">
-          <label for="franchiseName">Course Grade</label>
-          <input id="franchiseName" type="text" class="form-control"v-model="course.grade">
+          <label for="schoolDName">Course Description</label>
+          <input id="schoolDName" type="text" class="form-control" v-model="course.description">
         </div>
 
         <div class="form-group">
@@ -43,9 +43,7 @@
 </template>
 
 <script>
-const API_URL = "/api/myschool/";
 import Modal from '@/components/Modal';
-
 export default {
   name: "AddCourse",
   components: {
@@ -75,7 +73,7 @@ export default {
       let vm = this;
       //Update Course
       //Add Course
-      this.axios.post(API_URL+ "addcourse", vm.course, this.restCallHeaders()).then(
+      this.axios.post(this.$constants().BASE_URL + "addcourse", vm.course, this.restCallHeaders()).then(
           response => {
             /*$('.toast').toast('show');*/
             let res = response.data;
@@ -93,7 +91,7 @@ export default {
     getTeachers() {
       let vm = this;
       let schoolId = this.course.courseSchoolId;
-      this.axios.get(API_URL+ "teachers/"+schoolId, this.restCallHeaders()).then(
+      this.axios.get(this.$constants().BASE_URL + "teachers/"+schoolId, this.restCallHeaders()).then(
           response => {
             vm.teachers = response.data;
             vm.errorMsg = '';

@@ -67,7 +67,7 @@ export default {
       let vm = this;
       //Update Course
       //Add Course
-      this.axios.post(this.$constants().BASE_URL + "messages/addschoolmessage", vm.message).then(
+      this.axios.post(this.$constants().BASE_URL + "messages/addschoolmessage", vm.message, this.restCallHeaders()).then(
           response => {
             /*$('.toast').toast('show');*/
             let res = response.data;
@@ -75,6 +75,12 @@ export default {
             /*event.target.reset();*/
             /*vm.contact = JSON.parse(JSON.stringify(vm.initContact));*/
             vm.errorMsg = '';
+            //Toast
+            if(vm.action == "update") {
+              this.$toast.success("School announcement updated successfully!!");
+            } else {
+              this.$toast.success("School announcement added successfully!!");
+            }
             this.$emit("close")
             this.$emit("addMessage")
           },

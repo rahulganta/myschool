@@ -71,7 +71,7 @@ export default {
       let vm = this;
       //Update Course
       //Add Course
-      this.axios.post(this.$constants().BASE_URL + "messages/addcoursemessage", vm.message).then(
+      this.axios.post(this.$constants().BASE_URL + "messages/addcoursemessage", vm.message, this.restCallHeaders()).then(
           response => {
             let res = response.data;
             vm.errorMsg = '';
