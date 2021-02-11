@@ -42,8 +42,8 @@ public class CourseService {
     }
 
     public Optional<Course> getCourseById(Integer id) {
-        Optional<Course> courseList = courseRepository.findById(id);
-        return courseList;
+        Optional<Course> course = courseRepository.findById(id);
+        return course;
     }
 
     public List<Course> getCoursesBySchoolId(long schoolId) {
@@ -86,6 +86,11 @@ public class CourseService {
         Sort sort = Sort.by("createdTimeStamp").descending();
         List<CourseWork> courseWorks = courseWorkRepository.findAllByCourseId(courseId, sort);
         return courseWorks;
+    }
+
+    public Optional<CourseWork> getCourseWorkById(long id) {
+       Optional<CourseWork> courseWork = courseWorkRepository.findById(id);
+       return courseWork;
     }
 
 }

@@ -10,9 +10,15 @@ import com.myschool.adminservice.model.SchoolMessage;
 import com.myschool.adminservice.services.CourseService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,8 +60,8 @@ public class CourseController {
         return createdCoursework;
     }
 
-    @PostMapping(value = "coursework/{id}/addfile")
-    public CourseWork addCourseworkFile(@PathVariable(value = "id") long id,@RequestPart("uploadedFile") MultipartFile file) {
+    @PostMapping(value = "coursework/{id}/uploadfile")
+    public CourseWork addCourseworkFile(@PathVariable(value = "id") long id, @RequestPart("uploadedFile") MultipartFile file) {
         CourseWork createdCoursework = courseService.addCourseWorkFile(id, file);
         return createdCoursework;
     }
@@ -64,5 +70,21 @@ public class CourseController {
     public List<CourseWork> getCourseWorksByCourseId(@PathVariable(value = "courseId") long courseId) {
         List<CourseWork> courseWorkList = courseService.getCourseWorksByCourseId(courseId);
         return courseWorkList;
+    }
+
+    @GetMapping(value = "coursework/{id}/downloadfile")
+    public ResponseEntity<byte[]> downloadCourseWorkFile(@PathVariable(value = "id") long id) throws Exception {
+        Optional<CourseWork> optionalCourseWork = courseService.getCourseWorkById(id);
+        if(!optionalCourseWork.isPresent()) {
+            throw new Exception("Could not find document with ID: "+ id );
+        }
+
+        CourseWork courseWork = optionalCourseWork.get();
+        HttpHeaders header = new HttpHeaders();
+        header.setContentType(MediaType.APPLICATION_OCTET_STREAM); //MediaType.valueOf(fileEntity.getContentType())
+        header.setContentLength(courseWork.getUploadedFile().length);
+        header.set("Content-Disposition", "attachment; filename=" + courseWork.getFileName());
+
+        return new ResponseEntity<>(courseWork.getUploadedFile(), header, HttpStatus.OK);
     }
 }

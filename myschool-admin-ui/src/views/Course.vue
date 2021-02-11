@@ -71,6 +71,7 @@
               <div class="card mi-card">
                 <h5 class="card-title">{{classwork.title}}<br/><small class="text-muted">{{classwork.createdTimeStamp}}</small></h5>
                 <div class="mb-3">{{classwork.description}}</div>
+                <div class="btn mi-linkbtn" @click="downloadFile(classwork)">DownLoad</div>
                 <iframe width="320" height="245" v-if="classwork.videoLink" :src="classwork.videoLink"></iframe>
               </div>
             </div>
@@ -217,6 +218,22 @@ export default {
       this.axios.get(this.$constants().BASE_URL + "allcourseworks/"+courseId, this.restCallHeaders()).then(
           response => {
             vm.courseWorkList = response.data;
+          },
+          error => {
+            this.errorMsg = error.response.message;
+          });
+    },
+    downloadFile(classWork) {
+      this.axios.get(this.$constants().BASE_URL + "coursework/"+classWork.id+"/downloadfile",  { headers: {'Authorization': 'Bearer ' + this.$store.state.user.token }, responseType: 'blob'}).then(
+          response => {
+              var fileURL = window.URL.createObjectURL(new Blob([response.data]));
+              var fileLink = document.createElement('a');
+
+              fileLink.href = fileURL;
+              var fileName = classWork.fileName ? classWork.fileName : 'file.docx';
+              fileLink.setAttribute('download', fileName);
+              document.body.appendChild(fileLink);
+              fileLink.click();
           },
           error => {
             this.errorMsg = error.response.message;

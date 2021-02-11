@@ -157,7 +157,7 @@ export default {
       let formData = new FormData();
       formData.append("uploadedFile", this.uploadedFile);
 
-      this.axios.post(this.$constants().BASE_URL + "coursework/" + classWork.id + "/addfile", formData).then(
+      this.axios.post(this.$constants().BASE_URL + "coursework/" + classWork.id + "/uploadfile", formData).then(
           response => {
 
           },
