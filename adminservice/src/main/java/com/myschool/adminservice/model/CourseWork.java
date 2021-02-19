@@ -37,6 +37,8 @@ public class CourseWork {
 
     private String fileName;
 
+    private long fileSize;
+
     @Lob
     private byte[] uploadedFile;
 
@@ -47,4 +49,17 @@ public class CourseWork {
     @JoinColumn(name="courseId", referencedColumnName = "id", updatable = false, insertable = false)
     @JsonBackReference
     private Course course;
+
+    public CourseWork(long id, String type, String title, String description, String topic, LocalDateTime createdTimeStamp, String videoLink, String fileName, long fileSize, long courseId) {
+        this.id = id;
+        this.type = type;
+        this.title = title;
+        this.description = description;
+        this.topic = topic;
+        this.createdTimeStamp = createdTimeStamp;
+        this.videoLink = videoLink;
+        this.fileName = fileName;
+        this.fileSize = fileSize;
+        this.courseId = courseId;
+    }
 }

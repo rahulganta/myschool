@@ -62,19 +62,19 @@ public class CourseService {
     public CourseWork addCourseWorkFile(long id, MultipartFile file) {
         // Normalize file name
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-
+        long fileSize = file.getSize();
         try {
-            //add file name validations and restrictions
+            //add file name and file size validations and restrictions
 
             /* TODO update only one file column by id, instead of updating entire row */
             CourseWork createdCourseWork = new CourseWork();
             Optional<CourseWork> optCourseWork = courseWorkRepository.findById(id);
-            optCourseWork.orElseThrow().setUploadedFile(file.getBytes());
-            optCourseWork.orElseThrow().setFileName(fileName);
-
             if (optCourseWork.isPresent()) {
-                CourseWork courseWork1 = optCourseWork.get();
-                createdCourseWork = courseWorkRepository.save(courseWork1);
+                CourseWork courseWork = optCourseWork.get();
+                courseWork.setUploadedFile(file.getBytes());
+                courseWork.setFileName(fileName);
+                courseWork.setFileSize(fileSize);
+                createdCourseWork = courseWorkRepository.save(courseWork);
             }
             return createdCourseWork;
         } catch (IOException ex) {
@@ -91,6 +91,10 @@ public class CourseService {
     public Optional<CourseWork> getCourseWorkById(long id) {
        Optional<CourseWork> courseWork = courseWorkRepository.findById(id);
        return courseWork;
+    }
+
+    public void deleteCourseWorkById(long id) {
+        courseWorkRepository.deleteById(id);
     }
 
 }

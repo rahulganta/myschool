@@ -5,20 +5,20 @@
       <div class="col-lg-6 col-sm-6">
         <ul class="nav nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist">
           <li class="nav-item mr-2" role="presentation">
-            <a class="mi-linkbtn active" id="pills-home-tab" data-toggle="pill" href="#pills-messages" role="tab" aria-controls="pills-messages" aria-selected="true">Messages</a>
+            <a class="mi-linkbtn" :class="{ active: activeTab === 'messages' }" id="pills-home-tab" data-toggle="pill" href="#pills-messages" @click="manageTab('messages')" role="tab" aria-controls="pills-messages" aria-selected="true">Messages</a>
           </li>
           <li class="nav-item mr-2" role="presentation">
-            <a class="mi-linkbtn" id="pills-profile-tab" data-toggle="pill" href="#pills-classwork" role="tab" aria-controls="pills-classwork" aria-selected="false">Classwork</a>
+            <a class="mi-linkbtn" :class="{ active: activeTab === 'classwork' }" id="pills-profile-tab" data-toggle="pill" href="#pills-classwork" @click="manageTab('classwork')" role="tab" aria-controls="pills-classwork" aria-selected="false">Classwork</a>
           </li>
           <li class="nav-item" role="presentation">
-            <a class="mi-linkbtn" id="pills-contact-tab" data-toggle="pill" href="#pills-students" role="tab" aria-controls="pills-students" aria-selected="false">Students</a>
+            <a class="mi-linkbtn" :class="{ active: activeTab === 'students' }" id="pills-contact-tab" data-toggle="pill" href="#pills-students" @click="manageTab('students')" role="tab" aria-controls="pills-students" aria-selected="false">Students</a>
           </li>
         </ul>
       </div>
     </div>
 
     <div class="tab-content" id="pills-tabContent">
-      <div class="tab-pane fade show active" id="pills-messages" role="tabpanel" aria-labelledby="pills-messages-tab">
+      <div class="tab-pane fade" :class="{ 'active show': activeTab === 'messages' }"id="pills-messages" role="tabpanel" aria-labelledby="pills-messages-tab">
         <div class="card mi-card h-100">
           <div class="card-body">
             <div class="row">
@@ -55,7 +55,7 @@
         </div>
       </div>
 
-      <div class="tab-pane fade" id="pills-classwork" role="tabpanel" aria-labelledby="pills-classwork-tab">
+      <div class="tab-pane fade" :class="{ 'active show': activeTab === 'classwork' }" id="pills-classwork" role="tabpanel" aria-labelledby="pills-classwork-tab">
         <div class="card mi-card h-100">
           <div class="card-body">
             <div class="row">
@@ -67,19 +67,45 @@
                   <i class="fas fa-plus"/> CREATE CLASS WORK</button>
               </div>
             </div>
-            <div v-for="classwork in courseWorkList">
-              <div class="card mi-card">
-                <h5 class="card-title">{{classwork.title}}<br/><small class="text-muted">{{classwork.createdTimeStamp}}</small></h5>
-                <div class="mb-3">{{classwork.description}}</div>
-                <div class="btn mi-linkbtn" @click="downloadFile(classwork)">DownLoad</div>
-                <iframe width="320" height="245" v-if="classwork.videoLink" :src="classwork.videoLink"></iframe>
+
+            <div class="mb-3 mi-card-border" v-for="courseWork in courseWorkList">
+              <div class="row">
+                <div class="col-10">
+                  <div style="color: #37966F">Topic: <strong>{{courseWork.topic}}</strong></div>
+                  <h5 class="card-title">{{courseWork.title}}<br/><small class="text-muted">{{courseWork.createdTimeStamp | formatDateTime}}</small></h5>
+                </div>
+                <div class="col-2 text-right mi-menu dropdown">
+                  <a class="btn mi-linkbtn" href="#" role="button" id="courseWorkDropdownMenuButton" name="dropdown" data-toggle="dropdown" aria-haspopup="true"
+                     aria-expanded="false"> <i class="fas fa-ellipsis-v"></i>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right mi-dropdown-menu " aria-labelledby="courseWorkDropdownMenuButton">
+                    <button class="dropdown-item" name="copy" @click="showModal('courseWorkModal', 'update', courseWork)"><i class="fas fa-pen pr-1"/> Edit</button>
+                    <button class="dropdown-item" name="edit" @click="showModal('courseWorkModal', 'delete', courseWork)"><i class="fas fa-info-circle pr-1"/> Delete</button>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6 col-sm-12 col-xs-12">
+                  <div class="mb-3">{{courseWork.description}}</div>
+                    <div class="media mb-3" v-if="courseWork.fileSize > 0">
+                      <!--TODO: depending on the file type change the icon-->
+                      <i class="far fa-file-alt fa-4x"/>
+                      <div class="media-body ml-3">
+                        <a class="mi-text-primary" @click="downloadFile(courseWork)">{{courseWork.fileName}} (DownLoad)</a>
+                        <p class="text-muted">File Size: {{courseWork.fileSize | formatBytes}}</p>
+                      </div>
+                    </div>
+                  <div v-if="courseWork.videoLink">
+                    <iframe width="320" height="245" v-if="courseWork.videoLink" :src="courseWork.videoLink" frameborder="0" allowfullscreen></iframe>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="tab-pane fade" id="pills-students" role="tabpanel" aria-labelledby="pills-students-tab">
+      <div class="tab-pane fade" :class="{ 'active show': activeTab === 'students' }" id="pills-students" role="tabpanel" aria-labelledby="pills-students-tab">
         <div class="card mi-card h-100">
           <div class="card-body">
             <h5 class="card-title">Students</h5>
@@ -113,6 +139,7 @@ export default {
   },
   data() {
     return {
+      activeTab: 'messages',
       errorMsg: '',
       action: 'add',
       showAddCourseMessageModal: false,
@@ -176,6 +203,11 @@ export default {
     }
   },
   created() {
+    let activeTab = localStorage.getItem('activeTab');
+    if (activeTab) {
+      this.activeTab = activeTab;
+    }
+
     this.course = this.$store.state.course;
     if(Object.keys(this.course).length === 0) {
       this.getCourse();
@@ -183,8 +215,28 @@ export default {
     this.getCourseMessages();
     this.getCourseWorks();
     this.getCourseStudents();
+
+  },
+  computed: {
+    formatBytes(bytes, decimals = 2) {
+      if (bytes === 0) return '0 Bytes';
+
+      const k = 1024;
+      const dm = decimals < 0 ? 0 : decimals;
+      const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+
+      const i = Math.floor(Math.log(bytes) / Math.log(k));
+
+      return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+    },
+
   },
   methods: {
+    manageTab(activeTabName) {
+      console.log("the current tab is: "+activeTabName);
+      this.activeTab = activeTabName;
+      localStorage.setItem('activeTab', activeTabName);
+    },
     getCourse() {
       let vm = this;
       let courseId = this.$route.params.id;
@@ -224,7 +276,7 @@ export default {
           });
     },
     downloadFile(classWork) {
-      this.axios.get(this.$constants().BASE_URL + "coursework/"+classWork.id+"/downloadfile",  { headers: {'Authorization': 'Bearer ' + this.$store.state.user.token }, responseType: 'blob'}).then(
+      this.axios.get(this.$constants().BASE_URL + "coursework/"+classWork.id+"/downloadfile",  this.restCallHeaders('blob')).then(
           response => {
               var fileURL = window.URL.createObjectURL(new Blob([response.data]));
               var fileLink = document.createElement('a');
@@ -240,6 +292,8 @@ export default {
           });
     },
     addCourseWork() {
+      //make rest call to get all the course works or just push the latest coursework to existing arraylist of courseworks
+      this.getCourseWorks()
 
     },
     getCourseStudents() {
@@ -268,15 +322,26 @@ export default {
       }
     },
     showModal(modal, action, data) {
+      let vm = this;
       this.action = action;
       if(modal == 'courseMessageModal') {
         this.courseMessage = JSON.parse(JSON.stringify(data));
         this.courseMessage.courseId = this.course.id;
         this.showAddCourseMessageModal = true;
       } else if(modal == 'courseWorkModal') {
-        this.courseWork = JSON.parse(JSON.stringify(data));
-        this.courseWork.courseId = this.course.id;
-        this.showAddCourseWorkModal = true;
+        if(action == 'delete') {
+          this.axios.delete(this.$constants().BASE_URL + "deletecoursework/"+data.id, this.restCallHeaders()).then(
+              response => {
+                vm.getCourseWorks();
+              },
+              error => {
+                vm.errorMsg = error.response.error +": " + error.message;
+              });
+        } else {
+          this.courseWork = JSON.parse(JSON.stringify(data));
+          this.courseWork.courseId = this.course.id;
+          this.showAddCourseWorkModal = true;
+        }
       }
 
     },

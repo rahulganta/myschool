@@ -50,7 +50,6 @@
           <div class="mi-error-label" v-if="fileErrorMsg"><i class="fas fa-exclamation-triangle" /> {{fileErrorMsg}} </div>
         </div>
       </template>
-s
       <div slot="footer">
         <button type="button" class="btn mi-linkbtn mx-3" @click="close" id="cancel-button">Cancel</button>
         <button type="button" class="btn mi-primarybtn" id="add-button" @click="addClassWork"><span v-if="action=='update'">Update</span><span v-else>Add</span> Classwork</button>
@@ -128,6 +127,8 @@ export default {
     },
     addClassWork() {
       let vm = this;
+      let embedURL = vm.getEmbedURL(vm.courseWork.videoLink);
+      vm.courseWork.videoLink = embedURL;
 
       this.axios.post(this.$constants().BASE_URL + "addcoursework", this.courseWork, this.restCallHeaders()).then(
           response => {
@@ -136,7 +137,9 @@ export default {
             //Clear the form data
             /*event.target.reset();*/
             /*vm.contact = JSON.parse(JSON.stringify(vm.initContact));*/
-            vm.addClassWorkFile(res);
+            if(vm.uploadedFile) {
+              vm.uploadClassWorkFile(res);
+            }
 
             vm.errorMsg = '';
             if(vm.action == "update") {
@@ -152,7 +155,7 @@ export default {
             vm.errorMsg = error.response.error +": " + error.message;
           });
     },
-    addClassWorkFile(classWork) {
+    uploadClassWorkFile(classWork) {
       let vm = this;
       let formData = new FormData();
       formData.append("uploadedFile", this.uploadedFile);
@@ -164,6 +167,17 @@ export default {
           error => {
 
           });
+    },
+    getEmbedURL(url) {
+      var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+      var match = url.match(regExp);
+
+      if (match && match[2].length == 11) {
+        return "//www.youtube.com/embed/" + match[2];
+      } else {
+        /*TODO: add regExp for vimeo link or others*/
+        return '';
+      }
     },
     close() {
       this.$emit("close")

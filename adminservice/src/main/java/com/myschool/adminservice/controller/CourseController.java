@@ -87,4 +87,9 @@ public class CourseController {
 
         return new ResponseEntity<>(courseWork.getUploadedFile(), header, HttpStatus.OK);
     }
+
+    @DeleteMapping("deletecoursework/{id}")
+    public void deleteCourseWorkById(@PathVariable(value = "id")  long id) {
+        courseService.deleteCourseWorkById(id);
+    }
 }
