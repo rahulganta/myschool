@@ -159,6 +159,12 @@ button.mi-linkbtn:hover {
   margin-right:16px;
 }
 
+.mi-card-border {
+  border: 1px solid #9aa2a87d;
+  border-radius: 4px;
+  padding: 10px 7px;
+}
+
 @media screen and (max-width: 768px) { /* Specific to this particular image */
   #contentbody {
     padding-bottom: 130px;   /* Height of the footer */
