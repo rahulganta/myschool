@@ -10,8 +10,8 @@ const Constants = {
                 ROLES: { STUDENT: "ROLE_STUDENT", TEACHER: "ROLE_TEACHER", SADMIN: "ROLE_SCHOOLADMIN", FADMIN: "ROLE_FRANCHISEADMIN", SUPERADMIN: "ROLE_SUPERADMIN"}
             }
         }
-        Vue.prototype.restCallHeaders = function () {
-            return {'headers': {'Authorization': 'Bearer ' + this.$store.state.user.token}};
+        Vue.prototype.restCallHeaders = function (responseType) {
+            return {'headers': {'Authorization': 'Bearer ' + this.$store.state.user.token}, responseType: responseType? responseType: 'json'};
         }
     }
 };
