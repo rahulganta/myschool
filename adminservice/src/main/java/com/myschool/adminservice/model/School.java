@@ -1,5 +1,6 @@
 package com.myschool.adminservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
@@ -32,9 +33,9 @@ public class School {
     @Column(columnDefinition = "varchar(255) default 'Active'")
     String status;
 
-    @OneToMany(mappedBy = "courseSchool", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private List<Course> courses = new ArrayList<>();
+    /*@OneToMany(mappedBy = "courseSchool", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Course> courses = new ArrayList<>();*/
 
     @PrePersist
     void prePersist() {

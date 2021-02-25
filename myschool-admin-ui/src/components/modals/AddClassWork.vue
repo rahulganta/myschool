@@ -149,7 +149,6 @@ export default {
             }
 
             this.$emit("close")
-            this.$emit("AddCourseWork")
           },
           error => {
             vm.errorMsg = error.response.error +": " + error.message;
@@ -162,7 +161,7 @@ export default {
 
       this.axios.post(this.$constants().BASE_URL + "coursework/" + classWork.id + "/uploadfile", formData).then(
           response => {
-
+            this.$emit("AddCourseWork")
           },
           error => {
 

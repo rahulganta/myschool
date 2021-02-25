@@ -2,14 +2,14 @@ package com.myschool.adminservice.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -18,6 +18,7 @@ import java.time.LocalDate;
 @JsonIgnoreProperties
 @Entity
 @Table(name = "course")
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -45,9 +46,16 @@ public class Course {
     private long courseSchoolId;
 
     @ManyToOne
-    @JoinColumn(name="courseSchoolId", referencedColumnName = "id", updatable=false, insertable = false)
+    @JoinColumn(name = "courseSchoolId", referencedColumnName = "id", updatable=false, insertable = false)
     @JsonBackReference
     private School courseSchool;
 
+   /* @OneToMany(mappedBy = "mesCourse")
+    @JsonManagedReference
+    Set<CourseMessage> courseMessages;*/
+
+    /*@OneToMany(mappedBy = "regCourse")
+    @JsonManagedReference
+    Set<CourseRegistration> courseRegistrations;*/
 
 }

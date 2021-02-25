@@ -41,7 +41,7 @@ public class MessageService {
         return courseMessageList;
     }
 
-    public List<CourseMessage> getCourseMessagesByCourseId(long courseId) {
+    public List<CourseMessage> getCourseMessagesByCourseId(Integer courseId) {
         List<CourseMessage> courseMessageList = courseMessageRepository.findAllByCourseId(courseId);
         return courseMessageList;
     }

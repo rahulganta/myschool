@@ -3,6 +3,7 @@ package com.myschool.adminservice.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.mysql.cj.protocol.ColumnDefinition;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -31,6 +32,7 @@ public class SchoolMessage {
 
     private String postedBy;
 
+    @ApiModelProperty(dataType = "java.lang.String", example = "")
     private LocalDateTime createdTimeStamp;
 
     private String priority;

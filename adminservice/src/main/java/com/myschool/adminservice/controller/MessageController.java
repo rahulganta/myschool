@@ -36,7 +36,7 @@ public class MessageController {
     }
 
     @GetMapping(value = "allcoursemessages/{courseId}")
-    public List<CourseMessage> getMessagesByCourseId(@PathVariable(value = "courseId") long courseId) {
+    public List<CourseMessage> getMessagesByCourseId(@PathVariable(value = "courseId") Integer courseId) {
         List<CourseMessage> courseMessageList = messageService.getCourseMessagesByCourseId(courseId);
         return courseMessageList;
     }

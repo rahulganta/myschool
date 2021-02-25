@@ -42,15 +42,14 @@ public class CourseWork {
     @Lob
     private byte[] uploadedFile;
 
-    @Column(columnDefinition = "BIGINT default 0")
-    private long courseId;
+    private Integer courseId;
 
     @ManyToOne
     @JoinColumn(name="courseId", referencedColumnName = "id", updatable = false, insertable = false)
     @JsonBackReference
     private Course course;
 
-    public CourseWork(long id, String type, String title, String description, String topic, LocalDateTime createdTimeStamp, String videoLink, String fileName, long fileSize, long courseId) {
+    public CourseWork(long id, String type, String title, String description, String topic, LocalDateTime createdTimeStamp, String videoLink, String fileName, long fileSize, Integer courseId) {
         this.id = id;
         this.type = type;
         this.title = title;

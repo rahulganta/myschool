@@ -91,7 +91,7 @@ const routes = [
     path: '/test',
     name: 'Test',
     component: () => import('../views/Test'),
-    meta: { requiresAuth: true, authorize: ['ROLE_SUPERADMIN', 'TEST'] }
+    meta: { requiresAuth: true, authorize: ['ROLE_SUPERADMIN', 'ROLE_FRANCHISEADMIN', 'ROLE_SCHOOLADMIN'] }
   },
 ]
 

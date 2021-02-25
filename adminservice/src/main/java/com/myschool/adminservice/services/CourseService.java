@@ -2,8 +2,10 @@ package com.myschool.adminservice.services;
 
 import com.myschool.adminservice.exceptions.FileStorageException;
 import com.myschool.adminservice.model.Course;
+import com.myschool.adminservice.model.CourseRegistration;
 import com.myschool.adminservice.model.CourseWork;
 import com.myschool.adminservice.model.SchoolMessage;
+import com.myschool.adminservice.repository.CourseRegistrationRepository;
 import com.myschool.adminservice.repository.CourseRepository;
 import com.myschool.adminservice.repository.CourseWorkRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +31,9 @@ public class CourseService {
 
     @Autowired
     private CourseWorkRepository courseWorkRepository;
+
+    @Autowired
+    private CourseRegistrationRepository courseRegistrationRepository;
 
     public Course createCourse(Course course) {
         /*TODO do all the preliminary checks throw error*/
@@ -82,7 +87,7 @@ public class CourseService {
         }
     }
 
-    public List<CourseWork> getCourseWorksByCourseId(long courseId) {
+    public List<CourseWork> getCourseWorksByCourseId(Integer courseId) {
         Sort sort = Sort.by("createdTimeStamp").descending();
         List<CourseWork> courseWorks = courseWorkRepository.findAllByCourseId(courseId, sort);
         return courseWorks;
@@ -96,5 +101,18 @@ public class CourseService {
     public void deleteCourseWorkById(long id) {
         courseWorkRepository.deleteById(id);
     }
+
+    public List<CourseRegistration> getCourseRegistrationsByCourseId(Integer courseId) {
+        Sort sort = Sort.by("student.username").descending();
+        List<CourseRegistration> courseRegistrationList = courseRegistrationRepository.findCourseRegistrationsByRegCourse_Id(courseId, sort);
+        return courseRegistrationList;
+    }
+
+    public List<CourseRegistration> getCourseRegistrationsByStudentId(String studentId) {
+        Sort sort = Sort.by("student.username").descending();
+        List<CourseRegistration> courseRegistrationList = courseRegistrationRepository.findCourseRegistrationsByStudent_Username(studentId, sort);
+        return courseRegistrationList;
+    }
+
 
 }

@@ -12,3 +12,8 @@ mvn clean install
 ```
 git push heroku master
 ```
+
+## Admin Service
+### Issues
+1. make id type long every where or Long. Consisten in all the model classes
+1. 

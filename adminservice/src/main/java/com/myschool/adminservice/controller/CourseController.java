@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.myschool.adminservice.model.Course;
+import com.myschool.adminservice.model.CourseRegistration;
 import com.myschool.adminservice.model.CourseWork;
 import com.myschool.adminservice.model.SchoolMessage;
 import com.myschool.adminservice.services.CourseService;
@@ -67,7 +68,7 @@ public class CourseController {
     }
 
     @GetMapping(value = "allcourseworks/{courseId}")
-    public List<CourseWork> getCourseWorksByCourseId(@PathVariable(value = "courseId") long courseId) {
+    public List<CourseWork> getCourseWorksByCourseId(@PathVariable(value = "courseId") Integer courseId) {
         List<CourseWork> courseWorkList = courseService.getCourseWorksByCourseId(courseId);
         return courseWorkList;
     }
@@ -91,5 +92,17 @@ public class CourseController {
     @DeleteMapping("deletecoursework/{id}")
     public void deleteCourseWorkById(@PathVariable(value = "id")  long id) {
         courseService.deleteCourseWorkById(id);
+    }
+
+    @GetMapping(value = "courseregistrations")
+    public List<CourseRegistration> getCourseRegistrationsByCourseId(@RequestParam(value = "courseid") Integer courseId) {
+        List<CourseRegistration> courseRegistrationList = courseService.getCourseRegistrationsByCourseId(courseId);
+        return courseRegistrationList;
+    }
+
+    @GetMapping(value = "student/{studentid}/courseregistrations")
+    public List<CourseRegistration> getCourseRegistrationsByStudentId(@PathVariable(value = "studentid") String studentId) {
+        List<CourseRegistration> courseRegistrationList = courseService.getCourseRegistrationsByStudentId(studentId);
+        return courseRegistrationList;
     }
 }
