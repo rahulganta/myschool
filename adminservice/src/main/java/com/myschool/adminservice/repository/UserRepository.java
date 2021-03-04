@@ -22,4 +22,7 @@ public interface UserRepository extends JpaRepository<User, String> {
 
     @Query("SELECT n FROM User n where n.schoolId = :schoolId and n.roles in :roles")
     List<User> findUsersBySchoolIdandRoles(long schoolId, List<String> roles);
+
+    @Query("SELECT n FROM User n WHERE CONCAT(n.firstName, n.lastName, n.username, n.email) LIKE %:keyword% and n.schoolId = :schoolId and n.roles = 'ROLE_STUDENT'")
+    List<User> searchStudents(String keyword, long schoolId);
 }

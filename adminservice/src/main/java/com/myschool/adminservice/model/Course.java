@@ -46,7 +46,7 @@ public class Course {
     private long courseSchoolId;
 
     @ManyToOne
-    @JoinColumn(name = "courseSchoolId", referencedColumnName = "id", updatable=false, insertable = false)
+    @JoinColumn(name = "courseSchoolId", referencedColumnName = "id", updatable = false, insertable = false)
     @JsonBackReference
     private School courseSchool;
 

@@ -66,4 +66,9 @@ public class UserController {
             List<User> userList = userService.getUsersBySchoolIdAndRoles(schoolId, roles);
             return userList;
     }
+    @GetMapping(value = "searchstudents/{schoolId}")
+    public List<User> searchStudents(@RequestParam(value = "q") String searchWord, @PathVariable(value = "schoolId") long schoolId) {
+        List<User> studentsList = userService.searchStudents(searchWord, schoolId);
+        return studentsList;
+    }
 }

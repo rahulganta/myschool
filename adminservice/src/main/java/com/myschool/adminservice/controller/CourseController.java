@@ -3,11 +3,9 @@ package com.myschool.adminservice.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.TextNode;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.myschool.adminservice.model.Course;
-import com.myschool.adminservice.model.CourseRegistration;
-import com.myschool.adminservice.model.CourseWork;
-import com.myschool.adminservice.model.SchoolMessage;
+import com.myschool.adminservice.model.*;
 import com.myschool.adminservice.services.CourseService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -104,5 +102,32 @@ public class CourseController {
     public List<CourseRegistration> getCourseRegistrationsByStudentId(@PathVariable(value = "studentid") String studentId) {
         List<CourseRegistration> courseRegistrationList = courseService.getCourseRegistrationsByStudentId(studentId);
         return courseRegistrationList;
+    }
+
+    @PostMapping(value = "addcourseregistrations")
+    public List<CourseRegistration> addCourseRegistrations(@RequestBody List<CourseRegistration> courseRegistrations) {
+        List<CourseRegistration> courseRegistrationList = courseService.addCourseRegistrations(courseRegistrations);
+        return courseRegistrationList;
+    }
+
+    @PostMapping(value = "addstudenttocourse/{courseid}")
+    public CourseRegistration addStudentToCourse(@PathVariable(value = "courseid") Integer courseId, @RequestBody String studentId) {
+        if(studentId.contains("=")) {
+            studentId = studentId.replaceAll("=$", "");
+        }
+        CourseRegistration courseRegistration = courseService.addStudentToCourse(studentId, courseId);
+        return courseRegistration;
+    }
+
+    @DeleteMapping(value = "deletecourseregistration")
+    public void deleteCourseRegistrationById(@RequestBody(required = false) CourseRegistrationPK courseRegistrationPK) {
+        CourseRegistrationPK courseRegistrationPK1 = new CourseRegistrationPK();
+        /*courseService.deleteCourseRegistrationById(courseRegistrationPK);*/
+    }
+
+    @DeleteMapping(value = "deletestudentfromcourse/{courseid}")
+    public void deleteStudentFromCourse(@PathVariable(value = "courseid") Integer courseId, @RequestParam(value = "studentid") String studentId) {
+        CourseRegistrationPK courseRegistrationPK = new CourseRegistrationPK(studentId, courseId);
+        courseService.deleteCourseRegistrationById(courseRegistrationPK);
     }
 }

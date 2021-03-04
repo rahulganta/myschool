@@ -1,6 +1,5 @@
 package com.myschool.adminservice.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
@@ -21,9 +20,14 @@ public class CourseRegistration implements Serializable {
     @EmbeddedId
     private CourseRegistrationPK courseRegistrationPK;
 
+    @ApiModelProperty(dataType = "java.lang.String", example = "")
+    private LocalDateTime registeredDate;
+
+    private int grade;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @MapsId("studentId")
-    @JoinColumn(name = "studentId")
+    @JoinColumn(name = "studentId", referencedColumnName = "username", updatable = false, insertable = false)
     private User student;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -32,8 +36,13 @@ public class CourseRegistration implements Serializable {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Course regCourse;
 
-    @ApiModelProperty(dataType = "java.lang.String", example = "")
-    private LocalDateTime registeredDate;
-
-    private int grade;
+    public CourseRegistration(CourseRegistrationPK courseRegistrationPK, LocalDateTime registeredDate, int grade) {
+        this.courseRegistrationPK = courseRegistrationPK;
+        this.registeredDate = registeredDate;
+        this.grade = grade;
+        this.student = new User();
+        this.student.setUsername(courseRegistrationPK.getStudentId());
+        this.regCourse = new Course();
+        this.regCourse.setId(courseRegistrationPK.getCourseId());
+    }
 }

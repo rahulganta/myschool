@@ -71,8 +71,11 @@
             <div class="mb-3 mi-card-border" v-for="courseWork in courseWorkList">
               <div class="row">
                 <div class="col-10">
-                  <div style="color: #37966F">Topic: <strong>{{courseWork.topic}}</strong></div>
-                  <h5 class="card-title">{{courseWork.title}}<br/><small class="text-muted">{{courseWork.createdTimeStamp | formatDateTime}}</small></h5>
+                  <h5 class="card-title">{{courseWork.title}}<br/>
+                    <small class="text-muted">{{courseWork.createdTimeStamp | formatDateTime}}</small><br/>
+                    <small><span class="text-muted">Topic:</span> <strong>{{courseWork.topic}}</strong></small>
+                  </h5>
+
                 </div>
                 <div class="col-2 text-right mi-menu dropdown">
                   <a class="btn mi-linkbtn" href="#" role="button" id="courseWorkDropdownMenuButton" name="dropdown" data-toggle="dropdown" aria-haspopup="true"
@@ -120,7 +123,7 @@
     <!--Modal Components-->
     <AddCourseMessage v-if="showAddCourseMessageModal" @close="close" :message="courseMessage" :action="action" @addMessage="addCourseMessage"></AddCourseMessage>
     <AddClassWork v-if="showAddCourseWorkModal" @close="close" :course-work="courseWork" :action="action" @AddCourseWork="addCourseWork"></AddClassWork>
-    <AddStudentToCourse v-if="showAddStudentToCourseModal" @close="close" :course="course" :action="action" @AddStudenToCourse="AddStudentToCourse"></AddStudentToCourse>
+    <AddStudentToCourse v-if="showAddStudentToCourseModal" @close="close" :course="course" :action="action" @AddStudentToCourse="AddStudentToCourse"></AddStudentToCourse>
     <!--Toast-->
     <Toasts></Toasts>
   </div>
@@ -197,7 +200,7 @@ export default {
       ],
       studentTableRowActions: [
         { title: "View Student", name: "viewstudent", icon: "fa-info-circle"},
-        { title: "Edit Student", name: "editstudent", icon: "fa-pen"},
+        /*{ title: "Edit Student", name: "editstudent", icon: "fa-pen"},*/
         { title: "Delete Student", name: "deletestudent", icon: "fa-trash"},
       ],
       studentTableActions: [
@@ -324,10 +327,33 @@ export default {
           });
     },
     AddStudentToCourse() {
-
+      this.getCourseStudents();
     },
     tableRowAction(actionName, rowData, index) {
+      let vm = this;
       console.log("Row action is: "+actionName+ " Row data is: " +rowData.username+ " Index is: "+index);
+      if(actionName == 'deletestudent') {
+        let courseRegistrationPK = new Object({studentId: rowData.username, courseId: vm.course.id});
+        this.axios.delete(this.$constants().BASE_URL + "deletestudentfromcourse/"+vm.course.id+"?studentid="+rowData.username, this.restCallHeaders()).then(
+            response => {
+              let res = response.data;
+              vm.errorMsg = '';
+              vm.getCourseStudents();
+            },
+            error => {
+              vm.errorMsg = error.response.error +": " + error.message;
+            });
+
+        /*this.axios.delete(this.$constants().BASE_URL + "deletecourseregistration", {headers: {'Authorization': 'Bearer ' + this.$store.state.user.token}, data: {studentId:'ganta', courseId: 38}}).then(
+            response => {
+              let res = response.data;
+              vm.errorMsg = '';
+              vm.getCourseStudents();
+            },
+            error => {
+              vm.errorMsg = error.response.error +": " + error.message;
+            });*/
+      }
     },
     tableAction(actionName, selectedTableData) {
       if(actionName == 'addstudent') {

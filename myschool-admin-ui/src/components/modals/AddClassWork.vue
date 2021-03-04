@@ -11,7 +11,7 @@
       </div>
       <template slot="body">
         <div class="form-group">
-          <b>Type like assignment, study material...etc, Title, Description, Topic, Add attachment, Youtube link and Vimeo link</b><br/>
+          <!--<b>Type like assignment, study material...etc, Title, Description, Topic, Add attachment, Youtube link and Vimeo link</b><br/>-->
           <label for="title">Title</label>
           <input id="title" type="text" class="form-control" v-model="courseWork.title">
         </div>
@@ -27,7 +27,7 @@
         </div>
 
         <div class="form-group">
-          <label for="videolink">Video Link</label>
+          <label for="videolink">Youtube Link</label>
           <input id="videolink" type="text" class="form-control" v-model="courseWork.videoLink">
         </div>
 
@@ -187,7 +187,10 @@ export default {
 
 <style lang="scss">
 .addclasswork-modal .modal-container {
+  max-width: 100%;
   width: 100%;
+  height: 100%;
+  max-height: 100%;
 }
 .filenameInput {
   background-color: #e9ecef;

@@ -1,15 +1,14 @@
 package com.myschool.adminservice.services;
 
 import com.myschool.adminservice.exceptions.FileStorageException;
-import com.myschool.adminservice.model.Course;
-import com.myschool.adminservice.model.CourseRegistration;
-import com.myschool.adminservice.model.CourseWork;
-import com.myschool.adminservice.model.SchoolMessage;
+import com.myschool.adminservice.model.*;
 import com.myschool.adminservice.repository.CourseRegistrationRepository;
 import com.myschool.adminservice.repository.CourseRepository;
 import com.myschool.adminservice.repository.CourseWorkRepository;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -18,8 +17,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Optional;
 
 @Service
@@ -115,4 +118,35 @@ public class CourseService {
     }
 
 
+    public List<CourseRegistration> addCourseRegistrations(List<CourseRegistration> courseRegistrations) {
+        List<CourseRegistration> courseRegistrationList = null;
+        try {
+            courseRegistrationList = (List<CourseRegistration>) courseRegistrationRepository.saveAll(courseRegistrations);
+        } catch (DataIntegrityViolationException ex)  {
+            throw new DataIntegrityViolationException(ex.getMostSpecificCause().getLocalizedMessage(), ex);
+        }
+        return courseRegistrationList;
+    }
+
+    public CourseRegistration addStudentToCourse(String studentId, Integer courseId)  {
+        CourseRegistration createdCourseRegistration = null;
+        try {
+            CourseRegistrationPK courseRegistrationPK = new CourseRegistrationPK(studentId,courseId);
+            LocalDateTime currentTime = LocalDateTime.now();
+            CourseRegistration courseRegistration = new CourseRegistration(courseRegistrationPK , currentTime,  0);
+            createdCourseRegistration = courseRegistrationRepository.save(courseRegistration);
+
+        } catch (DataIntegrityViolationException ex) {
+            throw new DataIntegrityViolationException(ex.getMostSpecificCause().getLocalizedMessage(), ex);
+        }
+        return createdCourseRegistration;
+    }
+
+    public void deleteCourseRegistrationById(CourseRegistrationPK courseRegistrationPK) {
+        courseRegistrationRepository.deleteById(courseRegistrationPK);
+    }
+
+    public void deleteCourseRegistrations(List<CourseRegistration> courseRegistrations) {
+        courseRegistrationRepository.deleteAll(courseRegistrations);
+    }
 }

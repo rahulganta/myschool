@@ -62,4 +62,9 @@ public class UserService {
         return userList;
     }
 
+    public List<User> searchStudents(String keyword, long schoolId) {
+        List<User> studentList = userRepository.searchStudents(keyword, schoolId);
+        return studentList;
+    }
+
 }
