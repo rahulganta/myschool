@@ -46,7 +46,8 @@
         </td>
 
         <td v-for="(columnHeader, cHeaderindex) in columnsHeaders" :id="rowData[columnHeader.sortKey]" :class="columnHeader.hideOnScr? 'd-md-block d-none': '' ">
-          <a class="mi-text-primary" v-if="columnHeader.action" @click="rowAction(columnHeader.action, rowData, index)">{{ rowData[columnHeader.sortKey] }}</a><template v-else>{{ rowData[columnHeader.sortKey] }}</template>
+          <a class="mi-text-primary" v-if="columnHeader.action" @click="rowAction(columnHeader.action, rowData, index)">{{ rowData[columnHeader.sortKey] }}</a>
+          <span v-else>{{ rowData[columnHeader.sortKey] }}</span>
         </td>
         <td class="text-right" v-if="rowActions">
           <div class="userprofilemenu dropdown">
