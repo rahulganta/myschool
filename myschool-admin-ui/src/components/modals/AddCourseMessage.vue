@@ -1,7 +1,7 @@
 <template type="text/x-template">
   <div>
   <form>
-    <modal class="mi-custom-modal addschool-modal">
+    <modal class="mi-custom-modal addcoursemessage-modal">
       <div slot="header" class="mi-custom-header">
         <div class="row no-gutters">
           <h4 class="col-10 title"><span v-if="action=='update'">Update</span><span v-else>Add</span> Announcement</h4>
@@ -11,6 +11,8 @@
         </div>
       </div>
       <template slot="body">
+        <ErrorMessage :error-message="errorMsg"></ErrorMessage>
+
         <div class="form-group">
           <label for="subject">Message Subject*</label>
           <input id="subject" type="text" class="form-control" aria-describedby="schoolNameHelp"  v-model="message.subject">
@@ -43,9 +45,11 @@
 
 <script>
 import Modal from '@/components/Modal';
+import ErrorMessage from "@/components/ErrorMessage";
 export default {
   name: "AddCourseMessage",
   components: {
+    ErrorMessage,
     Modal
   },
   props: {
@@ -86,7 +90,7 @@ export default {
             this.$emit("addMessage")
           },
           error => {
-            vm.errorMsg = error.response.error +": " + error.message;
+            vm.errorMsg = error.response.data.message;
           });
     },
     close() {

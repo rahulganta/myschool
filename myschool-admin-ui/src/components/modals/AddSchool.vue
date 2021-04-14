@@ -11,6 +11,8 @@
         </div>
       </div>
       <template slot="body">
+        <ErrorMessage :error-message="errorMsg"></ErrorMessage>
+
         <div class="form-group">
           <label for="schoolName">School Name *  <small id="schoolNameHelp" class="form-text text-muted">School Name should be unique</small></label>
           <input id="schoolName" type="text" class="form-control" aria-describedby="schoolNameHelp"  v-model="school.name">
@@ -60,11 +62,13 @@
 
 <script>
 import Modal from '@/components/Modal';
+import ErrorMessage from "@/components/ErrorMessage";
 
   export default {
     name: "AddSchool",
     components: {
-      Modal
+      Modal,
+      ErrorMessage
     },
     props: {
       school: {
@@ -79,7 +83,6 @@ import Modal from '@/components/Modal';
     },
     data () {
       return {
-        error: false,
         errorMsg: '',
       }
     },
@@ -99,7 +102,7 @@ import Modal from '@/components/Modal';
               //Clear the form data
               /*event.target.reset();*/
               /*vm.contact = JSON.parse(JSON.stringify(vm.initContact));*/
-              vm.error = false;
+              vm.errorMsg = '';
 
               if(vm.action == "update") {
                 this.$toast.success("School updated successfully!!");
@@ -111,8 +114,7 @@ import Modal from '@/components/Modal';
               this.$emit("addschool");
             },
             error => {
-              vm.error = true;
-              vm.errorMsg = error.response.error +": " + error.message;
+              vm.errorMsg = error.response.data.message;
             });
       },
       close() {

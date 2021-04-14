@@ -10,6 +10,8 @@
         </div>
       </div>
       <template slot="body">
+        <ErrorMessage :error-message="errorMsg"></ErrorMessage>
+
         <div class="form-group">
           <!--<b>Type like assignment, study material...etc, Title, Description, Topic, Add attachment, Youtube link and Vimeo link</b><br/>-->
           <label for="title">Title</label>
@@ -60,10 +62,12 @@
 
 <script>
 import Modal from '@/components/Modal';
+import ErrorMessage from "@/components/ErrorMessage";
 
 export default {
   name: "AddClassWork",
   components: {
+    ErrorMessage,
     Modal
   },
   props: {
@@ -151,7 +155,7 @@ export default {
             this.$emit("close")
           },
           error => {
-            vm.errorMsg = error.response.error +": " + error.message;
+            vm.errorMsg = error.response.data.message;
           });
     },
     uploadClassWorkFile(classWork) {

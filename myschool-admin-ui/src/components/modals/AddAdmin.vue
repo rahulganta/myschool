@@ -11,6 +11,8 @@
         </div>
       </div>
       <template slot="body">
+        <ErrorMessage :error-message="errorMsg"></ErrorMessage>
+
         <div class="form-group">
           <label for="username">Username *  <small id="usernamehelp" class="form-text text-muted">User login id</small></label>
           <input id="username" type="text" class="form-control" aria-describedby="usernamehelp" v-model.trim="admin.username">
@@ -81,7 +83,7 @@
       </template>
       <div slot="footer">
         <button type="button" class="btn mi-linkbtn mx-3" @click="close" id="cancel-button">Cancel</button>
-        <button type="button" class="btn mi-primarybtn" id="add-button" @click="addAdmin"><span v-if="action=='update'">Update</span><span v-else>Add</span> Admin</button>
+        <button type="button" class="btn mi-primarybtn" id="add-button" @click="addAdmin"><span v-if="action=='update'">Update</span><span v-else>Add</span> User</button>
       </div>
     </modal>
   </form>
@@ -90,11 +92,12 @@
 <script>
 const API_URL = "/api/myschool/";
 import Modal from '@/components/Modal';
-
+import ErrorMessage from "@/components/ErrorMessage";
 export default {
   name: "AddAdmin",
   components: {
-    Modal
+    Modal,
+    ErrorMessage
   },
   props: {
     admin: {
@@ -135,7 +138,7 @@ export default {
           },
           error => {
             vm.error = true;
-            vm.errorMsg = error.response.error +": " + error.message;
+            vm.errorMsg = error.response.data.message;
           });
 
     },

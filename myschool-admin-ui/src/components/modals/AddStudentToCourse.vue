@@ -10,6 +10,7 @@
         </div>
       </div>
       <template slot="body">
+        <ErrorMessage :error-message="errorMsg"></ErrorMessage>
         <!--<div class="form-group">
           <label for="schoolName">Student *</label>
           <input id="schoolName" type="text" class="form-control" aria-describedby="schoolNameHelp" v-model="studentId">
@@ -48,9 +49,11 @@
 
 <script>
 import Modal from '@/components/Modal';
+import ErrorMessage from "@/components/ErrorMessage";
 export default {
   name: "AddStudentToCourse",
   components: {
+    ErrorMessage,
     Modal
   },
   props: {
@@ -114,7 +117,7 @@ export default {
             vm.errorMsg = '';
           },
           error => {
-            vm.errorMsg = error.response.error +": " + error.message;
+            vm.errorMsg = error.response.data.message;
           });
     },
     addStudents() {
@@ -138,7 +141,7 @@ export default {
           },
           error => {
             vm.courseRegistrationList = [];
-            vm.errorMsg = error.response.error +": " + error.message;
+            vm.errorMsg = error.response.data.message;
           });
 
     },
