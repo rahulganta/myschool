@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 
@@ -23,9 +24,11 @@ public class CourseMessage {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @NotBlank(message = "Subject cannot be blank")
     private String subject;
 
     @Column(columnDefinition = "TEXT")
+    @NotBlank(message = "Message cannot be blank")
     private String message;
 
     private String postedBy;
