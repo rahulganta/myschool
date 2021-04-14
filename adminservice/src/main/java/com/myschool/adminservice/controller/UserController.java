@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -20,7 +21,7 @@ public class UserController {
 
     @PostMapping(value = "addadmin")
     @ResponseBody
-    public User addAdmin(@RequestBody User user) {
+    public User addAdmin(@Valid @RequestBody User user) {
         User createdUser = userService.createUser(user);
         return createdUser;
     }
