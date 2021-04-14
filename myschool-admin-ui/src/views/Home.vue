@@ -56,7 +56,7 @@
                 <button class="dropdown-item" name="edit" @click="viewSchool(index, rowData)"><i class="fas fa-info-circle"/> View School</button>
                 <button class="dropdown-item" name="copy" @click="showAddSchool('update', rowData)"><i class="fas fa-pen"/> Edit School</button>
                 <hr>
-                <button class="dropdown-item" name="delete"><i class="fas fa-ban"/> Inactivate School</button>
+                <button class="dropdown-item" name="delete"><i class="fas fa-store-alt-slash"/> Inactivate School</button>
                 <button class="dropdown-item" @click="showAddAdmin('add', rowData)" :aria-expanded="showAddAdminModal ? 'true':'false'"><i class="fas fa-plus"/> Add AdminUser</button>
               </div>
             </div>
