@@ -39,7 +39,8 @@ public class HomeController {
         try {
             authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
         } catch (AuthenticationException e) {
-            throw new Exception("Inconrrect username or password", e);
+            throw new AuthenticationException("Inconrrect username or password", e) {
+            };
         }
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
