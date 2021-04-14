@@ -138,10 +138,8 @@ export default {
     }
 
     this.axios.interceptors.response.use(function (response) {
-      console.log("the response is: " +response);
       return response;
     }, function (error) {
-      console.log("The error object is: "+error);
       if(error.response.status == 401 && (!error.config.url.includes('/login'))) {
         vm.$store.dispatch('logout');
         vm.$router.push('/login');
