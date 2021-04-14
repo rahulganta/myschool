@@ -71,7 +71,7 @@ public class MessageService {
     public UserMessage createUserMessage(UserMessage userMessage) {
         /*TODO do all the preliminary checks*/
         LocalDateTime now = LocalDateTime.now();
-        userMessage.setCreatedTime(now);
+        userMessage.setCreatedTimeStamp(now);
         UserMessage resUserMessage = userMessageRepository.save(userMessage);
         return resUserMessage;
     }
