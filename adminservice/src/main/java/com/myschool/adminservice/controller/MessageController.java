@@ -5,6 +5,7 @@ import com.myschool.adminservice.model.SchoolMessage;
 import com.myschool.adminservice.model.UserMessage;
 import com.myschool.adminservice.security.MyUserDetails;
 import com.myschool.adminservice.services.MessageService;
+import com.myschool.adminservice.util.AuthenticationFacade;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -22,9 +23,15 @@ public class MessageController {
     @Autowired
     private MessageService messageService;
 
+    @Autowired
+    private AuthenticationFacade authenticationFacade;
+
     //CourseMessages Endpoints
     @PostMapping(value = "addcoursemessage")
     public CourseMessage addCourseMessage(@RequestBody CourseMessage courseMessage) {
+        MyUserDetails myUserDetails = authenticationFacade.getLoginUserDetails();
+        courseMessage.setPostedBy(myUserDetails.getUsername());
+
         CourseMessage createdCourseMessage = messageService.createCourseMessage(courseMessage);
         return createdCourseMessage;
     }
@@ -63,6 +70,8 @@ public class MessageController {
     //UserMessage Endpoints
     @PostMapping(value = "addusermessage")
     public UserMessage addUserMessage(@RequestBody UserMessage userMessage) {
+        MyUserDetails myUserDetails = authenticationFacade.getLoginUserDetails();
+        userMessage.setPostedBy(myUserDetails.getUsername());
         UserMessage resUserMessage = messageService.createUserMessage(userMessage);
         return resUserMessage;
     }

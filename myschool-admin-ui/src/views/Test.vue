@@ -7,6 +7,8 @@
 
     <a class="mi-linkbtn" @click="submit('Hello All')">Submit</a>
 
+    <button class="btn btn-primary" name="edit" @click="navToStudent('rahul')"><i class="fas fa-info-circle pr-1"/> Goto Student</button>
+
     <select class="form-control selectpicker my-5" data-live-search="true" id="state_list" name="">
       <option value="" selected>Manufacturer's Name</option>
       <option value="">Aarkay Engineering Corpot</option>
@@ -123,7 +125,15 @@ export default {
           error => {
             vm.errorMsg = error.response.error +": " + error.message;
           });
-    }
+    },
+    navToStudent(username) {
+      /*this.$router.push('/student/?username:'+username);*/
+
+      this.$router.push({
+        path:'/student/'+username,
+        /*query:{username: username}*/
+      })
+    },
 
   }
 }

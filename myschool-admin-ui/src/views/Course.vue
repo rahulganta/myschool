@@ -123,7 +123,8 @@
     <!--Modal Components-->
     <AddCourseMessage v-if="showAddCourseMessageModal" @close="close" :message="courseMessage" :action="action" @addMessage="addCourseMessage"></AddCourseMessage>
     <AddClassWork v-if="showAddCourseWorkModal" @close="close" :course-work="courseWork" :action="action" @AddCourseWork="addCourseWork"></AddClassWork>
-    <AddStudentToCourse v-if="showAddStudentToCourseModal" @close="close" :course="course" :action="action" @AddStudentToCourse="AddStudentToCourse"></AddStudentToCourse>
+    <AddStudentToCourse v-if="showAddStudentToCourseModal" @close="close" :course="course" :action="action" @AddStudentToCourse="addStudentToCourse"></AddStudentToCourse>
+    <ConfirmModal v-if="showConfirmModal" @close="close" :title="cModalTitle" :warning-message="cModalWarningMessage" @confirm="modalConfirm"></ConfirmModal>
     <!--Toast-->
     <Toasts></Toasts>
   </div>
@@ -134,10 +135,12 @@ import AddCourseMessage from "@/components/modals/AddCourseMessage";
 import MiTable from "@/components/MiTable";
 import AddClassWork from "@/components/modals/AddClassWork";
 import AddStudentToCourse from "@/components/modals/AddStudentToCourse";
+import ConfirmModal from "@/components/modals/ConfirmModal";
 
 export default {
   name: "Course",
   components: {
+    ConfirmModal,
     AddStudentToCourse,
     AddCourseMessage,
     MiTable,
@@ -151,6 +154,10 @@ export default {
       showAddCourseMessageModal: false,
       showAddCourseWorkModal: false,
       showAddStudentToCourseModal: false,
+      showConfirmModal: false,
+      cModalTitle: '',
+      cModalWarningMessage: '',
+      cModalData: {},
       school: this.$store.state.user.school,
       course: {},
       courseMessages:[],
@@ -193,7 +200,7 @@ export default {
       ],
       courseRegistrations:[],
       studentTableColumnsHeaders: [
-        { title: "USERNAME", sortKey: "username", sortOrder: 1, action: "viewschool", selectedFilters: []},
+        { title: "USERNAME", sortKey: "username", sortOrder: 1, action: "viewstudent", selectedFilters: []},
         { title: "FIRST NAME", sortKey: "firstName", sortOrder: 1, selectedFilters: [], hideOnScr: 'sm'},
         { title: "LAST NAME", sortKey: "lastName", sortOrder: 1, selectedFilters: [], },
         { title: "EMAIL", sortKey: "email", sortOrder: 1, selectedFilters: [],hideOnScr: 'sm'},
@@ -259,7 +266,7 @@ export default {
             vm.$store.commit('saveCourse', {course: vm.course});
           },
           error => {
-            vm.errorMsg = error.response.message;
+            vm.errorMsg = error.response.data.message;
           });
     },
     getCourseMessages() {
@@ -270,7 +277,7 @@ export default {
             vm.courseMessages = response.data;
           },
           error => {
-            vm.errorMsg = error.response.message;
+            vm.errorMsg = error.response.data.message;
           });
     },
     addCourseMessage() {
@@ -285,10 +292,11 @@ export default {
             vm.courseWorkList = response.data;
           },
           error => {
-            vm.errorMsg = error.response.message;
+            vm.errorMsg = error.response.data.message;
           });
     },
     downloadFile(classWork) {
+      let vm = this;
       this.axios.get(this.$constants().BASE_URL + "coursework/"+classWork.id+"/downloadfile",  this.restCallHeaders('blob')).then(
           response => {
               var fileURL = window.URL.createObjectURL(new Blob([response.data]));
@@ -301,7 +309,7 @@ export default {
               fileLink.click();
           },
           error => {
-            vm.errorMsg = error.response.message;
+            vm.errorMsg = error.response.data.message;
           });
     },
     addCourseWork() {
@@ -323,27 +331,43 @@ export default {
             vm.errorMsg = '';
           },
           error => {
-            vm.errorMsg = error.response.error +": " + error.message;
+            vm.errorMsg = error.response.data.message;
           });
     },
-    AddStudentToCourse() {
+    addStudentToCourse() {
       this.getCourseStudents();
+    },
+    modalConfirm() {
+      let vm = this;
+      console.log("Modal Confirm function");
+      /*let courseRegistrationPK = new Object({studentId: vm.cModalData.username, courseId: vm.course.id});*/
+      this.axios.delete(this.$constants().BASE_URL + "deletestudentfromcourse/"+vm.course.id+"?studentid="+vm.cModalData.username, this.restCallHeaders()).then(
+      response => {
+        let res = response.data;
+        vm.errorMsg = '';
+        vm.getCourseStudents();
+      },
+      error => {
+        vm.errorMsg = error.response.data.message;
+      });
+
     },
     tableRowAction(actionName, rowData, index) {
       let vm = this;
+      let courseId = this.$route.params.id;
       console.log("Row action is: "+actionName+ " Row data is: " +rowData.username+ " Index is: "+index);
-      if(actionName == 'deletestudent') {
-        let courseRegistrationPK = new Object({studentId: rowData.username, courseId: vm.course.id});
-        this.axios.delete(this.$constants().BASE_URL + "deletestudentfromcourse/"+vm.course.id+"?studentid="+rowData.username, this.restCallHeaders()).then(
-            response => {
-              let res = response.data;
-              vm.errorMsg = '';
-              vm.getCourseStudents();
-            },
-            error => {
-              vm.errorMsg = error.response.error +": " + error.message;
-            });
+      if(actionName == 'viewstudent') {
+        this.$router.push({
+          path:'/student/'+rowData.username+'/'+courseId,
+          query:{username: rowData.username}
+        })
+      } else if(actionName == 'deletestudent') {
+        vm.cModalTitle = "Delete student from course";
+        vm.cModalWarningMessage = "Are you sure to delete the student <b>" + rowData.firstName + " " + rowData.lastName+ "</b> from this course?";
+        vm.showConfirmModal = true;
+        vm.cModalData = rowData;
 
+        /*TODO -- Cant send array of student and course object in request body for delete*/
         /*this.axios.delete(this.$constants().BASE_URL + "deletecourseregistration", {headers: {'Authorization': 'Bearer ' + this.$store.state.user.token}, data: {studentId:'ganta', courseId: 38}}).then(
             response => {
               let res = response.data;
@@ -356,37 +380,42 @@ export default {
       }
     },
     tableAction(actionName, selectedTableData) {
+      let vm = this;
       if(actionName == 'addstudent') {
         this.showModal('addStudentToCourse', 'add')
-      }
-      if (Array.isArray(selectedTableData) && (selectedTableData.length == 0)) {
-        console.log("Table Action name is:" + actionName + " and no data selected");
-      } else {
-        console.log("Table Action name is:" + actionName + " and selected table data is: "+selectedTableData);
+      } else if(actionName == 'deletestudent') {
+        if (Array.isArray(selectedTableData) && (selectedTableData.length == 0)) {
+          console.log("Table Action name is:" + actionName + " and no data selected");
+          vm.cModalTitle = "Delete student from course";
+          vm.cModalWarningMessage = "Please select at least one checkbox from the table to perform this action!";
+          vm.showConfirmModal = true;
+        } else {
+          console.log("Table Action name is:" + actionName + " and selected table data is: "+selectedTableData);
+        }
       }
     },
-    showModal(modal, action, data) {
+    showModal(modalName, action, data) {
       let vm = this;
       this.action = action;
-      if(modal == 'courseMessageModal') {
+      if(modalName == 'courseMessageModal') {
         this.courseMessage = JSON.parse(JSON.stringify(data));
         this.courseMessage.courseId = this.course.id;
         this.showAddCourseMessageModal = true;
-      } else if(modal == 'courseWorkModal') {
+      } else if(modalName == 'courseWorkModal') {
         if(action == 'delete') {
           this.axios.delete(this.$constants().BASE_URL + "deletecoursework/"+data.id, this.restCallHeaders()).then(
               response => {
                 vm.getCourseWorks();
               },
               error => {
-                vm.errorMsg = error.response.error +": " + error.message;
+                vm.errorMsg = error.response.data.message;
               });
         } else {
           this.courseWork = JSON.parse(JSON.stringify(data));
           this.courseWork.courseId = this.course.id;
           this.showAddCourseWorkModal = true;
         }
-      } else if(modal == 'addStudentToCourse') {
+      } else if(modalName == 'addStudentToCourse') {
         this.showAddStudentToCourseModal = true;
       }
 
@@ -395,6 +424,7 @@ export default {
       this.showAddCourseMessageModal = false;
       this.showAddCourseWorkModal = false;
       this.showAddStudentToCourseModal = false;
+      this.showConfirmModal = false;
     }
   }
 }

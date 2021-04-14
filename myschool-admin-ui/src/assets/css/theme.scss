@@ -65,6 +65,7 @@ button.mi-linkbtn {
   text-decoration: none;
   /*font-family: 'Roboto Medium', 'Roboto Regular', 'Roboto';*/
   font-weight: 600;
+  cursor: pointer;
 }
 
 a.mi-linkbtn:focus, a:not([href]):not([tabindex]).mi-linkbtn:focus, a:not([href]):not([tabindex]).mi-linkbtn:hover,
