@@ -30,7 +30,7 @@ export default {
       action: 'add',
       studentList: [],
       studentTableColumnsHeaders: [
-        { title: "USERNAME", sortKey: "username", sortOrder: 1, action: "viewschool", selectedFilters: []},
+        { title: "USERNAME", sortKey: "username", sortOrder: 1, action: "viewstudent", selectedFilters: []},
         { title: "FIRST NAME", sortKey: "firstName", sortOrder: 1, selectedFilters: [], hideOnScr: 'sm'},
         { title: "LAST NAME", sortKey: "lastName", sortOrder: 1, selectedFilters: [], },
         { title: "EMAIL", sortKey: "email", sortOrder: 1, selectedFilters: [],hideOnScr: 'sm'},
@@ -94,7 +94,10 @@ export default {
       console.debug("Row action is: "+actionName+ " Row data is: " +rowData.username+ " Index is: "+index);
 
       if(actionName == 'viewstudent') {
-
+        this.$router.push({
+          path:'/student/'+rowData.username,
+                query:{username: rowData.username}
+        })
       } else if(actionName == 'editstudent') {
         this.showModal('userModal', 'update', rowData);
       } else if(actionName == 'deletestudent') {
