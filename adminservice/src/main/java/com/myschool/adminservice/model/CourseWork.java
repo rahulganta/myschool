@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
 @Data
@@ -24,9 +25,11 @@ public class CourseWork {
 
     private String type;
 
+    @NotBlank(message = "Title name cannot be blank")
     private String title;
 
     @Column(columnDefinition = "TEXT")
+    @NotBlank(message = "Description cannot be blank")
     private String description;
 
     private String topic;

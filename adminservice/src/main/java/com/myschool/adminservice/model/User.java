@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -23,13 +25,18 @@ public class User {
 
     @Id
     @Column(unique=true)
+    @NotBlank(message = "Username cannot be blank")
+    @Size(min = 5, max = 30, message = "Username must be between 3 and 30 characters")
     private String username;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @NotBlank(message = "Password cannot be blank")
     private String password;
 
+    @NotBlank(message = "First name cannot be blank")
     private String firstName;
 
+    @NotBlank(message = "Last name cannot be blank")
     private String lastName;
 
     private String email;
@@ -37,6 +44,7 @@ public class User {
     @Column(columnDefinition="boolean default TRUE")
     private boolean active;
 
+    @NotBlank(message = "Role cannot be blank")
     private String roles;
 
     private LocalDateTime lastLogin;

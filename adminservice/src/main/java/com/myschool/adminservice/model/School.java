@@ -1,16 +1,15 @@
 package com.myschool.adminservice.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 
 @Data
 @AllArgsConstructor
@@ -24,10 +23,16 @@ public class School {
     private Long id;
 
     @Column(nullable = false, unique = true)
-    String name;
+    @NotBlank(message = "School name cannot be blank")
+    @Size(min = 3, max = 30, message = "School name must be between 3 and 30 characters")
+    private String name;
 
+    @NotBlank(message = "School DisplayName cannot be blank")
+    @Size(min = 3, max = 30, message = "School displayname must be between 3 and 30 characters")
     String displayName;
+
     String franchiseName;
+
     String correspondent;
 
     @Column(columnDefinition = "varchar(255) default 'Active'")
