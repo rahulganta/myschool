@@ -3,12 +3,14 @@ package com.myschool.adminservice.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
 @Data
@@ -23,14 +25,17 @@ public class UserMessage {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotBlank(message = "Subject cannot be blank")
     private String subject;
 
     @Column(columnDefinition = "TEXT")
+    @NotBlank(message = "Message cannot be blank")
     private String message;
 
     private String postedBy;
 
-    private LocalDateTime createdTime;
+    @ApiModelProperty(dataType = "java.lang.String", example = "")
+    private LocalDateTime createdTimeStamp;
 
     private String priority;
 

@@ -2,14 +2,12 @@ package com.myschool.adminservice.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
 import javax.persistence.*;
-import java.io.Serializable;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
-import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -24,6 +22,7 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+    @NotBlank(message = "Course name cannot be blank")
     private String name;
 
     private String description;
@@ -57,5 +56,4 @@ public class Course {
     /*@OneToMany(mappedBy = "regCourse")
     @JsonManagedReference
     Set<CourseRegistration> courseRegistrations;*/
-
 }
