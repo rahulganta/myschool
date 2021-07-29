@@ -50,6 +50,15 @@ public class WebSecurityConfigurator extends WebSecurityConfigurerAdapter {
                     .antMatchers("/secure/api/myschool/**").fullyAuthenticated()
                     .anyRequest().permitAll();
 
+            /*http
+                    // ...
+                    .authorizeRequests(authorize -> authorize
+                            .mvcMatchers("/resources/**", "/signup", "/about").permitAll()
+                            .mvcMatchers("/admin/**").hasRole("ADMIN")
+                            .mvcMatchers("/db/**").access("hasRole('ADMIN') and hasRole('DBA')")
+                            .anyRequest().denyAll()
+                    );*/
+
             http.addFilterBefore(jwtRequestFiler, UsernamePasswordAuthenticationFilter.class);
         } else {
             http.authorizeRequests().antMatchers("/").permitAll();
