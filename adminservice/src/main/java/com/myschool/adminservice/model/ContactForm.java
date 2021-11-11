@@ -16,5 +16,4 @@ public class ContactForm {
     private String state;
     private String zipcode;
     private String message;
-
 }
