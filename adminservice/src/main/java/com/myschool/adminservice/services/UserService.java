@@ -24,6 +24,7 @@ public class UserService {
             user.setActive(TRUE);
         }
         User createdUser = userRepository.save(user);
+
         return createdUser;
     }
 

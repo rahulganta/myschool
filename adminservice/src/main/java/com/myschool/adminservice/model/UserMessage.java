@@ -49,7 +49,4 @@ public class UserMessage {
     @JoinColumn(name="postedTo", referencedColumnName = "username", updatable = false, insertable = false)
     @JsonBackReference
     private User user;
-
-
-
 }
