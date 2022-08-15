@@ -79,16 +79,18 @@ spring:
 spring:
   profiles: myschool-localpostgres
   datasource:
-    url: jdbc:postgresql://localhost:5432/rahul.ganta?createDatabaseIfNotExist=true&serverTimezone=UTC&useSSL=false
-    username:
-    password:
-    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/myschooladmin?serverTimezone=UTC&useSSL=false
+    username: postgres
+    password: Password1!
     initialization-mode: always
+    driver-class-name: org.postgresql.Driver
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
     show-sql: true
+    generate-ddl: true
+    database: postgresql
 
 ---
 
