@@ -91,3 +91,19 @@ spring:
     show-sql: true
 
 ---
+
+spring:
+  profiles: myschool-cockroachdb
+  datasource:
+    url: jdbc:postgresql://localhost:26257/defaultdb?ApplicationName=myschool_admin&currentSchema=myschool_admin
+    username: root
+    password:
+    driver-class-name: org.postgresql.Driver
+    initialization-mode: always
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+---
