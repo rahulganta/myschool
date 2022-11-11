@@ -4,6 +4,9 @@ import com.myschool.adminservice.model.User;
 import com.myschool.adminservice.services.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.method.P;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -21,7 +24,10 @@ public class UserController {
 
     @PostMapping(value = "addadmin")
     @ResponseBody
-    public User addAdmin(@Valid @RequestBody User user) {
+    @Secured({"ROLE_SUPERADMIN", "ROLE_FRANCHISEADMIN", "ROLE_SCHOOLADMIN"})
+    @PreAuthorize("#user.schoolId == principal.school.id")
+    public User addAdmin(@P("user")@Valid @RequestBody User user) {
+        //((MyUserDetails) authentication.principal).school.id
         User createdUser = userService.createUser(user);
         return createdUser;
     }
