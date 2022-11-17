@@ -88,7 +88,7 @@ export default {
             this.$emit("addCourse")
           },
           error => {
-            vm.errorMsg = error.response.error +": " + error.message;
+            vm.errorMsg = error.response.data.message;
           });
     },
     getTeachers() {

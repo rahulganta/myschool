@@ -49,13 +49,21 @@ public class CourseService {
         return courseList;
     }
 
-    public Optional<Course> getCourseById(Integer id) {
-        Optional<Course> course = courseRepository.findById(id);
-        return course;
+    public Course getCourseById(Integer id) {
+        Optional<Course> optionalCourse = courseRepository.findById(id);
+        if(optionalCourse.isPresent()) {
+            return optionalCourse.get();
+        } else {
+            return new Course();
+        }
     }
 
     public List<Course> getCoursesBySchoolId(long schoolId) {
         List<Course> courseList = courseRepository.findAllByCourseSchoolId(schoolId);
+        return courseList;
+    }
+    public List<Course> getMyCourses(String instructor) {
+        List<Course> courseList = courseRepository.findAllByInstructor(instructor);
         return courseList;
     }
 

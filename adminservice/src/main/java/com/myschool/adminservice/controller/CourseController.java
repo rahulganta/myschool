@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.TextNode;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.myschool.adminservice.model.*;
+import com.myschool.adminservice.security.MyUserDetails;
 import com.myschool.adminservice.services.CourseService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +14,20 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.security.Principal;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/api/myschool")
@@ -27,6 +37,7 @@ public class CourseController {
     @Autowired
     private CourseService courseService;
 
+    @PreAuthorize("(#course.instructor == principal.username and hasRole('ROLE_TEACHER')) or hasAnyRole('ROLE_SUPERADMIN', 'ROLE_FRANCHISEADMIN', 'ROLE_SCHOOLADMIN')")
     @PostMapping(value = "addcourse")
     public Course addCourse(@RequestBody Course course) {
         Course createdCourse = courseService.createCourse(course);
@@ -40,9 +51,34 @@ public class CourseController {
     }
 
     @GetMapping(value = "course/{id}")
-    public Optional<Course> getCourseById(@PathVariable(value = "id") Integer id) {
-        Optional<Course> course = courseService.getCourseById(id);
+    public Course getCourseById(@PathVariable(value = "id") Integer id) {
+        Course course = courseService.getCourseById(id);
         return course;
+    }
+
+    /**
+     *
+     * @param principal
+     * @return
+     */
+    @GetMapping(value = "mycourses")
+    public List<Course> getMyCourses(Principal principal) {
+        String userName = principal.getName();
+        Collection<GrantedAuthority> authorities = ((UsernamePasswordAuthenticationToken) principal).getAuthorities();
+        List<Course> courseList = courseService.getMyCourses(userName);
+        List<CourseRegistration> courseRegistrations = courseService.getCourseRegistrationsByStudentId(userName);
+        List<Course> regCourseList = courseRegistrations.stream().map(CourseRegistration::getRegCourse).collect(Collectors.toList());
+        courseList.addAll(regCourseList);
+        return courseList;
+    }
+
+    @GetMapping(value = "myregisteredcourses")
+    public List<Course> getMyRegisteredCourses(Principal principal) {
+        String userName = principal.getName();
+        Collection<GrantedAuthority> authorities = ((UsernamePasswordAuthenticationToken) principal).getAuthorities();
+        List<CourseRegistration> courseRegistrations = courseService.getCourseRegistrationsByStudentId(userName);
+        List<Course> regCourseList = courseRegistrations.stream().map(CourseRegistration::getRegCourse).collect(Collectors.toList());
+        return regCourseList;
     }
 
     @GetMapping(value = "schoolcourses/{schoolId}")
@@ -51,8 +87,16 @@ public class CourseController {
         return courseList;
     }
 
+
     @PostMapping(value = "addcoursework")
     public CourseWork addCoursework(@RequestBody CourseWork courseWork) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        MyUserDetails myUserDetails = (MyUserDetails) authentication.getPrincipal();
+        String username = myUserDetails.getUsername();
+        Course course = courseService.getCourseById(courseWork.getCourseId());
+        if(course.getInstructor() != username) {
+            throw new AccessDeniedException("Access denied to update or add coursework");
+        }
         CourseWork createdCoursework = courseService.createCourseWork(courseWork);
         return createdCoursework;
     }

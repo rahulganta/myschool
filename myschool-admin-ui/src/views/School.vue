@@ -252,7 +252,7 @@ export default {
     getCourses() {
       let vm = this;
       let schoolId = this.$route.params.id;
-      this.axios.get(this.$constants().BASE_URL + "schoolcourses/"+schoolId, this.restCallHeaders()).then(
+      this.axios.get(this.$constants().BASE_URL + "mycourses", this.restCallHeaders()).then(
           response => {
             vm.courses = response.data;
           },

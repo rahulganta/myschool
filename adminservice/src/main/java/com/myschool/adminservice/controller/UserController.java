@@ -22,10 +22,10 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    //TODO: Method name and url need to be changed as it can be used to add any user instead of just admin
     @PostMapping(value = "addadmin")
     @ResponseBody
-    @Secured({"ROLE_SUPERADMIN", "ROLE_FRANCHISEADMIN", "ROLE_SCHOOLADMIN"})
-    @PreAuthorize("#user.schoolId == principal.school.id")
+    @PreAuthorize("#user.schoolId == principal.school.id and hasAnyRole('ROLE_SUPERADMIN', 'ROLE_FRANCHISEADMIN', 'ROLE_SCHOOLADMIN')")
     public User addAdmin(@P("user")@Valid @RequestBody User user) {
         //((MyUserDetails) authentication.principal).school.id
         User createdUser = userService.createUser(user);

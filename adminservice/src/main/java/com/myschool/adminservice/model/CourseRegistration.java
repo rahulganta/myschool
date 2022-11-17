@@ -42,7 +42,6 @@ public class CourseRegistration implements Serializable {
         this.grade = grade;
         this.student = new User();
         this.student.setUsername(courseRegistrationPK.getStudentId());
-        this.regCourse = new Course();
         this.regCourse.setId(courseRegistrationPK.getCourseId());
     }
 }

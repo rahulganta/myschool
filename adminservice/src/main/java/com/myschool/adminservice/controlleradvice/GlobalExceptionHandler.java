@@ -3,21 +3,18 @@ package com.myschool.adminservice.controlleradvice;
 import com.myschool.adminservice.model.ApiError;
 import com.sun.xml.bind.v2.TODO;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.PropertyValueException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.transaction.TransactionSystemException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.support.WebExchangeBindException;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import java.beans.PropertyVetoException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
@@ -39,6 +36,14 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public ApiError handleAuthorizationException(AuthenticationException ex, WebRequest request) {
         return new ApiError(LocalDateTime.now(), ex.getMessage(), ex.getLocalizedMessage(), request.getDescription(false));
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    @ResponseBody
+    public ApiError handleAccessDeniedException(AccessDeniedException ex, WebRequest request){
+        String errorMessage = ex.getLocalizedMessage() != null ? ex.getLocalizedMessage() : ex.getMessage();
+        return new ApiError(LocalDateTime.now(), errorMessage , ex.getLocalizedMessage(), request.getDescription(false));
     }
 
     @ExceptionHandler(DataIntegrityViolationException.class)
