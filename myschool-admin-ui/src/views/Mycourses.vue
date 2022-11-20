@@ -20,7 +20,7 @@
               </div>
             </div>
             <div class="card-text">{{course.description}}</div>
-            <span>Instructor: {{course.instructor}}</span>
+            <span>{{$t('label.instructor')}}: {{course.instructor}}</span>
           </div>
         </div>
       </div>
@@ -29,9 +29,9 @@
       <div class="col mb-4" @click="showModal('courseModal', 'add')">
         <div class="card mi-card h-100" > <!--v-bind:style="{backgroundColor:'#37966F',color: '#FFF' }"-->
           <div class="card-body text-center mi-text-primary">
-            <h5 class="card-title">Add</h5>
+            <h5 class="card-title">{{$t('btn.add')}}</h5>
             <h5 class="card-title"><i class="fas fa-plus" /> </h5>
-            <h5 class="card-text">Course</h5>
+            <h5 class="card-text">{{$t('btn.course')}}</h5>
             <!--<h5 class="card-text"><i class="fas fa-plus" /> Add Course</h5>-->
           </div>
         </div>

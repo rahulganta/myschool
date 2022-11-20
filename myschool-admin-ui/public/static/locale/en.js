@@ -6,47 +6,73 @@ const messages = {
         user: 'User | Users',
         nav: {
             home: 'Home',
+            mycourses: 'My Courses',
+            messages: "Messages",
+            staff: 'Staff',
+            students: 'Students',
+            attendance: 'Attendance',
+            reports: 'Reports',
+            schedule: 'Schedule',
             aboutus: 'About Us',
-            gallery: 'GALLERY',
-            contact: 'CONTACT',
-            products: 'PRODUCTS',
-            activities: 'ACTIVITIES',
             test: 'Test'
         },
 
         // Buttons and Links
         btn: {
-            login: 'LOGIN',
-            signout: 'Sign Out',
             submit: 'SUBMIT',
             cancel: 'CANCEL',
             close: 'CLOSE',
             confirm: 'CONFIRM',
             save: 'SAVE',
-            contactsinfo: 'Contacts Info',
-            here: 'here',
-            settings: 'Settings',
-            userprofile: 'USER PROFILE'
+            here: 'HERE',
+            add: 'ADD',
+            edit: 'EDIT',
+            update: 'UPDATE',
+            delete: 'DELETE',
+            school: 'SCHOOL',
+            course: 'COURSE',
+            user: 'USER',
+            teacher: 'TEACHER',
+            admin: 'ADMIN',
+
+            login: 'LOGIN',
+            signout: 'SIGN OUT',
+            settings: 'SETTINGS',
+            userprofile: 'USER PROFILE',
+
+            addschool: 'ADD SCHOOL',
+            viewschool: 'VIEW SCHOOL',
+            editschool: 'EDIT SCHOOL',
+            updateschool: 'UPDATE SCHOOL',
+            inactivateschool: 'INACTIVATE SCHOOL',
+
+            addadmin: 'ADD ADMIN',
+            editadmin: 'EDIT ADMIN',
+            updateadmin: 'UPDATE ADMIN',
+            adduser: 'ADD USER',
+            edituser: 'EDIT USER',
+            updateuser: 'UPDATE USER',
+
+            addcourse: 'ADD COURSE',
+            editcourse: 'EDIT COURSE',
+            updatecourse: 'UPDATE COURSE',
+            viewcourse: 'VIEW COURSE',
+            inactivatecourse: 'INACTIVATE COURSE',
+
+            createclasswork: 'CREATE CLASS WORK',
+            addfile: 'ADD FILE',
+
+            addschoolannouncement: 'ADD SCHOOL ANNOUNCEMENT',
+
         },
 
         //Page titles, card titles, headers, etc
         title: {
-            memberlogin: 'Member Login',
-            quote1: 'Every one can do something for the better future!!',
-            quote2: 'Education is the most powerful weapon which you can use to change the world!',
-            quote3: 'Life and sports can not be separated; They are one!',
-            webelieve: 'We Believe',
-            edustatement1: 'Education is the path forward in eradicating poverty and building a good society.',
-
-            education: 'Education',
-            sports: 'Sports',
-            cultural: 'Cultural',
-            helpinghand: 'Helping Hand',
-
-            missionstatement: 'Mission Statement',
-            goal: 'Our Goal',
-            history: 'History',
-
+            schoollist: 'School List',
+            schoolInfo: 'School Info',
+            mymessages: 'My Messages',
+            schoolannouncements: 'School Announcements',
+            mycourses: 'My Courses',
             contactus: 'Contact Us',
         },
 
@@ -64,6 +90,14 @@ const messages = {
             state: 'State',
             zip: 'Zip/Postal Code',
             message: 'Message',
+
+            displayname: 'Display Name',
+            franchisename: 'Franchise Name',
+            correspondent: 'Correspondent',
+            status: 'Status',
+
+            course: 'Course',
+            instructor: 'Instructor',
 
             note: 'NOTE',
             useformtocontactus: 'Please use below form to contact us.',
@@ -98,13 +132,6 @@ const messages = {
             allrights: 'All Rights Reserved',
         },
 
-        //Its same in all locale files so no need to add in other local files
-        localeoption: {
-            english: 'English',
-            telugu: 'తెలుగు',
-            spanish: 'Español',
-        },
-
         option: {
             defaulttheme: "Default Theme",
             darktheme: "Dark Theme",
@@ -115,6 +142,14 @@ const messages = {
             updated: "updated successfully!!",
             archived: "archived successfully!!",
         },
+
+        //Its same in all locale files so no need to add in other local files
+        localeoption: {
+            english: 'English',
+            telugu: 'తెలుగు',
+            spanish: 'Español',
+        },
+        SCHOOLNAME: 'School Name',
         copyright: 'Copyright © 2020 @:appname .  All Rights Reserved.',
         items: 'No Items | one Item | {count} Items',
         linked: '@:message.hello, Welcome to @:nav.ourmission, your id has been created successfully',

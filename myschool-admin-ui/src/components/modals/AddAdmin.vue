@@ -124,22 +124,39 @@ export default {
   methods: {
     addAdmin () {
       let vm = this;
-
-      this.axios.post(API_URL+ "addadmin", vm.admin, this.restCallHeaders()).then(
-          response => {
-            /*$('.toast').toast('show');*/
-            let res = response.data;
-            //Clear the form data
-            /*event.target.reset();*/
-            /*vm.contact = JSON.parse(JSON.stringify(vm.initContact));*/
-            vm.error = false;
-            this.$emit("close");
-            this.$emit("addadmin")
-          },
-          error => {
-            vm.error = true;
-            vm.errorMsg = error.response.data.message;
-          });
+      if(vm.action == 'update') {
+        this.axios.put(API_URL+ "updateuser", vm.admin, this.restCallHeaders()).then(
+            response => {
+              /*$('.toast').toast('show');*/
+              let res = response.data;
+              //Clear the form data
+              /*event.target.reset();*/
+              /*vm.contact = JSON.parse(JSON.stringify(vm.initContact));*/
+              vm.error = false;
+              this.$emit("close");
+              this.$emit("addadmin")
+            },
+            error => {
+              vm.error = true;
+              vm.errorMsg = error.response.data.message;
+            });
+      } else {
+        this.axios.post(API_URL+ "addadmin", vm.admin, this.restCallHeaders()).then(
+            response => {
+              /*$('.toast').toast('show');*/
+              let res = response.data;
+              //Clear the form data
+              /*event.target.reset();*/
+              /*vm.contact = JSON.parse(JSON.stringify(vm.initContact));*/
+              vm.error = false;
+              this.$emit("close");
+              this.$emit("addadmin")
+            },
+            error => {
+              vm.error = true;
+              vm.errorMsg = error.response.data.message;
+            });
+      }
 
     },
     close() {

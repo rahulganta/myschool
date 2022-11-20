@@ -3,45 +3,77 @@ const messages = {
     appname: 'మై స్కూల్',
     nav: {
         home: 'హోమ్',
-        ourmission: 'మా లక్ష్యం',
-        gallery: 'గ్యాలరీ',
-        contact: 'సంప్రదించండి',
-        donate: 'విరాళం',
-        activities: 'కార్యకలాపాలు',
-        test: 'TEST'
+        mycourses: 'నా కోర్సులు',
+        messages: "సందేశాలు",
+        staff: 'సిబ్బంది',
+        students: 'విద్యార్థులు',
+        attendance: 'హాజరు',
+        reports: 'రిపోర్ట్స్',
+        schedule: 'షెడ్యూల్',
+        aboutus: 'About Us',
+        test: 'టెస్ట్'
     },
 
     // Buttons and Links
     btn: {
-        login: 'లాగిన్',
-        signout: 'సైన్ అవుట్',
         submit: 'సమర్పించండి',
         cancel: 'రద్దు చేయు',
-        close: 'CLOSE',
+        close: 'క్లోజ్',
         confirm: 'నిర్ధారించు',
         save: 'SAVE',
-        contactsinfo: 'పరిచయాల సమాచారం',
         here: 'ఇక్కడ',
+        add: 'జోడించు',
+        edit: 'సవరించు',
+        update: 'నవీకరించు',
+        delete: 'తొలగించు',
+        school: 'పాఠశాల',
+        course: 'కోర్సు',
+        user: 'యూసర్',
+        teacher: 'టీచర్',
+        admin: 'అడ్మిన్',
+
+        login: 'లాగిన్',
+        signout: 'సైన్ అవుట్',
+        settings: 'సెట్టింగ్‌లు',
+        userprofile: 'వినియోగదారు వివరాలు',
+        contactsinfo: 'పరిచయాల సమాచారం',
+
+        addschool: 'పాఠశాలను జోడించండి',
+        viewschool: 'పాఠశాల చూడండి',
+        editschool: 'పాఠశాలను సవరించండి',
+        updateschool: 'పాఠశాలను నవీకరించండి',
+        inactivateschool: 'INACTIVATE SCHOOL',
+
+        addadmin: 'ADD ADMIN',
+        editadmin: 'EDIT ADMIN',
+        updateadmin: 'UPDATE ADMIN',
+        adduser: 'ఆడ్ యూసర్',
+        edituser: 'EDIT USER',
+        updateuser: 'UPDATE USER',
+
+        addcourse: 'ADD COURSE',
+        editcourse: 'EDIT COURSE',
+        updatecourse: 'UPDATE COURSE',
+        viewcourse: 'VIEW COURSE',
+        inactivatecourse: 'INACTIVATE COURSE',
+
+        createclasswork: 'CREATE CLASS WORK',
+        addfile: 'ADD FILE',
+
+        addschoolannouncement: 'పాఠశాల ప్రకటనను జోడించండి',
     },
 
     //Page titles, card titles, headers, etc
     title: {
-        memberlogin: 'సభ్యుడి లాగిన్',
-        quote1: 'మంచి భవిష్యత్తు కోసం ప్రతి ఒక్కరూ ఏదో ఒకటి చేయగలరు!!',
-        quote2: 'ప్రపంచాన్ని మార్చడానికి ఉపయోగించగల అత్యంత శక్తివంతమైన ఆయుధం విద్య!',
-        quote3: 'Life and sports can not be separated; They are one!',
-        webelieve: 'We Believe',
-        edustatement1: 'పేదరికాన్ని నిర్మూలించడంలో మరియు మంచి సమాజాన్ని నిర్మించడంలో విద్య అవసరం ఎంతో వుంది.',
-
-        education: 'విద్య',
-        sports: 'క్రీడలు',
-        cultural: 'సంస్కృతి',
-        helpinghand: 'అభయ హస్తం',
+        schoollist: 'పాఠశాల జాబితా',
+        schoolInfo: 'పాఠశాల సమాచారం',
+        mymessages: 'నా సందేశాలు',
+        schoolannouncements: 'పాఠశాల ప్రకటనలు',
+        mycourses: 'నా కోర్సులు',
 
         missionstatement: 'మా లక్ష్య ప్రకటన',
         goal: 'మా లక్ష్యం',
         history: 'మా చరిత్ర',
-
         contactus: 'మమ్మల్ని సంప్రదించండి',
     },
 
@@ -59,6 +91,14 @@ const messages = {
         state: 'రాష్ట్రం',
         zip: 'జిప్ / పోస్టల్ కోడ్',
         message: 'సందేశం',
+
+        displayname: 'ప్రదర్శన పేరు',
+        franchisename: 'ఫ్రాంచైజ్ పేరు',
+        correspondent: 'కరస్పాండెంట్',
+        status: 'స్టేటస్',
+
+        course: 'కోర్సు',
+        instructor: 'బోధకుడు',
 
         note: 'గమనిక',
         useformtocontactus: 'మమ్మల్ని సంప్రదించడానికి దయచేసి దిగువ ఫారమ్‌ను ఉపయోగించండి.',
@@ -92,7 +132,7 @@ const messages = {
     },
 
     option: {
-        defaulttheme: "Default థీమ్",
+        defaulttheme: "డిఫాల్ట్ థీమ్",
         darktheme: "డార్క్ థీమ్",
     },
 

@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h2 class="mi-page-title">School List</h2>
+    <h2 class="mi-page-title">{{$t('title.schoollist')}}</h2>
     <!--<img alt="Vue logo" src="../assets/logo.png">
     <HelloWorld msg="Welcome to my school App"/>-->
     <div class="mi-card">
@@ -20,7 +20,7 @@
           <span class="mr-4" v-if="selectedTableRows.length > 0">{{ selectedTableRows.length }} item(s) selected</span>
 
           <button id="addschool" class="btn mi-linkbtn" @click="showAddSchool('add', {})" :aria-expanded="showAddSchoolModal ? 'true':'false'">
-            <i class="fas fa-plus"/> ADD SCHOOL</button>
+            <i class="fas fa-plus"/> {{ $t('btn.addschool')}}</button>
           <!--<button id="addadmin" class="btn mi-linkbtn" @click="showAddAdminModal = !showAddAdminModal" :aria-expanded="showAddAdminModal ? 'true':'false'">
             <i class="fas fa-plus"/> ADD ADMIN</button>-->
         </div>
@@ -31,7 +31,7 @@
         <tr>
           <th v-for="columnHeader in columnsHeaders" :class="columnHeader.hideOnScr? 'd-md-block d-none': '' ">
             <a class="mi-text-primary" v-bind:id="columnHeader" v-on:click="sortBy(columnHeader.sortKey)" :class="{ active: sortKey == columnHeader.sortKey }" v-html="columnHeader.title">
-              {{ columnHeader.title }}
+              {{ columnHeader.title}}
             </a>
             <i v-if="columnHeader.sortKey == sortKey" class="mi-text-primary ml-2 fas" :class="columnHeader.sortOrder > 0 ? 'fa-caret-down' : 'fa-caret-up'"></i>
             <i v-else class="text-muted ml-2 fas" :class="columnHeader.sortOrder > 0 ? 'fa-caret-down' : 'fa-caret-up'"/>

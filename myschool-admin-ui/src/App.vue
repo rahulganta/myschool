@@ -17,25 +17,25 @@
               <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/about"><i class="fas fa-address-card fa-2x d-inline d-sm-none" /> {{$t('nav.aboutus')}}</router-link>
             </li>-->
             <li class="nav-item">
-              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/mycourses"><i class="fas fa-address-card fa-2x d-inline d-sm-none mr-2" />My courses</router-link>
+              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/mycourses"><i class="fas fa-address-card fa-2x d-inline d-sm-none mr-2" />{{$t('nav.mycourses')}}</router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/messages"><i class="fas fa-address-card fa-2x d-inline d-sm-none mr-2" />Messages</router-link>
+              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/messages"><i class="fas fa-address-card fa-2x d-inline d-sm-none mr-2" />{{$t('nav.messages')}}</router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/staff"><i class="fas fa-address-card fa-2x d-inline d-sm-none mr-2" />Staff</router-link>
+              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/staff"><i class="fas fa-address-card fa-2x d-inline d-sm-none mr-2" />{{$t('nav.staff')}}</router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/students"><i class="fas fa-address-card fa-2x d-inline d-sm-none mr-2" />Students</router-link>
+              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/students"><i class="fas fa-address-card fa-2x d-inline d-sm-none mr-2" />{{$t('nav.students')}}</router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/attendance"><i class="fas fa-address-card fa-2x d-inline d-sm-none mr-2" />Attendance</router-link>
+              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/attendance"><i class="fas fa-address-card fa-2x d-inline d-sm-none mr-2" />{{$t('nav.attendance')}}</router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/reports"><i class="fas fa-address-card fa-2x d-inline d-sm-none mr-2" />Reports</router-link>
+              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/reports"><i class="fas fa-address-card fa-2x d-inline d-sm-none mr-2" />{{$t('nav.reports')}}</router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/schedule"><i class="fas fa-address-card fa-2x d-inline d-sm-none mr-2" />Schedule</router-link>
+              <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/schedule"><i class="fas fa-address-card fa-2x d-inline d-sm-none mr-2" />{{$t('nav.schedule')}}</router-link>
             </li>
             <li class="nav-item">
               <router-link class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" to="/test"><i class="fas fa-futbol fa-2x d-inline d-sm-none mr-2" />{{$t('nav.test')}}</router-link>

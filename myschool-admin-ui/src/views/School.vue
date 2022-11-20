@@ -3,32 +3,32 @@
   <h3 class="mi-page-title text-uppercase">{{ school.name}}</h3>
   <div class="card mi-card mb-4 pb-0 h-100">
     <div class="card-body pb-0">
-      <h5 class="card-title">School Info</h5>
+      <h5 class="card-title">{{$t('title.schoolInfo')}}</h5>
       <div class="card-text row">
         <div class="col-lg-4 col-md-6">
-          <p><strong>Name: </strong>{{school.name}}</p>
-          <p><strong>Display Name: </strong>{{school.displayName}}</p>
-          <p><strong>Franchise Name: </strong>{{school.franchiseName}}</p>
+          <p><strong>{{$t('label.name')}}: </strong>{{school.name}}</p>
+          <p><strong>{{$t('label.displayname')}}: </strong>{{school.displayName}}</p>
+          <p><strong>{{$t('label.franchisename')}}: </strong>{{school.franchiseName}}</p>
         </div>
         <div class="col-lg-4 col-md-6">
-          <p><strong>Correspondant: </strong>{{school.correspondent}}</p>
-          <p><strong>Status: </strong>{{school.status}}</p>
+          <p><strong>{{$t('label.correspondent')}}: </strong>{{school.correspondent}}</p>
+          <p><strong>{{$t('label.status')}}: </strong>{{school.status}}</p>
         </div>
       </div>
     </div>
     <div class="card-footer mi-card-footer">
       <button id="editschool1" class="btn mi-linkbtn" @click="showModal('schoolModal')" :aria-expanded="showAddSchoolModal ? 'true':'false'">
-        <i class="fas fa-pen"/> EDIT SCHOOL</button>
+        <i class="fas fa-pen"/>{{$t('btn.editschool')}}</button>
       <button id="addadmin1" class="btn mi-linkbtn" @click="showModal('userModal')" :aria-expanded="showAddAdminModal ? 'true':'false'">
-        <i class="fas fa-plus"/> ADD USER</button>
+        <i class="fas fa-plus"/>{{$t('btn.adduser')}}</button>
     </div>
   </div>
 
-  <div class="row row-cols-lg-3 row-cols-md-1 row-cols-sm-1">
-    <div class="col-sm-12 mb-4">
+  <div class="row row-cols-lg-2 row-cols-md-1 row-cols-sm-1">
+    <div class="col-sm-12 mb-6">
       <div class="card mi-card h-100">
         <div class="card-body">
-          <h5 class="card-title">My Messages</h5>
+          <h5 class="card-title">{{$t('title.mymessages')}}</h5>
           <ul class="list-unstyled">
             <li class="media mb-3" v-for="(userMessage, index) in userMessages">
               <!--<i class="far fa-circle fa-2x mr-2"/>-->
@@ -43,10 +43,10 @@
         </div>
       </div>
     </div>
-    <div class="col-sm-12 mb-4">
+    <div class="col-sm-12 mb-6">
       <div class="card mi-card h-100">
         <div class="card-body">
-          <h5 class="card-title">School Announcements</h5>
+          <h5 class="card-title">{{$t('title.schoolannouncements')}}</h5>
           <ul class="list-unstyled">
             <li class="media mb-3" v-for="(schoolMessage, index) in schoolMessages">
               <!--<i class="far fa-circle fa-2x mr-2"/>-->
@@ -61,38 +61,38 @@
         </div>
         <div class="card-footer mi-card-footer">
           <button id="addschoolmessage" class="btn mi-linkbtn" @click="showModal('schoolMessageModal')" :aria-expanded="showAddSchoolMessage ? 'true':'false'">
-            <i class="fas fa-plus"/> ADD SCHOOL ANNOUNCEMENT</button>
+            <i class="fas fa-plus"/>{{$t('btn.addschoolannouncement')}}</button>
         </div>
       </div>
     </div>
 
-    <div class="col-sm-12 mb-4">
+    <!--<div class="col-sm-12 mb-4">
       <div class="card mi-card pb-0 h-100">
         <div class="card-body pb-0">
-          <h5 class="card-title">School Info</h5>
+          <h5 class="card-title">{{$t('title.schoolInfo')}}</h5>
           <div class="card-text row">
             <div class="col-lg-6 col-md-6">
-              <p><strong>Name: </strong>{{school.name}}</p>
-              <p><strong>Display Name: </strong>{{school.displayName}}</p>
-              <p><strong>Franchise Name: </strong>{{school.franchiseName}}</p>
+              <p><strong>{{$t('label.name')}}: </strong>{{school.name}}</p>
+              <p><strong>{{$t('label.displayname')}}: </strong>{{school.displayName}}</p>
+              <p><strong>{{$t('label.franchisename')}}: </strong>{{school.franchiseName}}</p>
             </div>
             <div class="col-lg-6 col-md-6">
-              <p><strong>Correspondant: </strong>{{school.correspondent}}</p>
-              <p><strong>Status: </strong>{{school.status}}</p>
+              <p><strong>{{$t('label.correspondent')}}: </strong>{{school.correspondent}}</p>
+              <p><strong>{{$t('label.status')}}: </strong>{{school.status}}</p>
             </div>
           </div>
         </div>
         <div class="card-footer mi-card-footer">
           <button id="editschool" class="btn mi-linkbtn" @click="showModal('schoolModal')" :aria-expanded="showAddSchoolModal ? 'true':'false'">
-            <i class="fas fa-pen"/> EDIT SCHOOL</button>
+            <i class="fas fa-pen"/> {{$t('btn.editschool')}}</button>
           <button id="addadmin" class="btn mi-linkbtn" @click="showModal('userModal')" :aria-expanded="showAddAdminModal ? 'true':'false'">
-            <i class="fas fa-plus"/> ADD USER</button>
+            <i class="fas fa-plus"/>{{$t('btn.adduser')}}</button>
         </div>
       </div>
-    </div>
+    </div>-->
   </div>
 
-  <h3>My courses</h3>
+  <h3>{{$t('title.mycourses')}}</h3>
   <div class="row row-cols-sm-1 row-cols-md-2 row-cols-lg-3">
     <div class="col-sm-12 mb-4" v-for="(course, index) in courses">
       <div class="card mi-card h-100"> <!--v-bind:style="{backgroundColor:'#F9AA33',color: '#FFF' }"-->
@@ -112,7 +112,7 @@
             </div>
           </div>
           <div class="card-text">{{course.description}}</div>
-          <span>Instructor: {{course.instructor}}</span>
+          <span>{{$t('label.instructor')}}: {{course.instructor}}</span>
         </div>
       </div>
     </div>
@@ -121,9 +121,9 @@
     <div class="col mb-4" @click="showModal('courseModal', 'add')">
       <div class="card mi-card h-100" > <!--v-bind:style="{backgroundColor:'#37966F',color: '#FFF' }"-->
         <div class="card-body text-center mi-text-primary">
-          <h5 class="card-title">Add</h5>
+          <h5 class="card-title">{{$t('btn.add')}}</h5>
           <h5 class="card-title"><i class="fas fa-plus" /> </h5>
-          <h5 class="card-text">Course</h5>
+          <h5 class="card-text">{{$t('btn.course')}}</h5>
           <!--<h5 class="card-text"><i class="fas fa-plus" /> Add Course</h5>-->
         </div>
       </div>
