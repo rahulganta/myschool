@@ -68,6 +68,7 @@ const messages = {
 
         //Page titles, card titles, headers, etc
         title: {
+            memberlogin: 'Member Login',
             schoollist: 'School List',
             schoolInfo: 'School Info',
             mymessages: 'My Messages',
