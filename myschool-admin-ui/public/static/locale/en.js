@@ -66,6 +66,16 @@ const messages = {
 
         },
 
+        //Table columns headers
+        tbl: {
+            schoolname: 'SCHOOL NAME',
+            displayname: 'DISPLAY NAME',
+            franchise: 'FRANCHISE',
+            correspondent: 'CORRESPONDENT',
+            status: 'STATUS'
+
+        },
+
         //Page titles, card titles, headers, etc
         title: {
             schoollist: 'School List',
@@ -166,6 +176,31 @@ export const dateTimeFormats = {
             weekday: 'short', hour: 'numeric', minute: 'numeric', hour12: false
         }
     },
+    te: {
+        shortdate: {
+            year: 'numeric', month: 'short', day: 'numeric'
+        },
+        longdate: {
+            year: 'numeric', month: 'long', day: 'numeric',
+            weekday: 'long', hour: 'numeric', minute: 'numeric', hour12: true
+        }
+    }
 };
+
+export const numberFormats = {
+    'en': {
+        currency: {
+            style: 'currency',
+            currency: 'USD'
+        }
+    },
+    'ja-JP': {
+        currency: {
+            style: 'currency',
+            currency: 'JPY',
+            currencyDisplay: 'symbol'
+        }
+    }
+}
 
 export default messages

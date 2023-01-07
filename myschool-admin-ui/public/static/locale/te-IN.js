@@ -39,15 +39,15 @@ const messages = {
         contactsinfo: 'పరిచయాల సమాచారం',
 
         addschool: 'పాఠశాలను జోడించండి',
-        viewschool: 'పాఠశాల చూడండి',
+        viewschool: 'పాఠశాలను చూడండి',
         editschool: 'పాఠశాలను సవరించండి',
         updateschool: 'పాఠశాలను నవీకరించండి',
-        inactivateschool: 'INACTIVATE SCHOOL',
+        inactivateschool: 'పాఠశాలను నిష్క్రియం చేయండి',
 
         addadmin: 'ADD ADMIN',
         editadmin: 'EDIT ADMIN',
         updateadmin: 'UPDATE ADMIN',
-        adduser: 'ఆడ్ యూసర్',
+        adduser: 'యూసర్ని జోడించండి',
         edituser: 'EDIT USER',
         updateuser: 'UPDATE USER',
 
@@ -61,6 +61,16 @@ const messages = {
         addfile: 'ADD FILE',
 
         addschoolannouncement: 'పాఠశాల ప్రకటనను జోడించండి',
+    },
+
+    //Table columns headers
+    tbl: {
+        schoolname: 'పాఠశాల పేరు',
+        displayname: 'ప్రదర్శన పేరు',
+        franchise: 'ఫ్రాంచైజ్',
+        correspondent: 'కరెస్పాండంట్',
+        status: 'స్టేటస్'
+
     },
 
     //Page titles, card titles, headers, etc
