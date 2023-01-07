@@ -30,8 +30,8 @@
         <thead>
         <tr>
           <th v-for="columnHeader in columnsHeaders" :class="columnHeader.hideOnScr? 'd-md-block d-none': '' ">
-            <a class="mi-text-primary" v-bind:id="columnHeader" v-on:click="sortBy(columnHeader.sortKey)" :class="{ active: sortKey == columnHeader.sortKey }" v-html="columnHeader.title">
-              {{ columnHeader.title}}
+            <a class="mi-text-primary" v-bind:id="columnHeader" v-on:click="sortBy(columnHeader.sortKey)" :class="{ active: sortKey == columnHeader.sortKey }" v-html="$t(`tbl.${columnHeader.title}`)">
+              {{ $t(`tbl.${columnHeader.title}`) }}
             </a>
             <i v-if="columnHeader.sortKey == sortKey" class="mi-text-primary ml-2 fas" :class="columnHeader.sortOrder > 0 ? 'fa-caret-down' : 'fa-caret-up'"></i>
             <i v-else class="text-muted ml-2 fas" :class="columnHeader.sortOrder > 0 ? 'fa-caret-down' : 'fa-caret-up'"/>
@@ -53,11 +53,11 @@
                  aria-expanded="false"> <i class="fas fa-ellipsis-v"></i>
               </a>
               <div class="dropdown-menu dropdown-menu-right mi-dropdown-menu " aria-labelledby="dropdownMenuButton">
-                <button class="dropdown-item" name="edit" @click="viewSchool(index, rowData)"><i class="fas fa-info-circle"/> View School</button>
-                <button class="dropdown-item" name="copy" @click="showAddSchool('update', rowData)"><i class="fas fa-pen"/> Edit School</button>
+                <button class="dropdown-item" name="edit" @click="viewSchool(index, rowData)"><i class="fas fa-info-circle"/> {{$t('btn.viewschool')}}</button>
+                <button class="dropdown-item" name="copy" @click="showAddSchool('update', rowData)"><i class="fas fa-pen"/> {{$t('btn.editschool')}}</button>
                 <hr>
-                <button class="dropdown-item" name="delete"><i class="fas fa-store-alt-slash"/> Inactivate School</button>
-                <button class="dropdown-item" @click="showAddAdmin('add', rowData)" :aria-expanded="showAddAdminModal ? 'true':'false'"><i class="fas fa-plus"/> Add AdminUser</button>
+                <button class="dropdown-item" name="delete"><i class="fas fa-store-alt-slash"/> {{$t('btn.inactivateschool')}}</button>
+                <button class="dropdown-item" @click="showAddAdmin('add', rowData)" :aria-expanded="showAddAdminModal ? 'true':'false'"><i class="fas fa-plus"/> {{$t('btn.adduser')}}</button>
               </div>
             </div>
           </td>
@@ -114,11 +114,11 @@ export default {
       sortKey: "name",
       showFilters: false,
       columnsHeaders: [
-        { title: "SCHOOL NAME", sortKey: "name", sortOrder: 1, selectedFilters: []},
-        { title: "DISPLAY NAME", sortKey: "displayName", sortOrder: 1, selectedFilters: [], hideOnScr: 'sm'},
-        { title: "FRANCHISE", sortKey: "franchiseName", sortOrder: 1, selectedFilters: [],},
-        { title: "CORRESPONDENT", sortKey: "correspondent", sortOrder: 1, selectedFilters: [], hideOnScr: 'sm'},
-        { title: "STATUS", sortKey: "status", sortOrder: 1, selectedFilters: []},
+        { title: 'schoolname', sortKey: "name", sortOrder: 1, selectedFilters: []},
+        { title: 'displayname', sortKey: "displayName", sortOrder: 1, selectedFilters: [], hideOnScr: 'sm'},
+        { title: 'franchise', sortKey: "franchiseName", sortOrder: 1, selectedFilters: [],},
+        { title: 'correspondent', sortKey: "correspondent", sortOrder: 1, selectedFilters: [], hideOnScr: 'sm'},
+        { title: 'status', sortKey: "status", sortOrder: 1, selectedFilters: []},
       ],
       dataList: [
         { id: 1, name: "Tiny Tots", displayName: "Tiny Tots", franchiseName: "Alphores", correspondent: "Narendra Reddy", status: "Active", clientFeature: "feature1",},
