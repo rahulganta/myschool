@@ -1,7 +1,6 @@
 package com.myschool.adminservice.controlleradvice;
 
 import com.myschool.adminservice.model.ApiError;
-import com.sun.xml.bind.v2.TODO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;

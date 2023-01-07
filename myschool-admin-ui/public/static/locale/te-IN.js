@@ -3,7 +3,7 @@ const messages = {
     appname: 'మై స్కూల్',
     nav: {
         home: 'హోమ్',
-        mycourses: 'నా కోర్సులు',
+        mycourses: 'నాకోర్సులు',
         messages: "సందేశాలు",
         staff: 'సిబ్బంది',
         students: 'విద్యార్థులు',
@@ -75,6 +75,7 @@ const messages = {
 
     //Page titles, card titles, headers, etc
     title: {
+        memberlogin: 'లాగిన్',
         schoollist: 'పాఠశాల జాబితా',
         schoolInfo: 'పాఠశాల సమాచారం',
         mymessages: 'నా సందేశాలు',
