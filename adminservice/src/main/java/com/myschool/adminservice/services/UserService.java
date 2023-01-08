@@ -28,6 +28,20 @@ public class UserService {
         return createdUser;
     }
 
+    public User updateUser(User user) throws Exception {
+        /*TODO do all the preliminary checks throw error*/
+        if(!user.isActive()) {
+            user.setActive(TRUE);
+        }
+        if(getUser(user.getUsername()).isPresent()) {
+            User createdUser = userRepository.save(user);
+            return createdUser;
+        } else {
+            throw new Exception("User: "+ user.getUsername()+ "does not exist ");
+        }
+
+    }
+
     public List<User> getAllUsers() {
         List<User> userList = userRepository.findAll();
         return userList;
