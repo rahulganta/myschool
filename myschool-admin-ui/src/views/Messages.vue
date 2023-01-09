@@ -33,6 +33,7 @@
                   <strong class="mt-0 mb-1">{{userMessage.subject}}</strong>
                   <div>{{userMessage.message}}</div>
                   <p class="text-muted">Posted: {{ userMessage.createdTimeStamp | formatDateTime }}</p>
+                  <p class="text-muted">Posted: {{ $d(new Date(userMessage.createdTimeStamp), 'longdate') }}</p>
                 </div>
               </li>
             </ul>
@@ -51,7 +52,8 @@
                 <div class="media-body">
                   <strong class="mt-0 mb-1">{{schoolMessage.subject}}</strong>
                   <div>{{schoolMessage.message}}</div>
-                  <p class="text-muted">Posted: {{ schoolMessage.createdTimeStamp | formatDateTime }}</p>
+<!--                  <p class="text-muted">Posted: {{ schoolMessage.createdTimeStamp | formatDateTime }}</p>-->
+                  <p class="text-muted">Posted: {{ $d(new Date(schoolMessage.createdTimeStamp), 'longdate') }}</p>
                 </div>
               </li>
             </ul>

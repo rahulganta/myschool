@@ -51,11 +51,11 @@ const messages = {
         edituser: 'EDIT USER',
         updateuser: 'UPDATE USER',
 
-        addcourse: 'ADD COURSE',
-        editcourse: 'EDIT COURSE',
-        updatecourse: 'UPDATE COURSE',
-        viewcourse: 'VIEW COURSE',
-        inactivatecourse: 'INACTIVATE COURSE',
+        addcourse: 'కోర్సును జోడించండి',
+        editcourse: 'కోర్సును సవరించండి',
+        updatecourse: 'కోర్సును నవీకరించండి',
+        viewcourse: 'కోర్సును చూడండి',
+        inactivatecourse: 'కోర్సును నిష్క్రియం చేయండి',
 
         createclasswork: 'CREATE CLASS WORK',
         addfile: 'ADD FILE',
