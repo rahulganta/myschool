@@ -54,7 +54,8 @@
               <div class="media-body">
                 <strong class="mt-0 mb-1">{{schoolMessage.subject}}</strong>
                 <div>{{schoolMessage.message}}</div>
-                <p class="text-muted">Posted: {{ schoolMessage.createdTimeStamp | formatDateTime }}</p>
+<!--                <p class="text-muted">Posted: {{ schoolMessage.createdTimeStamp | formatDateTime }}</p>-->
+                <p class="text-muted">Posted: {{ $d(new Date(schoolMessage.createdTimeStamp), 'longdate') }}</p>
               </div>
             </li>
           </ul>
@@ -223,6 +224,8 @@ export default {
       this.axios.get(this.$constants().BASE_URL + "messages/allschoolmessages/"+schoolId, this.restCallHeaders()).then(
           response => {
             vm.schoolMessages = response.data;
+            console.log("the date: " +new Date('24 September 2022 15:30 UTC'));
+            console.log("The date formate:" +new Date( vm.schoolMessages[0].createdTimeStamp));
           },
           error => {
             this.errorMsg = error.response.message;

@@ -6,7 +6,7 @@ const messages = {
         user: 'User | Users',
         nav: {
             home: 'Home',
-            mycourses: 'My Courses',
+            mycourses: 'MyCourses',
             messages: "Messages",
             staff: 'Staff',
             students: 'Students',
@@ -174,7 +174,8 @@ export const dateTimeFormats = {
         },
         longdate: {
             year: 'numeric', month: 'short', day: 'numeric',
-            weekday: 'short', hour: 'numeric', minute: 'numeric', hour12: false
+            weekday: 'short', hour: '2-digit', minute: 'numeric', second:'numeric', hour12: true,
+            timeZoneName: 'short'
         }
     },
     te: {
@@ -183,7 +184,8 @@ export const dateTimeFormats = {
         },
         longdate: {
             year: 'numeric', month: 'long', day: 'numeric',
-            weekday: 'long', hour: 'numeric', minute: 'numeric', hour12: true
+            weekday: 'long', hour: 'numeric', minute: 'numeric', second:'numeric',hour12: true,
+            timeZoneName: 'short'
         }
     }
 };
