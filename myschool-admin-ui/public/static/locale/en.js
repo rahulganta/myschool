@@ -6,7 +6,7 @@ const messages = {
         user: 'User | Users',
         nav: {
             home: 'Home',
-            mycourses: 'My Courses',
+            mycourses: 'MyCourses',
             messages: "Messages",
             staff: 'Staff',
             students: 'Students',
