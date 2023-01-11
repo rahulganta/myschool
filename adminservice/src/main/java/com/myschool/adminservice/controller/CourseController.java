@@ -1,10 +1,5 @@
 package com.myschool.adminservice.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.TextNode;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.myschool.adminservice.model.*;
 import com.myschool.adminservice.security.MyUserDetails;
 import com.myschool.adminservice.services.CourseService;
@@ -24,6 +19,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -93,12 +90,17 @@ public class CourseController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         MyUserDetails myUserDetails = (MyUserDetails) authentication.getPrincipal();
         String username = myUserDetails.getUsername();
+        Collection<GrantedAuthority> authorities = myUserDetails.getAuthorities();
+        List<String> autorizedRles = new ArrayList<>(Arrays.asList("ROLE_SUPERADMIN", "ROLE_FRANCHISEADMIN", "ROLE_SCHOOLADMIN"));
+        boolean hasRole = authorities.stream().anyMatch(element -> autorizedRles.contains(element.toString()));
+
         Course course = courseService.getCourseById(courseWork.getCourseId());
-        if(course.getInstructor() != username) {
+        if(course.getInstructor() == username || hasRole) {
+            CourseWork createdCoursework = courseService.createCourseWork(courseWork);
+            return createdCoursework;
+        } else {
             throw new AccessDeniedException("Access denied to update or add coursework");
         }
-        CourseWork createdCoursework = courseService.createCourseWork(courseWork);
-        return createdCoursework;
     }
 
     @PostMapping(value = "coursework/{id}/uploadfile")

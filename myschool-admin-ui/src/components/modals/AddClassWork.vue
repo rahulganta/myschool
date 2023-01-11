@@ -19,13 +19,13 @@
         </div>
 
         <div class="form-group">
-          <label for="description">Description</label>
-          <textarea id="description" rows="5" maxlength="10000" class="form-control" :placeholder="$t('plch.classworkdesc')" v-model="courseWork.description"></textarea>
+          <label for="topic">Topic</label>
+          <input id="topic" type="text" class="form-control" v-model="courseWork.topic">
         </div>
 
         <div class="form-group">
-          <label for="topic">Topic</label>
-          <input id="topic" type="text" class="form-control" v-model="courseWork.topic">
+          <label for="description">Description</label>
+          <textarea id="description" rows="5" maxlength="10000" class="form-control" :placeholder="$t('plch.classworkdesc')" v-model="courseWork.description"></textarea>
         </div>
 
         <div class="form-group">
