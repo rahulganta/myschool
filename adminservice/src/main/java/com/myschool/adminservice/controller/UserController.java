@@ -2,6 +2,7 @@ package com.myschool.adminservice.controller;
 
 import com.myschool.adminservice.model.User;
 import com.myschool.adminservice.services.UserService;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
@@ -25,10 +26,26 @@ public class UserController {
     //TODO: Method name and url need to be changed as it can be used to add any user instead of just admin
     @PostMapping(value = "addadmin")
     @ResponseBody
-    @PreAuthorize("#user.schoolId == principal.school.id and hasAnyRole('ROLE_SUPERADMIN', 'ROLE_FRANCHISEADMIN', 'ROLE_SCHOOLADMIN')")
+    @PreAuthorize("#user.schoolId == principal.school.id or hasAnyRole('ROLE_SUPERADMIN', 'ROLE_FRANCHISEADMIN', 'ROLE_SCHOOLADMIN')")
     public User addAdmin(@P("user")@Valid @RequestBody User user) {
         //((MyUserDetails) authentication.principal).school.id
         User createdUser = userService.createUser(user);
+        return createdUser;
+    }
+
+    @SneakyThrows
+    @PutMapping(value = "updateuser")
+    @ResponseBody
+    @PreAuthorize("#user.schoolId == principal.school.id or hasAnyRole('ROLE_SUPERADMIN', 'ROLE_FRANCHISEADMIN', 'ROLE_SCHOOLADMIN')")
+    public User updateUser(@P("user")@Valid @RequestBody User user) {
+        //((MyUserDetails) authentication.principal).school.id
+        User createdUser = null;
+        try {
+            createdUser = userService.updateUser(user);
+        } catch (Exception exception) {
+            log.error(exception.getLocalizedMessage(), exception);
+            throw new Exception(exception.getMessage(), exception);
+        }
         return createdUser;
     }
 
