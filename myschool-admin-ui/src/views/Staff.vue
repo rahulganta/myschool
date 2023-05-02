@@ -37,11 +37,11 @@ export default {
       teacherList: [],
       adminList: [],
       columnsHeaders: [
-        { title: "USERNAME", sortKey: "username", sortOrder: 1, action: "viewschool", selectedFilters: []},
-        { title: "FIRST NAME", sortKey: "firstName", sortOrder: 1, selectedFilters: [], hideOnScr: 'sm'},
-        { title: "LAST NAME", sortKey: "lastName", sortOrder: 1, selectedFilters: [], },
-        { title: "EMAIL", sortKey: "email", sortOrder: 1, selectedFilters: [],hideOnScr: 'sm'},
-        { title: "STATUS", sortKey: "status", sortOrder: 1, selectedFilters: [],},
+        { title: 'username', sortKey: "username", sortOrder: 1, action: "viewschool", selectedFilters: []},
+        { title: "firstname", sortKey: "firstName", sortOrder: 1, selectedFilters: [], hideOnScr: 'sm'},
+        { title: "lastname", sortKey: "lastName", sortOrder: 1, selectedFilters: [], },
+        { title: "email", sortKey: "email", sortOrder: 1, selectedFilters: [],hideOnScr: 'sm'},
+        { title: "status", sortKey: "status", sortOrder: 1, selectedFilters: [],},
       ],
       teacherTableRowActions: [
         { title: "View Teacher", name: "viewteacher", icon: "fa-info-circle"},
@@ -49,8 +49,8 @@ export default {
         { title: "Delete Teacher", name: "deleteteacher", icon: "fa-trash"},
       ],
       teacherTableActions: [
-        { title: "ADD TEACHER", name: "addteacher", icon: "fa-plus"},
-        { title: "DELETE TEACHER", name: "deleteteacher", icon: "fa-trash"},
+        { title: "addteacher", name: "addteacher", icon: "fa-plus"},
+        { title: "deleteteacher", name: "deleteteacher", icon: "fa-trash"},
       ],
       adminTableRowActions: [
         { title: "View Admin", name: "viewadmin", icon: "fa-info-circle"},
@@ -58,8 +58,8 @@ export default {
         { title: "Delete Admin", name: "deleteadmin", icon: "fa-trash"},
       ],
       adminTableActions: [
-        { title: "ADD ADMIN", name: "addadmin", icon: "fa-plus"},
-        { title: "DELETE ADMIN", name: "deleteadmin", icon: "fa-trash"},
+        { title: "addadmin", name: "addadmin", icon: "fa-plus"},
+        { title: "deleteadmin", name: "deleteadmin", icon: "fa-trash"},
       ],
       user: {
         username: '',

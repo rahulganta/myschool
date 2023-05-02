@@ -4,7 +4,22 @@ const messages = {
         appname: 'MySchool',
         school: "School ",
         user: 'User | Users',
+        student: 'Student | Students',
         nav: {
+            home: 'Home',
+            mycourses: 'MyCourses',
+            messages: "Messages",
+            staff: 'Staff',
+            students: 'Students',
+            attendance: 'Attendance',
+            reports: 'Reports',
+            schedule: 'Schedule',
+            aboutus: 'About Us',
+            test: 'Test'
+        },
+
+        // Page or other Headers
+        hdr: {
             home: 'Home',
             mycourses: 'MyCourses',
             messages: "Messages",
@@ -49,9 +64,22 @@ const messages = {
             addadmin: 'ADD ADMIN',
             editadmin: 'EDIT ADMIN',
             updateadmin: 'UPDATE ADMIN',
+            deleteadmin: 'DELETE ADMIN',
+
             adduser: 'ADD USER',
             edituser: 'EDIT USER',
             updateuser: 'UPDATE USER',
+            deleteuser: 'DELETE USER',
+
+            addteacher: 'ADD TEACHER',
+            editteacher: 'EDIT TEACHER',
+            updateteacher: 'UPDATE TEACHER',
+            deleteteacher: 'DELETE TEACHER',
+
+            addstudent: 'ADD STUDENT',
+            editstudent: 'EDIT STUDENT',
+            updatestudent: 'UPDATE STUDENT',
+            deletestudent: 'DELETE STUDENT',
 
             addcourse: 'ADD COURSE',
             editcourse: 'EDIT COURSE',
@@ -72,7 +100,11 @@ const messages = {
             displayname: 'DISPLAY NAME',
             franchise: 'FRANCHISE',
             correspondent: 'CORRESPONDENT',
-            status: 'STATUS'
+            status: 'STATUS',
+            username: 'USERNAME',
+            firstname:'FIRST NAME',
+            lastname:'LAST NAME',
+            email:'EMAIL'
 
         },
 

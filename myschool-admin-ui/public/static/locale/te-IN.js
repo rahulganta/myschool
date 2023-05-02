@@ -10,17 +10,30 @@ const messages = {
         attendance: 'హాజరు',
         reports: 'రిపోర్ట్స్',
         schedule: 'షెడ్యూల్',
-        aboutus: 'About Us',
+        aboutus: 'మా గురించి',
         test: 'టెస్ట్'
     },
 
+    // Page or other Headers
+    hdr: {
+        home: 'హోమ్',
+        mycourses: 'నాకోర్సులు',
+        messages: "సందేశాలు",
+        staff: 'సిబ్బంది',
+        students: 'విద్యార్థులు',
+        attendance: 'హాజరు',
+        reports: 'రిపోర్ట్స్',
+        schedule: 'షెడ్యూల్',
+        aboutus: 'మా గురించి',
+        test: 'టెస్ట్'
+    },
     // Buttons and Links
     btn: {
         submit: 'సమర్పించండి',
         cancel: 'రద్దు చేయు',
         close: 'క్లోజ్',
         confirm: 'నిర్ధారించు',
-        save: 'SAVE',
+        save: 'సేవ్',
         here: 'ఇక్కడ',
         add: 'జోడించు',
         edit: 'సవరించు',
@@ -44,12 +57,24 @@ const messages = {
         updateschool: 'పాఠశాలను నవీకరించండి',
         inactivateschool: 'పాఠశాలను నిష్క్రియం చేయండి',
 
-        addadmin: 'ADD ADMIN',
-        editadmin: 'EDIT ADMIN',
-        updateadmin: 'UPDATE ADMIN',
+        addadmin: 'అడ్మిన్ యూసర్ని జోడించండి',
+        editadmin: 'అడ్మిన్ యూసర్ని సవరించండి',
+        updateadmin: 'అడ్మిన్ యూసర్ని నవీకరించండి',
+        deleteadmin:'అడ్మిన్ యూసర్ని తొలగించండి',
+
         adduser: 'యూసర్ని జోడించండి',
-        edituser: 'EDIT USER',
-        updateuser: 'UPDATE USER',
+        edituser: 'యూసర్ని సవరించండి',
+        updateuser: 'యూసర్ని నవీకరించండి',
+        deleteuser: 'యూసర్ని తొలగించండి',
+        addteacher: 'ఉపాధ్యాయుడిని జోడించండి',
+        editteacher: 'ఉపాధ్యాయుడిని సవరించండి',
+        updateteacher: 'ఉపాధ్యాయుడిని నవీకరించండి',
+        deleteteacher: 'ఉపాధ్యాయుడిని తొలగించండి',
+
+        addstudent: 'విద్యార్థిని జోడించండి',
+        editstudent: 'విద్యార్థిని సవరించండి',
+        updatestudent: 'విద్యార్థిని నవీకరించండి',
+        deletestudent: 'విద్యార్థిని తొలగించండి',
 
         addcourse: 'కోర్సును జోడించండి',
         editcourse: 'కోర్సును సవరించండి',
@@ -57,8 +82,8 @@ const messages = {
         viewcourse: 'కోర్సును చూడండి',
         inactivatecourse: 'కోర్సును నిష్క్రియం చేయండి',
 
-        createclasswork: 'CREATE CLASS WORK',
-        addfile: 'ADD FILE',
+        createclasswork: 'క్లాస్ వర్క్‌ని సృష్టించండి',
+        addfile: 'ఫైల్‌ని జోడించు',
 
         addschoolannouncement: 'పాఠశాల ప్రకటనను జోడించండి',
     },
@@ -69,7 +94,11 @@ const messages = {
         displayname: 'ప్రదర్శన పేరు',
         franchise: 'ఫ్రాంచైజ్',
         correspondent: 'కరెస్పాండంట్',
-        status: 'స్టేటస్'
+        status: 'స్టేటస్',
+        username: 'యూసర్ పేరు',
+        firstname:'మొదటి పేరు',
+        lastname:'చివరి పేరు',
+        email:'ఇమెయిల్'
 
     },
 
@@ -137,8 +166,8 @@ const messages = {
     msg: {
         pageunderdev: 'ఈ పేజీని సందర్శించినందుకు ధన్యవాదాలు, ఈ పేజీ పురోగతిలో ఉంది.',
         contactustodonate: 'మీరు విరాళం ఇవ్వడానికి సిద్ధంగా ఉంటే, దయచేసి మమ్మల్ని సంప్రదించండి',
-        loading: 'Loading...' ,
-        nothing: 'Nothing to show here.' ,
+        loading: 'లోడింగ్...' ,
+        nothing: 'ఇక్కడ చూపించడానికి ఏమీ లేదు.' ,
         allrights: 'All Rights Reserved',
     },
 

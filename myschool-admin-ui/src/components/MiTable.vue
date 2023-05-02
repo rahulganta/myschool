@@ -16,7 +16,7 @@
         <span class="mr-4" v-if="selectedTableRows.length > 0">{{ selectedTableRows.length }} item(s) selected</span>
 
         <button v-for="(tAction, index) in tableActions" :id="tAction.name" class="btn mi-linkbtn" @click="tableAction(tAction.name, selectedTableRows)">
-          <i class="fas" :class="tAction.icon"/> {{tAction.title}}</button>
+          <i class="fas" :class="tAction.icon"/>{{ $t(`btn.${tAction.title}`) }}</button>
       </div>
     </div>
 
@@ -29,8 +29,8 @@
         </th>
 
         <th v-for="columnHeader in columnsHeaders" :class="columnHeader.hideOnScr? 'd-md-block d-none': '' ">
-          <a class="mi-text-primary" v-bind:id="columnHeader.sortKey" v-on:click="sortBy(columnHeader.sortKey)" :class="{ active: sortKey == columnHeader.sortKey }" v-html="columnHeader.title">
-            {{ columnHeader.title }}
+          <a class="mi-text-primary" v-bind:id="columnHeader.sortKey" v-on:click="sortBy(columnHeader.sortKey)" :class="{ active: sortKey == columnHeader.sortKey }" v-html="$t(`tbl.${columnHeader.title}`)">
+             {{ $t(`tbl.${columnHeader.title}`) }}
           </a>
           <i v-if="columnHeader.sortKey == sortKey" class="mi-text-primary ml-2 fas" :class="columnHeader.sortOrder > 0 ? 'fa-caret-down' : 'fa-caret-up'"></i>
           <i v-else class="text-muted ml-2 fas" :class="columnHeader.sortOrder > 0 ? 'fa-caret-down' : 'fa-caret-up'"/>

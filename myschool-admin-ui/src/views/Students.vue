@@ -1,6 +1,6 @@
 <template>
   <div class="students">
-    <h2 class="mi-page-title">Students</h2>
+    <h2 class="mi-page-title">{{ $t('hdr.students')}}</h2>
     <div class="mi-card">
       <!--<h4 class="mi-card-title">Students</h4>-->
       <MiTable :columns-headers="studentTableColumnsHeaders" :data-list="studentList" :row-actions="studentTableRowActions" :table-actions="studentTableActions" :show-row-check-box="true"
@@ -30,11 +30,11 @@ export default {
       action: 'add',
       studentList: [],
       studentTableColumnsHeaders: [
-        { title: "USERNAME", sortKey: "username", sortOrder: 1, action: "viewstudent", selectedFilters: []},
-        { title: "FIRST NAME", sortKey: "firstName", sortOrder: 1, selectedFilters: [], hideOnScr: 'sm'},
-        { title: "LAST NAME", sortKey: "lastName", sortOrder: 1, selectedFilters: [], },
-        { title: "EMAIL", sortKey: "email", sortOrder: 1, selectedFilters: [],hideOnScr: 'sm'},
-        { title: "STATUS", sortKey: "status", sortOrder: 1, selectedFilters: [],},
+        { title: "username", sortKey: "username", sortOrder: 1, action: "viewstudent", selectedFilters: []},
+        { title: "firstname", sortKey: "firstName", sortOrder: 1, selectedFilters: [], hideOnScr: 'sm'},
+        { title: "lastname", sortKey: "lastName", sortOrder: 1, selectedFilters: [], },
+        { title: "email", sortKey: "email", sortOrder: 1, selectedFilters: [],hideOnScr: 'sm'},
+        { title: "status", sortKey: "status", sortOrder: 1, selectedFilters: [],},
       ],
       studentTableRowActions: [
         { title: "View Student", name: "viewstudent", icon: "fa-info-circle"},
@@ -42,8 +42,8 @@ export default {
         { title: "Delete Student", name: "deletestudent", icon: "fa-trash"},
       ],
       studentTableActions: [
-        { title: "ADD STUDENT", name: "addstudent", icon: "fa-plus"},
-        { title: "DELETE STUDENT", name: "deletestudent", icon: "fa-trash"},
+        { title: "addstudent", name: "addstudent", icon: "fa-plus"},
+        { title: "deletestudent", name: "deletestudent", icon: "fa-trash"},
       ],
       user: {
         username: '',
