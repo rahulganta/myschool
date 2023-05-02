@@ -18,7 +18,7 @@ const messages = {
             test: 'Test'
         },
 
-        // Page or other Headers
+        // Page headers, other headers, card titles etc
         hdr: {
             home: 'Home',
             mycourses: 'MyCourses',
@@ -29,6 +29,13 @@ const messages = {
             reports: 'Reports',
             schedule: 'Schedule',
             aboutus: 'About Us',
+            memberlogin: 'Member Login',
+            schoollist: 'School List',
+            schoolInfo: 'School Info',
+            mymessages: 'My Messages',
+            schoolannouncements: 'School Announcements',
+            contactus: 'Contact Us',
+
             test: 'Test'
         },
 
@@ -60,6 +67,7 @@ const messages = {
             editschool: 'EDIT SCHOOL',
             updateschool: 'UPDATE SCHOOL',
             inactivateschool: 'INACTIVATE SCHOOL',
+            addschoolannouncement: 'ADD SCHOOL ANNOUNCEMENT',
 
             addadmin: 'ADD ADMIN',
             editadmin: 'EDIT ADMIN',
@@ -90,7 +98,7 @@ const messages = {
             createclasswork: 'CREATE CLASS WORK',
             addfile: 'ADD FILE',
 
-            addschoolannouncement: 'ADD SCHOOL ANNOUNCEMENT',
+
 
         },
 
@@ -106,17 +114,6 @@ const messages = {
             lastname:'LAST NAME',
             email:'EMAIL'
 
-        },
-
-        //Page titles, card titles, headers, etc
-        title: {
-            memberlogin: 'Member Login',
-            schoollist: 'School List',
-            schoolInfo: 'School Info',
-            mymessages: 'My Messages',
-            schoolannouncements: 'School Announcements',
-            mycourses: 'My Courses',
-            contactus: 'Contact Us',
         },
 
         //Form Labels and other Labels

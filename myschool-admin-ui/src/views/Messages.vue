@@ -1,6 +1,6 @@
 <template>
   <div class="messages">
-    <h2 class="mi-page-title">Messages</h2>
+    <h2 class="mi-page-title">{{ $t('hdr.messages')}}</h2>
     <div class="row row-cols-lg-2 row-cols-md-1 row-cols-sm-1">
       <!--<div class="col-sm-12 mb-4">
         <div class="card mi-card">
@@ -24,7 +24,7 @@
       <div class="col-sm-12 mb-4">
         <div class="card mi-card">
           <div class="card-body">
-            <h5 class="card-title">Personal Messages</h5>
+            <h5 class="card-title"> {{ $t('hdr.mymessages')}}</h5>
             <ul class="list-unstyled">
               <li class="media mb-3" v-for="(userMessage, index) in userMessages">
                 <!--<i class="far fa-circle fa-2x mr-2"/>-->
@@ -44,7 +44,7 @@
       <div class="col-sm-12 mb-4">
         <div class="card mi-card">
           <div class="card-body">
-            <h5 class="card-title">School Announcements</h5>
+            <h5 class="card-title">{{ $t('hdr.schoolannouncements')}}</h5>
             <ul class="list-unstyled">
               <li class="media mb-3" v-for="(schoolMessage, index) in schoolMessages">
                 <!--<i class="far fa-circle fa-2x mr-2"/>-->
@@ -60,7 +60,7 @@
           </div>
           <div class="card-footer mi-card-footer">
             <button id="addschoolmessage" class="btn mi-linkbtn" @click="showModal('schoolMessageModal')" :aria-expanded="showAddSchoolMessage ? 'true':'false'">
-              <i class="fas fa-plus"/> ADD SCHOOL ANNOUNCEMENT</button>
+              <i class="fas fa-plus"/>{{ $t('btn.addschoolannouncement')}}</button>
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h2 class="mi-page-title">{{$t('title.schoollist')}}</h2>
+    <h2 class="mi-page-title">{{$t('hdr.schoollist')}}</h2>
     <!--<img alt="Vue logo" src="../assets/logo.png">
     <HelloWorld msg="Welcome to my school App"/>-->
     <div class="mi-card">

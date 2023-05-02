@@ -1,6 +1,6 @@
 <template>
   <div class="reports">
-    <h2 class="mi-page-title">Reports</h2>
+    <h2 class="mi-page-title">{{$t('hdr.reports')}}</h2>
   </div>
 </template>
 

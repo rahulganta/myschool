@@ -15,6 +15,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,13 +29,13 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ResponseBody
     public ApiError handleAllExceptions(Exception ex, WebRequest request) {
-        return new ApiError(LocalDateTime.now(), ex.getMessage(), ex.getLocalizedMessage(), request.getDescription(false));
+        return new ApiError(LocalDateTime.now(), "", ex.getMessage(), ex.getLocalizedMessage(), request.getDescription(false), Collections.emptyMap());
     }
 
     @ExceptionHandler(AuthenticationException.class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public ApiError handleAuthorizationException(AuthenticationException ex, WebRequest request) {
-        return new ApiError(LocalDateTime.now(), ex.getMessage(), ex.getLocalizedMessage(), request.getDescription(false));
+        return new ApiError(LocalDateTime.now(), "", ex.getMessage(), ex.getLocalizedMessage(), request.getDescription(false), Collections.emptyMap());
     }
 
     @ExceptionHandler(AccessDeniedException.class)
@@ -42,7 +43,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ResponseBody
     public ApiError handleAccessDeniedException(AccessDeniedException ex, WebRequest request){
         String errorMessage = ex.getLocalizedMessage() != null ? ex.getLocalizedMessage() : ex.getMessage();
-        return new ApiError(LocalDateTime.now(), errorMessage , ex.getLocalizedMessage(), request.getDescription(false));
+        return new ApiError(LocalDateTime.now(), "", errorMessage , ex.getLocalizedMessage(), request.getDescription(false), Collections.emptyMap());
     }
 
     @ExceptionHandler(DataIntegrityViolationException.class)
@@ -50,7 +51,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ResponseBody
     public ApiError handleDataIntegrityViolationException(DataIntegrityViolationException ex, WebRequest request) {
         String errorMessage = ex.getMostSpecificCause().getLocalizedMessage() != null ? ex.getMostSpecificCause().getLocalizedMessage() : ex.getMessage();
-        return new ApiError(LocalDateTime.now(), errorMessage , ex.getLocalizedMessage(), request.getDescription(false));
+        return new ApiError(LocalDateTime.now(), "", errorMessage , ex.getLocalizedMessage(), request.getDescription(false), Collections.emptyMap());
     }
 
 //    @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -66,7 +67,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                                                                   HttpHeaders headers, HttpStatus status, WebRequest request) {
         logger.error("Validation error : "+ex);
         String errorMessage = ex.getBindingResult().getFieldErrors().get(0).getDefaultMessage();
-        ApiError apiError = new ApiError(LocalDateTime.now(), errorMessage, ex.getLocalizedMessage(), request.getDescription(false));
 
         /*TODO add errorlist prop to ApiError object and add the validation errors to it either Map or List depending on UI requirements*/
         List<String> validationList = ex.getBindingResult().getFieldErrors().stream().map(fieldError->fieldError.getDefaultMessage()).collect(Collectors.toList());
@@ -77,7 +77,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
             String eMessage = error.getDefaultMessage();
             errorList.put(fieldName, eMessage);
         });
-
+        ApiError apiError = new ApiError(LocalDateTime.now(), "", errorMessage, ex.getLocalizedMessage(), request.getDescription(false), errorList);
         return new ResponseEntity<>(apiError, status);
     }
 }

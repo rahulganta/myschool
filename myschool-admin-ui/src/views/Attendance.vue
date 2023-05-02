@@ -1,6 +1,6 @@
 <template>
   <div class="attendance">
-    <h2 class="mi-page-title">Attendance</h2>
+    <h2 class="mi-page-title">{{$t('hdr.attendance')}}</h2>
   </div>
 </template>
 

@@ -3,7 +3,7 @@
     <div class="d-flex justify-content-center">
       <form name="form" class="loginform mt-5" action="#" @submit.prevent="login">
 
-        <h4 class="d-flex justify-content-center mt-1 mb-4">{{$t('title.memberlogin')}}</h4>
+        <h4 class="d-flex justify-content-center mt-1 mb-4">{{$t('hdr.memberlogin')}}</h4>
         <div v-if="error">
           <div class="alert alert-danger">Invalid Username or Password</div>
         </div>

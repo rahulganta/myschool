@@ -3,7 +3,7 @@
   <h3 class="mi-page-title text-uppercase">{{ school.name}}</h3>
   <div class="card mi-card mb-4 pb-0 h-100">
     <div class="card-body pb-0">
-      <h5 class="card-title">{{$t('title.schoolInfo')}}</h5>
+      <h5 class="card-title">{{$t('hdr.schoolInfo')}}</h5>
       <div class="card-text row">
         <div class="col-lg-4 col-md-6">
           <p><strong>{{$t('label.name')}}: </strong>{{school.name}}</p>
@@ -28,7 +28,7 @@
     <div class="col-sm-12 mb-6">
       <div class="card mi-card h-100">
         <div class="card-body">
-          <h5 class="card-title">{{$t('title.mymessages')}}</h5>
+          <h5 class="card-title">{{$t('hdr.mymessages')}}</h5>
           <ul class="list-unstyled">
             <li class="media mb-3" v-for="(userMessage, index) in userMessages">
               <!--<i class="far fa-circle fa-2x mr-2"/>-->
@@ -46,7 +46,7 @@
     <div class="col-sm-12 mb-6">
       <div class="card mi-card h-100">
         <div class="card-body">
-          <h5 class="card-title">{{$t('title.schoolannouncements')}}</h5>
+          <h5 class="card-title">{{$t('hdr.schoolannouncements')}}</h5>
           <ul class="list-unstyled">
             <li class="media mb-3" v-for="(schoolMessage, index) in schoolMessages">
               <!--<i class="far fa-circle fa-2x mr-2"/>-->
@@ -70,7 +70,7 @@
     <!--<div class="col-sm-12 mb-4">
       <div class="card mi-card pb-0 h-100">
         <div class="card-body pb-0">
-          <h5 class="card-title">{{$t('title.schoolInfo')}}</h5>
+          <h5 class="card-title">{{$t('hdr.schoolInfo')}}</h5>
           <div class="card-text row">
             <div class="col-lg-6 col-md-6">
               <p><strong>{{$t('label.name')}}: </strong>{{school.name}}</p>
@@ -93,7 +93,7 @@
     </div>-->
   </div>
 
-  <h3>{{$t('title.mycourses')}}</h3>
+  <h3>{{$t('hdr.mycourses')}}</h3>
   <div class="row row-cols-sm-1 row-cols-md-2 row-cols-lg-3">
     <div class="col-sm-12 mb-4" v-for="(course, index) in courses">
       <div class="card mi-card h-100"> <!--v-bind:style="{backgroundColor:'#F9AA33',color: '#FFF' }"-->

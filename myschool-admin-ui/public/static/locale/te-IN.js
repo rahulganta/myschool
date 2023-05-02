@@ -25,6 +25,16 @@ const messages = {
         reports: 'రిపోర్ట్స్',
         schedule: 'షెడ్యూల్',
         aboutus: 'మా గురించి',
+        memberlogin: 'లాగిన్',
+        schoollist: 'పాఠశాల జాబితా',
+        schoolInfo: 'పాఠశాల సమాచారం',
+        mymessages: 'నా సందేశాలు',
+        schoolannouncements: 'పాఠశాల ప్రకటనలు',
+
+        missionstatement: 'మా లక్ష్య ప్రకటన',
+        goal: 'మా లక్ష్యం',
+        history: 'మా చరిత్ర',
+        contactus: 'మమ్మల్ని సంప్రదించండి',
         test: 'టెస్ట్'
     },
     // Buttons and Links
@@ -56,6 +66,7 @@ const messages = {
         editschool: 'పాఠశాలను సవరించండి',
         updateschool: 'పాఠశాలను నవీకరించండి',
         inactivateschool: 'పాఠశాలను నిష్క్రియం చేయండి',
+        addschoolannouncement: 'పాఠశాల ప్రకటనను జోడించండి',
 
         addadmin: 'అడ్మిన్ యూసర్ని జోడించండి',
         editadmin: 'అడ్మిన్ యూసర్ని సవరించండి',
@@ -85,7 +96,6 @@ const messages = {
         createclasswork: 'క్లాస్ వర్క్‌ని సృష్టించండి',
         addfile: 'ఫైల్‌ని జోడించు',
 
-        addschoolannouncement: 'పాఠశాల ప్రకటనను జోడించండి',
     },
 
     //Table columns headers
@@ -100,21 +110,6 @@ const messages = {
         lastname:'చివరి పేరు',
         email:'ఇమెయిల్'
 
-    },
-
-    //Page titles, card titles, headers, etc
-    title: {
-        memberlogin: 'లాగిన్',
-        schoollist: 'పాఠశాల జాబితా',
-        schoolInfo: 'పాఠశాల సమాచారం',
-        mymessages: 'నా సందేశాలు',
-        schoolannouncements: 'పాఠశాల ప్రకటనలు',
-        mycourses: 'నా కోర్సులు',
-
-        missionstatement: 'మా లక్ష్య ప్రకటన',
-        goal: 'మా లక్ష్యం',
-        history: 'మా చరిత్ర',
-        contactus: 'మమ్మల్ని సంప్రదించండి',
     },
 
     //Form Labels and other Labels

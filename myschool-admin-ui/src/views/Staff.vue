@@ -1,6 +1,6 @@
 <template>
   <div class="teachers">
-    <h2 class="mi-page-title">Staff</h2>
+    <h2 class="mi-page-title">{{ $t('hdr.staff')}}</h2>
     <div class="mi-card">
       <h4 class="mi-card-title">Teachers</h4>
      <MiTable :columns-headers="columnsHeaders" :data-list="teacherList" :row-actions="teacherTableRowActions" :table-actions="teacherTableActions" :show-row-check-box="true"

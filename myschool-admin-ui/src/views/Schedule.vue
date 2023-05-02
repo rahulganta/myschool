@@ -1,6 +1,6 @@
 <template>
   <div class="schedule">
-    <h2 class="mi-page-title">Schedule</h2>
+    <h2 class="mi-page-title">{{$t('hdr.schedule')}}</h2>
   </div>
 </template>
 
