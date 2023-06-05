@@ -20,7 +20,7 @@ public class CourseRegistration implements Serializable {
     @EmbeddedId
     private CourseRegistrationPK courseRegistrationPK;
 
-    @ApiModelProperty(dataType = "java.lang.String", example = "")
+    @ApiModelProperty(dataType = "java.lang.String", example = "2019-01-13")
     private LocalDateTime registeredDate;
 
     private int grade;

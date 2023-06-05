@@ -33,10 +33,10 @@ public class Course {
 
     private String createdBy;
 
-    @ApiModelProperty(dataType = "java.lang.String", example = "")
+    @ApiModelProperty(dataType = "java.lang.String", example = "2019-01-23")
     private LocalDate startDate;
 
-    @ApiModelProperty(dataType = "java.lang.String", example = "")
+    @ApiModelProperty(dataType = "java.lang.String", example = "2019-01-23")
     private LocalDate endDate;
 
     private String status;
@@ -44,7 +44,8 @@ public class Course {
     @Column(columnDefinition = "BIGINT default 0")
     private long courseSchoolId;
 
-    @ManyToOne
+    @ApiModelProperty(hidden = true)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "courseSchoolId", referencedColumnName = "id", updatable = false, insertable = false)
     @JsonBackReference
     private School courseSchool;
