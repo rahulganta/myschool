@@ -2,6 +2,7 @@ package com.myschool.adminservice.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -33,7 +34,7 @@ public class CourseWork {
     private String description;
 
     private String topic;
-
+    @ApiModelProperty(dataType = "java.lang.String", example = "2019-01-23T17:09:42.411")
     private LocalDateTime createdTimeStamp;
 
     private String videoLink;

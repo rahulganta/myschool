@@ -34,7 +34,7 @@ public class UserMessage {
 
     private String postedBy;
 
-    @ApiModelProperty(dataType = "java.lang.String", example = "")
+    @ApiModelProperty(dataType = "java.lang.String", example = "2019-01-23T17:09:42.411")
     private LocalDateTime createdTimeStamp;
 
     private String priority;

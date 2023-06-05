@@ -3,6 +3,7 @@ package com.myschool.adminservice.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -46,6 +47,7 @@ public class User {
     @NotBlank(message = "Role cannot be blank")
     private String roles;
 
+    @ApiModelProperty(dataType = "java.lang.String", example = "2019-01-23T17:09:42.411")
     private LocalDateTime lastLogin;
 
     private String lang;
