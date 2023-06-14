@@ -2,6 +2,9 @@ package com.myschool.adminservice.controlleradvice;
 
 import com.myschool.adminservice.model.ApiError;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -17,13 +20,15 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
+import java.util.Locale;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @ControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
+
+    @Autowired
+    ResourceBundleMessageSource messageSource;
 
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -63,21 +68,22 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 //    }
 
     @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
-                                                                  HttpHeaders headers, HttpStatus status, WebRequest request) {
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         logger.error("Validation error : "+ex);
-        String errorMessage = ex.getBindingResult().getFieldErrors().get(0).getDefaultMessage();
+        Locale locale = LocaleContextHolder.getLocale();
 
-        /*TODO add errorlist prop to ApiError object and add the validation errors to it either Map or List depending on UI requirements*/
-        List<String> validationList = ex.getBindingResult().getFieldErrors().stream().map(fieldError->fieldError.getDefaultMessage()).collect(Collectors.toList());
-        /*apiError.setErrorList(validationList);*/
+        Object [] firstFieldArguments = ex.getBindingResult().getFieldErrors().get(0).getArguments();
+        String firstErrorMessage = ex.getBindingResult().getFieldErrors().get(0).getDefaultMessage();
+        firstErrorMessage = messageSource.getMessage(firstErrorMessage, firstFieldArguments, firstErrorMessage, locale);
+
         Map<String, String> errorList = new HashMap<>();
         ex.getBindingResult().getAllErrors().forEach((error) -> {
+            Object [] obj = error.getArguments();
             String fieldName = ((FieldError) error).getField();
-            String eMessage = error.getDefaultMessage();
+            String eMessage = messageSource.getMessage(error.getDefaultMessage(), obj, error.getDefaultMessage(), locale);
             errorList.put(fieldName, eMessage);
         });
-        ApiError apiError = new ApiError(LocalDateTime.now(), "", errorMessage, ex.getLocalizedMessage(), request.getDescription(false), errorList);
+        ApiError apiError = new ApiError(LocalDateTime.now(), "", firstErrorMessage, ex.getLocalizedMessage(), request.getDescription(false), errorList);
         return new ResponseEntity<>(apiError, status);
     }
 }

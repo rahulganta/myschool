@@ -2,6 +2,8 @@ package com.myschool.adminservice.controller;
 
 import com.myschool.adminservice.model.User;
 import com.myschool.adminservice.services.UserService;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,10 @@ public class UserController {
     @PostMapping(value = "addadmin")
     @ResponseBody
     @PreAuthorize("#user.schoolId == principal.school.id or hasAnyRole('ROLE_SUPERADMIN', 'ROLE_FRANCHISEADMIN', 'ROLE_SCHOOLADMIN')")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "Authorization", value = "Access Token", required = false, allowEmptyValue = true, paramType = "header", dataTypeClass = String.class, example = "Bearer access_token"),
+            @ApiImplicitParam(name = "Accept-language", value = "language", required = false, allowEmptyValue = true, paramType = "header", dataTypeClass = String.class, example = "en_US")
+    })
     public User addAdmin(@P("user")@Valid @RequestBody User user) {
         //((MyUserDetails) authentication.principal).school.id
         User createdUser = userService.createUser(user);

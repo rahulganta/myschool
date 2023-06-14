@@ -5,6 +5,8 @@ import com.myschool.adminservice.security.MyUserDetails;
 import com.myschool.adminservice.services.CourseService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,11 +20,14 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -34,9 +39,18 @@ public class CourseController {
     @Autowired
     private CourseService courseService;
 
+    @Autowired
+    ResourceBundleMessageSource messageSource;
+   @GetMapping(value = "test")
+    public String TestString() {
+        Locale locale = LocaleContextHolder.getLocale();
+        String welcome = messageSource.getMessage("welcome", null,new Locale("es"));
+        return welcome;
+    }
+
     @PreAuthorize("(#course.instructor == principal.username and hasRole('ROLE_TEACHER')) or hasAnyRole('ROLE_SUPERADMIN', 'ROLE_FRANCHISEADMIN', 'ROLE_SCHOOLADMIN')")
     @PostMapping(value = "addcourse")
-    public Course addCourse(@RequestBody Course course) {
+    public Course addCourse(@RequestBody @Valid Course course) {
         Course createdCourse = courseService.createCourse(course);
         return createdCourse;
     }
@@ -86,7 +100,7 @@ public class CourseController {
 
 
     @PostMapping(value = "addcoursework")
-    public CourseWork addCoursework(@RequestBody CourseWork courseWork) {
+    public CourseWork addCoursework(@RequestBody @Valid CourseWork courseWork) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         MyUserDetails myUserDetails = (MyUserDetails) authentication.getPrincipal();
         String username = myUserDetails.getUsername();
@@ -149,13 +163,13 @@ public class CourseController {
     }
 
     @PostMapping(value = "addcourseregistrations")
-    public List<CourseRegistration> addCourseRegistrations(@RequestBody List<CourseRegistration> courseRegistrations) {
+    public List<CourseRegistration> addCourseRegistrations(@RequestBody List<@Valid CourseRegistration> courseRegistrations) {
         List<CourseRegistration> courseRegistrationList = courseService.addCourseRegistrations(courseRegistrations);
         return courseRegistrationList;
     }
 
     @PostMapping(value = "addstudenttocourse/{courseid}")
-    public CourseRegistration addStudentToCourse(@PathVariable(value = "courseid") Integer courseId, @RequestBody String studentId) {
+    public CourseRegistration addStudentToCourse(@PathVariable(value = "courseid") Integer courseId, @RequestBody @NotBlank String studentId) {
         if(studentId.contains("=")) {
             studentId = studentId.replaceAll("=$", "");
         }
@@ -170,7 +184,7 @@ public class CourseController {
     }
 
     @DeleteMapping(value = "deletestudentfromcourse/{courseid}")
-    public void deleteStudentFromCourse(@PathVariable(value = "courseid") Integer courseId, @RequestParam(value = "studentid") String studentId) {
+    public void deleteStudentFromCourse(@PathVariable(value = "courseid") @NotBlank Integer courseId, @RequestParam(value = "studentid") @NotBlank String studentId) {
         CourseRegistrationPK courseRegistrationPK = new CourseRegistrationPK(studentId, courseId);
         courseService.deleteCourseRegistrationById(courseRegistrationPK);
     }

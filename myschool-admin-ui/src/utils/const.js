@@ -11,7 +11,7 @@ const Constants = {
             }
         }
         Vue.prototype.restCallHeaders = function (responseType) {
-            return {'headers': {'Authorization': 'Bearer ' + this.$store.state.user.token}, responseType: responseType? responseType: 'json'};
+            return {'headers': {'Authorization': 'Bearer ' + this.$store.state.user.token, 'Accept-language': localStorage.getItem('locale')}, responseType: responseType? responseType: 'json'};
         }
     }
 };

@@ -20,6 +20,28 @@ public class ApiError {
     private String path;
 
     private Map<String, String> properties;
+
+    public ApiError(LocalDateTime timestamp, String errorCode, String message) {
+        super();
+        this.timestamp = timestamp;
+        this.errorCode = errorCode;
+        this.message = message;
+    }
+    public ApiError(LocalDateTime timestamp, String errorCode, String message, String details) {
+        super();
+        this.timestamp = timestamp;
+        this.errorCode = errorCode;
+        this.message = message;
+        this.details = details;
+    }
+    public ApiError(LocalDateTime timestamp, String errorCode, String message, String details, String path) {
+        super();
+        this.timestamp = timestamp;
+        this.errorCode = errorCode;
+        this.message = message;
+        this.details = details;
+        this.path = path;
+    }
     public ApiError(LocalDateTime timestamp, String errorCode, String message, String details, String path, Map<String,String> properties) {
         super();
         this.timestamp = timestamp;

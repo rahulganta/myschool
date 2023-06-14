@@ -9,6 +9,11 @@ spring:
   jackson:
     serialization:
       fail-on-empty-beans: false
+  messages:
+    basename: messages
+    encoding: UTF-8
+    always-use-message-format: true
+
 
 myschool:
   contact:

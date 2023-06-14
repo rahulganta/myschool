@@ -7,6 +7,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 @Data
@@ -22,11 +23,12 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @NotBlank(message = "Course name cannot be blank")
+    @NotBlank(message = "field.notblank")
     private String name;
 
     private String description;
 
+    @Size(min = 1, max = 10, message = "field.size")
     private String grade;
 
     private String instructor;

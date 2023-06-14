@@ -74,6 +74,7 @@
                     <select class="form-control" id="locale" v-model="locale">
                       <option value="en">{{$t('localeoption.english')}}</option>
                       <option value="te-IN">{{$t('localeoption.telugu')}}</option>
+                      <option value="hi-IN">{{$t('localeoption.hindi')}}</option>
                       <option value="es">{{$t('localeoption.spanish')}}</option>
                     </select>
                   </form>

@@ -12,6 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -28,7 +29,7 @@ public class MessageController {
 
     //CourseMessages Endpoints
     @PostMapping(value = "addcoursemessage")
-    public CourseMessage addCourseMessage(@RequestBody CourseMessage courseMessage) {
+    public CourseMessage addCourseMessage(@RequestBody @Valid CourseMessage courseMessage) {
         MyUserDetails myUserDetails = authenticationFacade.getLoginUserDetails();
         courseMessage.setPostedBy(myUserDetails.getUsername());
 
@@ -69,7 +70,7 @@ public class MessageController {
 
     //UserMessage Endpoints
     @PostMapping(value = "addusermessage")
-    public UserMessage addUserMessage(@RequestBody UserMessage userMessage) {
+    public UserMessage addUserMessage(@RequestBody @Valid UserMessage userMessage) {
         MyUserDetails myUserDetails = authenticationFacade.getLoginUserDetails();
         userMessage.setPostedBy(myUserDetails.getUsername());
         UserMessage resUserMessage = messageService.createUserMessage(userMessage);

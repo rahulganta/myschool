@@ -188,6 +188,7 @@ const messages = {
             english: 'English',
             telugu: 'తెలుగు',
             spanish: 'Español',
+            hindi: 'हिंदी',
         },
         SCHOOLNAME: 'School Name',
         copyright: 'Copyright © 2020 @:appname .  All Rights Reserved.',

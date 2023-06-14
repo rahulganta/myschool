@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,7 +35,7 @@ public class HomeController {
     private JwtUtil jwtUtil;
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) throws Exception {
+    public ResponseEntity<?> login(@RequestBody @Valid LoginRequest loginRequest) throws Exception {
         Authentication authentication = null;
         try {
             authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
@@ -76,7 +77,7 @@ public class HomeController {
 
     @PostMapping(value = "contact")
     @ResponseBody
-    public ContactForm postContact(@RequestBody ContactForm contactForm) {
+    public ContactForm postContact(@RequestBody @Valid ContactForm contactForm) {
         /*fileHandler.writeToJsonFile(contactUsFile, contactForm);*/
         /*emailService.sendMail(sendToEmail, "myschool Contact Info", " " + contactForm);*/
         return contactForm;
