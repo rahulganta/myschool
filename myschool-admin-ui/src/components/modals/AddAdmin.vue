@@ -25,7 +25,7 @@
         </div>
         <div class="form-group">
           <label for="confirmpassword">Confirm Password *</label>
-          <input id="confirmpassword" type="password" class="form-control">
+          <input id="confirmpassword" type="password" class="form-control" v-model.trim="confirmPassword" >
         </div>
 
         <div class="form-group">
@@ -117,6 +117,7 @@ export default {
     return {
       error: false,
       errorMsg: '',
+      confirmPassword: '',
     }
   },
   mounted () {
@@ -141,6 +142,11 @@ export default {
               vm.errorMsg = error.response.data.message;
             });
       } else {
+        if(vm.admin.password != vm.confirmPassword) {
+          vm.error = true;
+          vm.errorMsg = "the password and confirmpassword is not matching";
+          return;
+        }
         this.axios.post(API_URL+ "addadmin", vm.admin, this.restCallHeaders()).then(
             response => {
               /*$('.toast').toast('show');*/

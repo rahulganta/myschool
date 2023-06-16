@@ -12,8 +12,14 @@
           <input type="text" class="form-control" id="username" :placeholder="$t('plch.username')"  v-model="username" autofocus="autofocus">
         </div>
         <div class="form-group">
-          <input type="password" class="form-control" id="password" :placeholder="$t('plch.password')" v-model="password" autofocus="autofocus">
+          <div class="input-group input-group-md">
+            <input :type="showPassword?'text': 'password'" class="form-control" id="password" :placeholder="$t('plch.password')" v-model="password" autofocus="autofocus">
+            <div class="input-group-append">
+              <span class="input-group-text" id="basic-addon1" @click="toggleShowPassword"><i class="fas" :class="{ 'fa-eye-slash': showPassword, 'fa-eye': !showPassword }"></i></span>
+            </div>
+          </div>
         </div>
+
         <button type="submit" class="btn mi-primarybtn w-100 mb-3">{{$t('btn.login')}}</button>
       </form>
     </div>
@@ -29,7 +35,8 @@ export default {
       error: false,
       errorMsg: '',
       username: '',
-      password: ''
+      password: '',
+      showPassword: false
     }
   },
   methods: {
@@ -44,6 +51,9 @@ export default {
             vm.error = true;
             vm.errorMsg = error.response.data;
           })
+    },
+    toggleShowPassword() {
+      this.showPassword ? this.showPassword = false : this.showPassword = true;
     }
   }
 }
