@@ -1,5 +1,4 @@
-
-
+${AnsiColor.BRIGHT_GREEN}
    ______       _       ____  _____  _________     _
  .' ___  |     / \     |_   \|_   _||  _   _  |   / \
 / .'   \_|    / _ \      |   \ | |  |_/ | | \_|  / _ \
@@ -7,5 +6,5 @@
 \ `.___]  |_/ /   \ \_  _| |_\   |_    _| |_  _/ /   \ \_
  `._____.'|____| |____||_____|\____|  |_____||____| |____|
 
- Name: ${project.artifactId}    Version: ${project.version}
- Spring Boot Version: ${spring.boot.version}
+ ${AnsiColor.DEFAULT}Service Name: ${AnsiColor.BRIGHT_GREEN}${project.artifactId}    ${AnsiColor.DEFAULT}Version: ${AnsiColor.BRIGHT_GREEN}${project.version}
+ ${AnsiColor.DEFAULT}Spring Boot Version: ${AnsiColor.BRIGHT_GREEN}${spring.boot.version}
