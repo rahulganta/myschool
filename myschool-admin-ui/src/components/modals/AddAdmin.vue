@@ -21,11 +21,17 @@
 
         <div class="form-group">
           <label for="password">Password *</label>
-          <input id="password" type="password" class="form-control" v-model.trim="admin.password">
+          <div class="input-group input-group-md">
+            <input :type="showPassword?'text': 'password'" class="form-control" id="password" :placeholder="$t('plch.password')" v-model.trim="admin.password" autofocus="autofocus">
+            <div class="input-group-append">
+              <span class="input-group-text" id="basic-addon1" @click="toggleShowPassword"><i class="fas" :class="{ 'fa-eye-slash': showPassword, 'fa-eye': !showPassword }"></i></span>
+            </div>
+          </div>
         </div>
+
         <div class="form-group">
           <label for="confirmpassword">Confirm Password *</label>
-          <input id="confirmpassword" type="password" class="form-control" v-model.trim="confirmPassword" >
+          <input id="confirmpassword" onpaste="return false;" ondrop="return false;" autocomplete="off" type="password" class="form-control" v-model.trim="confirmPassword" >
         </div>
 
         <div class="form-group">
@@ -118,6 +124,7 @@ export default {
       error: false,
       errorMsg: '',
       confirmPassword: '',
+      showPassword: false,
     }
   },
   mounted () {
@@ -167,6 +174,9 @@ export default {
     },
     close() {
       this.$emit("close")
+    },
+    toggleShowPassword() {
+      this.showPassword ? this.showPassword = false : this.showPassword = true;
     },
   }
 }
