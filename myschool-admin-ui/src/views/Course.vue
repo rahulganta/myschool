@@ -13,6 +13,9 @@
           <li class="nav-item" role="presentation">
             <a class="mi-linkbtn" :class="{ active: activeTab === 'students' }" id="pills-contact-tab" data-toggle="pill" href="#pills-students" @click="manageTab('students')" role="tab" aria-controls="pills-students" aria-selected="false">Students</a>
           </li>
+          <li class="nav-item" role="presentation">
+            <a class="mi-linkbtn" :class="{ active: activeTab === 'attendance' }" id="pills-contact-tab" data-toggle="pill" href="#pills-attendance" @click="manageTab('attendance')" role="tab" aria-controls="pills-attendance" aria-selected="false">Attendance</a>
+          </li>
         </ul>
       </div>
     </div>
@@ -112,6 +115,16 @@
         <div class="card mi-card h-100">
           <div class="card-body">
             <h5 class="card-title">Students</h5>
+            <MiTable :columns-headers="studentTableColumnsHeaders" :data-list="studentList" :row-actions="studentTableRowActions" :table-actions="studentTableActions" :show-row-check-box="true"
+                     @rowAaction="tableRowAction" @tableAction="tableAction"></MiTable>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-pane fade" :class="{ 'active show': activeTab === 'attendance' }" id="pills-attendance" role="tabpanel" aria-labelledby="pills-attendance-tab">
+        <div class="card mi-card h-100">
+          <div class="card-body">
+            <h5 class="card-title">Attendance</h5>
             <MiTable :columns-headers="studentTableColumnsHeaders" :data-list="studentList" :row-actions="studentTableRowActions" :table-actions="studentTableActions" :show-row-check-box="true"
                      @rowAaction="tableRowAction" @tableAction="tableAction"></MiTable>
           </div>

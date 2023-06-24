@@ -6,9 +6,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 @Data
 @AllArgsConstructor
@@ -21,6 +22,8 @@ public class Attendance {
     @EmbeddedId
     private AttendancePK attendancePK;
 
-    @Column(columnDefinition="boolean default FALSE")
-    private boolean attended;
+    @Enumerated(EnumType.STRING)
+    private AttendanceStatus attendanceStatus;
+
+    private String comments;
 }
