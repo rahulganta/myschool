@@ -30,7 +30,7 @@
               </div>
               <div class="col-lg-6 col-sm-12 col-xs-12 text-right">
                 <button id="addcoursemessage" class="btn mi-linkbtn" @click="showModal('courseMessageModal', 'add', initialCourseMessage)" :aria-expanded="showAddCourseMessageModal ? 'true':'false'">
-                  <i class="fas fa-plus"/> ADD CLASS ANNOUNCEMENT</button>
+                  <i class="fas fa-plus"/> ADD COURSE ANNOUNCEMENT</button>
               </div>
             </div>
             <ul class="list-unstyled">
@@ -63,7 +63,7 @@
           <div class="card-body">
             <div class="row">
               <div class="col-lg-6 col-sm-12 col-xs-12">
-                <h5 class="card-title">Class Work</h5>
+                <h5 class="card-title">Course Work</h5>
               </div>
               <div class="col-lg-6 col-sm-12 col-xs-12 text-right">
                 <button id="createclasswork" class="btn mi-linkbtn" @click="showModal('courseWorkModal', 'add', initialCourseWork)" :aria-expanded="showAddCourseWorkModal ? 'true':'false'">
@@ -124,9 +124,68 @@
       <div class="tab-pane fade" :class="{ 'active show': activeTab === 'attendance' }" id="pills-attendance" role="tabpanel" aria-labelledby="pills-attendance-tab">
         <div class="card mi-card h-100">
           <div class="card-body">
-            <h5 class="card-title">Attendance</h5>
-            <MiTable :columns-headers="studentTableColumnsHeaders" :data-list="studentList" :row-actions="studentTableRowActions" :table-actions="studentTableActions" :show-row-check-box="true"
-                     @rowAaction="tableRowAction" @tableAction="tableAction"></MiTable>
+            <div class="row">
+              <div class="col-lg-6 col-sm-12 col-xs-12">
+                <h5 class="card-title">Course Attendance</h5>
+              </div>
+              <div class="col-lg-6 col-sm-12 col-xs-12 text-right">
+                <input type="date"  :data-date="moment().format('DD MMM YYYY')" data-date-format="DD MMMM YYYY" id="attendanceDate"
+                       :min="moment().subtract(30, 'days').format('YYYY-MM-DD')"
+                       :max="moment().format('YYYY-MM-DD')"
+                       v-model="attendanceDate">
+
+                <button id="createclasswork" class="btn mi-linkbtn" @click="showModal('addAttendanceModal', 'add', initialCourseWork)" :aria-expanded="showAddAttendanceModal ? 'true':'false'">
+                  <i class="fas fa-plus"/> TAKE ATTENDANCE</button>
+              </div>
+            </div>
+
+<!--            <table class="table table-hover" id="attendance">
+              <thead>
+              <tr>
+                <th>Student Id</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Comments</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr v-for="(attendance, index) in courseAttendanceData">
+                <td :id="attendance.attendancePK.studentId" @click="viewSchool(index, rowData)"><a class="mi-text-primary">{{ attendance.attendancePK.studentId }}</a></td>
+                <td>{{attendance.attendancePK.attendanceDate}}</td>
+                <td>{{attendance.attendanceStatus}}</td>
+                &lt;!&ndash;This column will be hidden on xs and sm screens&ndash;&gt;
+                <td>{{attendance.comments}}</td>
+              </tr>
+              </tbody>
+            </table>-->
+
+            <table class="table table-sm table-bordered table-hover" id="attendancebystudent">
+              <thead>
+              <tr>
+                <th>Student</th>
+                <th v-for="date in availableDates" :key="date">{{moment(date).format('MMM DD, ddd')}}</th>
+                <th>P</th>
+                <th>L</th>
+                <th>E</th>
+                <th>U</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr v-for="(hours, employee) in attendanceByStudent" :key="employee">
+                <td>{{ employee }}</td>
+                <td v-for="date in availableDates" :key="date">{{ hours[date] && hours[date].attendanceStatus}}
+                  <button v-if="hours[date] && hours[date].comments" type="button" class="btn mi-linkbtn" data-toggle="tooltip" data-placement="left" :title="hours[date] && hours[date].comments">
+                    <i class="fas fa-info-circle"/>
+                  </button>
+                </td>
+                <td>{{ hours.totalPresent }}</td>
+                <td>{{ hours.totalLate }}</td>
+                <td>{{ hours.totalExcusedAbsence }}</td>
+                <td>{{ hours.totalUnExcusedAbsence }}</td>
+              </tr>
+              </tbody>
+            </table>
+
           </div>
         </div>
       </div>
@@ -136,6 +195,7 @@
     <!--Modal Components-->
     <AddCourseMessage v-if="showAddCourseMessageModal" @close="close" :message="courseMessage" :action="action" @addMessage="addCourseMessage"></AddCourseMessage>
     <AddClassWork v-if="showAddCourseWorkModal" @close="close" :course-work="courseWork" :action="action" @AddCourseWork="addCourseWork"></AddClassWork>
+    <AddAttendance v-if="showAddAttendanceModal" @close="close" :student-list="studentList" :course="course" :attendance-date="attendanceDate" :action="action" @AddAttendance="addAttendance"></AddAttendance>
     <AddStudentToCourse v-if="showAddStudentToCourseModal" @close="close" :course="course" :action="action" @AddStudentToCourse="addStudentToCourse"></AddStudentToCourse>
     <ConfirmModal v-if="showConfirmModal" @close="close" :title="cModalTitle" :warning-message="cModalWarningMessage" @confirm="modalConfirm"></ConfirmModal>
     <!--Toast-->
@@ -149,10 +209,12 @@ import MiTable from "@/components/MiTable";
 import AddClassWork from "@/components/modals/AddClassWork";
 import AddStudentToCourse from "@/components/modals/AddStudentToCourse";
 import ConfirmModal from "@/components/modals/ConfirmModal";
+import AddAttendance from "@/components/modals/AddAttendance";
 
 export default {
   name: "Course",
   components: {
+    AddAttendance,
     ConfirmModal,
     AddStudentToCourse,
     AddCourseMessage,
@@ -166,6 +228,7 @@ export default {
       action: 'add',
       showAddCourseMessageModal: false,
       showAddCourseWorkModal: false,
+      showAddAttendanceModal: false,
       showAddStudentToCourseModal: false,
       showConfirmModal: false,
       cModalTitle: '',
@@ -191,20 +254,20 @@ export default {
       },
       courseWork: {},
       courseWorkList: [
-        {title: 'Material 1',
-        description: 'This is the material for first chapter',
-        topic: 'Algorithms',
-        videoLink: 'https://www.youtube.com/embed/E2vCWDLEkoo',
-        file: '',
-        createdTimeStamp: 'Jan 21st 2021 05:14:13 pm'
+        { title: 'Material 1',
+          description: 'This is the material for first chapter',
+          topic: 'Algorithms',
+          videoLink: 'https://www.youtube.com/embed/E2vCWDLEkoo',
+          file: '',
+          createdTimeStamp: 'Jan 21st 2021 05:14:13 pm'
         },
-        {title: 'Material 2',
+        { title: 'Material 2',
           description: 'This is the material for first chapter',
           topic: 'Algorithms',
           videoLink: 'https://youtube.com/embed/rL8X2mlNHPM',
           file: ''
         },
-        {title: 'Assignment',
+        { title: 'Assignment',
           description: 'This is the material for first chapter',
           topic: 'Algorithms',
           videoLink: '',
@@ -228,6 +291,8 @@ export default {
         { title: "addstudent", name: "addstudent", icon: "fa-plus"},
         { title: "deletestudent", name: "deletestudent", icon: "fa-trash"},
       ],
+      attendanceDate: this.moment().format('YYYY-MM-DD'),
+      courseAttendanceData: []
     }
   },
   created() {
@@ -243,7 +308,7 @@ export default {
     this.getCourseMessages();
     this.getCourseWorks();
     this.getCourseStudents();
-
+    this.getCourseAttendance();
   },
   computed: {
     formatBytes(bytes, decimals = 2) {
@@ -263,6 +328,29 @@ export default {
           stuList.push(courseRegistration.student);
       });
       return stuList;
+    },
+    attendanceByStudent() {
+      let list = this.courseAttendanceData.reduce((r, o) => {
+        r[o.attendancePK.studentId] ??= {};
+        r[o.attendancePK.studentId][o.attendancePK.attendanceDate] ??= {attendanceStatus: "", comments: ""};
+        r[o.attendancePK.studentId][o.attendancePK.attendanceDate].attendanceStatus = o.attendanceStatus;
+        r[o.attendancePK.studentId][o.attendancePK.attendanceDate].comments = o.comments;
+        r[o.attendancePK.studentId].totalPresent ??= 0
+        r[o.attendancePK.studentId].totalLate ??= 0
+        r[o.attendancePK.studentId].totalExcusedAbsence ??= 0
+        r[o.attendancePK.studentId].totalUnExcusedAbsence ??= 0
+        r[o.attendancePK.studentId].totalPresent += (o.attendanceStatus == "P" ? 1 : 0)
+        r[o.attendancePK.studentId].totalLate += (o.attendanceStatus == "L" ? 1 : 0)
+        r[o.attendancePK.studentId].totalExcusedAbsence += (o.attendanceStatus == "E" ? 1 : 0)
+        r[o.attendancePK.studentId].totalUnExcusedAbsence += (o.attendanceStatus == "U" ? 1 : 0)
+        return r;
+      }, {});
+      return list;
+    },
+    availableDates() {
+      let vm = this;
+      const dates = [...new Set(this.courseAttendanceData.map(r => r.attendancePK.attendanceDate))]
+      return dates.sort((a,b) => new Date(a) - new Date(b))
     },
   },
   methods: {
@@ -331,6 +419,9 @@ export default {
       this.getCourseWorks()
 
     },
+    addAttendance() {
+      this.getCourseAttendance();
+    },
     getCourseStudents() {
       let vm = this;
       let school = this.$store.state.school;
@@ -347,6 +438,21 @@ export default {
           error => {
             vm.errorMsg = error.response.data.message;
           });
+    },
+    getCourseAttendance() {
+
+      let vm = this;
+      let courseId = this.$route.params.id;
+
+      this.axios.get(this.$constants().BASE_URL + "attendance/course/"+courseId, this.restCallHeaders()).then(
+          response => {
+            vm.courseAttendanceData = response.data;
+            vm.errorMsg = '';
+          },
+          error => {
+            vm.errorMsg = error.response.data.message;
+          });
+
     },
     addStudentToCourse() {
       this.getCourseStudents();
@@ -431,12 +537,17 @@ export default {
         }
       } else if(modalName == 'addStudentToCourse') {
         this.showAddStudentToCourseModal = true;
+      } else if (modalName == 'addAttendanceModal') {
+        //TODO: Overwrite this date for edit attendance;
+        this.moment(vm.attendanceDate).format('YYYY-MM-DD');
+        this.showAddAttendanceModal = true;
       }
 
     },
     close() {
       this.showAddCourseMessageModal = false;
       this.showAddCourseWorkModal = false;
+      this.showAddAttendanceModal = false;
       this.showAddStudentToCourseModal = false;
       this.showConfirmModal = false;
     }

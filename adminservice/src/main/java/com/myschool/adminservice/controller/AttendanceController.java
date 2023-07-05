@@ -30,14 +30,14 @@ public class AttendanceController {
     }
 
     @GetMapping("/attendance/course/{courseId}")
-    public List<Attendance> getAttendanceByCourseId(@PathVariable Integer courseId) {
+    public List<Attendance> getAttendanceByCourseId(@PathVariable(value = "courseId") Integer courseId) {
         //TODO: add optional params ie Year and Month
         List<Attendance> attendanceList = attendanceService.getAttendanceByCourseId(courseId);
         return attendanceList;
     }
 
-    @GetMapping("/attendance/student/studentId")
-    public List<Attendance> getAttendanceByStudentId(@PathVariable String studentId) {
+    @GetMapping("/attendance/student/{studentId}")
+    public List<Attendance> getAttendanceByStudentId(@PathVariable(value = "studentId") String studentId) {
         //TODO: add optional params ie Year and Month
         List<Attendance> attendanceList = attendanceService.getAttendanceByStudentId(studentId);
         return attendanceList;

@@ -136,6 +136,8 @@ export default {
       this.locale = 'en';
     } else {
       this.locale = currentLocale;
+      //Setting locale for moment JS
+      this.moment.locale(currentLocale);
     }
 
     this.axios.interceptors.response.use(function (response) {
@@ -163,6 +165,8 @@ export default {
     locale(locale, oldLocale) {
       loadLanguageAsync(locale);
       localStorage.setItem("locale", locale);
+      //Setting locale for moment JS
+      this.moment.locale(locale);
     }
   },
   methods: {

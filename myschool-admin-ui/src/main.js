@@ -27,6 +27,7 @@ Vue.use(ToastsPlugin);
 
 Vue.config.productionTip = false
 Vue.prototype.axios = axios;
+Vue.prototype.moment = moment;
 
 Vue.filter('formatDateTime', function(value) {
   if (value) {
@@ -48,6 +49,7 @@ new Vue({
   store,
   axios,
   i18n,
+  moment,
   data: {},
   mounted: function () {
     loadLanguageAsync(this.$i18n.locale);

@@ -6,7 +6,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
           </div>
-          <input type="text" name="search" class="form-control" aria-label="Username" aria-describedby="basic-addon1" v-model="tableSearchString"/>
+          <input type="text" name="search" class="form-control" aria-label="search" aria-describedby="basic-addon1" v-model="tableSearchString"/>
         </div>
       </div>
       <div class="col-lg-1 col-sm-3">
@@ -20,7 +20,7 @@
       </div>
     </div>
 
-    <table class="table table-hover" id="schools">
+    <table class="table table-hover" id="MiTable">
       <thead>
       <tr>
         <th v-if="showRowCheckBox">
