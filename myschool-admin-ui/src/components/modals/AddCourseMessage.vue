@@ -4,7 +4,7 @@
     <modal class="mi-custom-modal addcoursemessage-modal">
       <div slot="header" class="mi-custom-header">
         <div class="row no-gutters">
-          <h4 class="col-10 title"><span v-if="action=='update'">Update</span><span v-else>Add</span> Announcement</h4>
+          <h4 class="col-10 title"><span v-if="action=='update'">Update</span><span v-else>Add</span> Course Announcement</h4>
           <div class="col-2 text-right">
             <a class="btn mi-linkbtn" @click="close"><i class="fas fa-times"/></a>
           </div>
