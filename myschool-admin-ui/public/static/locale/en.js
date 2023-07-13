@@ -14,16 +14,20 @@ const messages = {
             attendance: 'Attendance',
             reports: 'Reports',
             schedule: 'Schedule',
+            classwork: 'Classwork',
+
             aboutus: 'About Us',
             test: 'Test'
         },
 
-        // Page headers, other headers, card titles etc
+        // Page headers, other headers, card titles and etc..
         hdr: {
             home: 'Home',
             mycourses: 'MyCourses',
             messages: "Messages",
             staff: 'Staff',
+            teachers: 'TEACHERS',
+            admins: 'ADMINS',
             students: 'Students',
             attendance: 'Attendance',
             reports: 'Reports',
@@ -34,8 +38,11 @@ const messages = {
             schoolInfo: 'School Info',
             mymessages: 'My Messages',
             schoolannouncements: 'School Announcements',
-            contactus: 'Contact Us',
+            coursemessages: 'Course Messages',
+            coursework: 'Course Work',
+            courseattendance: 'Course Attendance',
 
+            contactus: 'Contact Us',
             test: 'Test'
         },
 
@@ -69,6 +76,7 @@ const messages = {
             inactivateschool: 'INACTIVATE SCHOOL',
             addschoolannouncement: 'ADD SCHOOL ANNOUNCEMENT',
 
+            viewadmin: 'VIEW ADMIN',
             addadmin: 'ADD ADMIN',
             editadmin: 'EDIT ADMIN',
             updateadmin: 'UPDATE ADMIN',
@@ -79,11 +87,14 @@ const messages = {
             updateuser: 'UPDATE USER',
             deleteuser: 'DELETE USER',
 
+            viewteacher: 'VIEW TEACHER',
             addteacher: 'ADD TEACHER',
             editteacher: 'EDIT TEACHER',
             updateteacher: 'UPDATE TEACHER',
             deleteteacher: 'DELETE TEACHER',
 
+
+            viewstudent: 'VIEW STUDENT',
             addstudent: 'ADD STUDENT',
             editstudent: 'EDIT STUDENT',
             updatestudent: 'UPDATE STUDENT',
@@ -94,11 +105,13 @@ const messages = {
             updatecourse: 'UPDATE COURSE',
             viewcourse: 'VIEW COURSE',
             inactivatecourse: 'INACTIVATE COURSE',
+            addcourseannouncement: 'ADD COURSE ANNOUNCEMENT',
+            addcoursework: 'ADD COURSE WORK',
 
             createclasswork: 'CREATE CLASS WORK',
             addfile: 'ADD FILE',
 
-
+            takeattendance: 'TAKE ATTENDANCE',
 
         },
 
@@ -112,11 +125,13 @@ const messages = {
             username: 'USERNAME',
             firstname:'FIRST NAME',
             lastname:'LAST NAME',
-            email:'EMAIL'
+            email:'EMAIL',
+            student: 'STUDENT',
+
 
         },
 
-        //Form Labels and other Labels
+        //Form Labels, other Labels, text and etc..
         label: {
             username: 'Username',
             name: 'Name',
@@ -141,6 +156,8 @@ const messages = {
 
             note: 'NOTE',
             useformtocontactus: 'Please use below form to contact us.',
+
+            itemsselected: 'No Item Selected | One Item Selected | {n} Items Selected',
         },
 
         //Placeholders
@@ -190,6 +207,7 @@ const messages = {
             spanish: 'Español',
             hindi: 'हिंदी',
         },
+
         SCHOOLNAME: 'School Name',
         copyright: 'Copyright © 2020 @:appname .  All Rights Reserved.',
         items: 'No Items | one Item | {count} Items',

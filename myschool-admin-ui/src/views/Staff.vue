@@ -2,13 +2,13 @@
   <div class="teachers">
     <h2 class="mi-page-title">{{ $t('hdr.staff')}}</h2>
     <div class="mi-card">
-      <h4 class="mi-card-title">Teachers</h4>
+      <h4 class="mi-card-title">{{$t('hdr.teachers')}}</h4>
      <MiTable :columns-headers="columnsHeaders" :data-list="teacherList" :row-actions="teacherTableRowActions" :table-actions="teacherTableActions" :show-row-check-box="true"
              @rowAaction="tableRowAction" @tableAction="tableAction"></MiTable>
     </div>
 
     <div class="mi-card mt-4">
-      <h4 class="mi-card-title">Admins</h4>
+      <h4 class="mi-card-title">{{$t('hdr.admins')}}</h4>
      <MiTable :columns-headers="columnsHeaders" :data-list="adminList" :row-actions="adminTableRowActions" :table-actions="adminTableActions" :show-row-check-box="true"
              @rowAaction="tableRowAction" @tableAction="tableAction"></MiTable>
     </div>
@@ -44,18 +44,18 @@ export default {
         { title: "status", sortKey: "status", sortOrder: 1, selectedFilters: [],},
       ],
       teacherTableRowActions: [
-        { title: "View Teacher", name: "viewteacher", icon: "fa-info-circle"},
-        { title: "Edit Teacher", name: "editteacher", icon: "fa-pen"},
-        { title: "Delete Teacher", name: "deleteteacher", icon: "fa-trash"},
+        { title: "viewteacher", name: "viewteacher", icon: "fa-info-circle"},
+        { title: "editteacher", name: "editteacher", icon: "fa-pen"},
+        { title: "deleteteacher", name: "deleteteacher", icon: "fa-trash"},
       ],
       teacherTableActions: [
         { title: "addteacher", name: "addteacher", icon: "fa-plus"},
         { title: "deleteteacher", name: "deleteteacher", icon: "fa-trash"},
       ],
       adminTableRowActions: [
-        { title: "View Admin", name: "viewadmin", icon: "fa-info-circle"},
-        { title: "Edit Admin", name: "editadmin", icon: "fa-pen"},
-        { title: "Delete Admin", name: "deleteadmin", icon: "fa-trash"},
+        { title: "viewadmin", name: "viewadmin", icon: "fa-info-circle"},
+        { title: "editadmin", name: "editadmin", icon: "fa-pen"},
+        { title: "deleteadmin", name: "deleteadmin", icon: "fa-trash"},
       ],
       adminTableActions: [
         { title: "addadmin", name: "addadmin", icon: "fa-plus"},

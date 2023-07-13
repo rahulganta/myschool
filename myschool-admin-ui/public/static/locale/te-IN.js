@@ -10,6 +10,8 @@ const messages = {
         attendance: 'హాజరు',
         reports: 'రిపోర్ట్స్',
         schedule: 'షెడ్యూల్',
+        classwork: 'తరగతి పని',
+
         aboutus: 'మా గురించి',
         test: 'టెస్ట్'
     },
@@ -20,6 +22,8 @@ const messages = {
         mycourses: 'నాకోర్సులు',
         messages: "సందేశాలు",
         staff: 'సిబ్బంది',
+        teachers: 'ఉపాధ్యాయులు',
+        admins: 'అడ్మిన్ యూజర్స్',
         students: 'విద్యార్థులు',
         attendance: 'హాజరు',
         reports: 'రిపోర్ట్స్',
@@ -30,6 +34,9 @@ const messages = {
         schoolInfo: 'పాఠశాల సమాచారం',
         mymessages: 'నా సందేశాలు',
         schoolannouncements: 'పాఠశాల ప్రకటనలు',
+        coursemessages: 'కోర్సు సందేశాలు',
+        coursework: 'కోర్సు పని',
+        courseattendance: 'కోర్సు హాజరు',
 
         missionstatement: 'మా లక్ష్య ప్రకటన',
         goal: 'మా లక్ష్యం',
@@ -68,6 +75,7 @@ const messages = {
         inactivateschool: 'పాఠశాలను నిష్క్రియం చేయండి',
         addschoolannouncement: 'పాఠశాల ప్రకటనను జోడించండి',
 
+        viewadmin: 'అడ్మిన్ యూసర్ని చూడండి',
         addadmin: 'అడ్మిన్ యూసర్ని జోడించండి',
         editadmin: 'అడ్మిన్ యూసర్ని సవరించండి',
         updateadmin: 'అడ్మిన్ యూసర్ని నవీకరించండి',
@@ -77,11 +85,14 @@ const messages = {
         edituser: 'యూసర్ని సవరించండి',
         updateuser: 'యూసర్ని నవీకరించండి',
         deleteuser: 'యూసర్ని తొలగించండి',
+
+        viewteacher: 'ఉపాధ్యాయుడిని చూడండి',
         addteacher: 'ఉపాధ్యాయుడిని జోడించండి',
         editteacher: 'ఉపాధ్యాయుడిని సవరించండి',
         updateteacher: 'ఉపాధ్యాయుడిని నవీకరించండి',
         deleteteacher: 'ఉపాధ్యాయుడిని తొలగించండి',
 
+        viewstudent: 'విద్యార్థిని చూడండి',
         addstudent: 'విద్యార్థిని జోడించండి',
         editstudent: 'విద్యార్థిని సవరించండి',
         updatestudent: 'విద్యార్థిని నవీకరించండి',
@@ -92,9 +103,13 @@ const messages = {
         updatecourse: 'కోర్సును నవీకరించండి',
         viewcourse: 'కోర్సును చూడండి',
         inactivatecourse: 'కోర్సును నిష్క్రియం చేయండి',
+        addcourseannouncement: 'కోర్సు ప్రకటనను జోడించండి',
+        addcoursework: 'కోర్సు పనిని జోడించండి',
 
         createclasswork: 'క్లాస్ వర్క్‌ని సృష్టించండి',
         addfile: 'ఫైల్‌ని జోడించు',
+
+        takeattendance: 'హాజరు తీసుకోండి',
 
     },
 
@@ -108,7 +123,8 @@ const messages = {
         username: 'యూసర్ పేరు',
         firstname:'మొదటి పేరు',
         lastname:'చివరి పేరు',
-        email:'ఇమెయిల్'
+        email:'ఇమెయిల్',
+        student: 'విద్యార్థి',
 
     },
 
@@ -137,6 +153,8 @@ const messages = {
 
         note: 'గమనిక',
         useformtocontactus: 'మమ్మల్ని సంప్రదించడానికి దయచేసి దిగువ ఫారమ్‌ను ఉపయోగించండి.',
+
+        itemsselected: 'ఏ అంశం ఎంచుకోబడలేదు | ఒక అంశం ఎంపికచేయబడింది | {n} అంశాలు ఎంపికచేయబడ్డాయి',
     },
 
     //Placeholders

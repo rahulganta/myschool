@@ -5,16 +5,16 @@
       <div class="col-lg-6 col-sm-6">
         <ul class="nav nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist">
           <li class="nav-item mr-2" role="presentation">
-            <a class="mi-linkbtn" :class="{ active: activeTab === 'messages' }" id="pills-home-tab" data-toggle="pill" href="#pills-messages" @click="manageTab('messages')" role="tab" aria-controls="pills-messages" aria-selected="true">Messages</a>
+            <a class="mi-linkbtn" :class="{ active: activeTab === 'messages' }" id="pills-home-tab" data-toggle="pill" href="#pills-messages" @click="manageTab('messages')" role="tab" aria-controls="pills-messages" aria-selected="true">{{$t('nav.messages')}}</a>
           </li>
           <li class="nav-item mr-2" role="presentation">
-            <a class="mi-linkbtn" :class="{ active: activeTab === 'classwork' }" id="pills-profile-tab" data-toggle="pill" href="#pills-classwork" @click="manageTab('classwork')" role="tab" aria-controls="pills-classwork" aria-selected="false">Classwork</a>
+            <a class="mi-linkbtn" :class="{ active: activeTab === 'classwork' }" id="pills-profile-tab" data-toggle="pill" href="#pills-classwork" @click="manageTab('classwork')" role="tab" aria-controls="pills-classwork" aria-selected="false">{{$t('nav.classwork')}}</a>
           </li>
           <li class="nav-item" role="presentation">
-            <a class="mi-linkbtn" :class="{ active: activeTab === 'students' }" id="pills-contact-tab" data-toggle="pill" href="#pills-students" @click="manageTab('students')" role="tab" aria-controls="pills-students" aria-selected="false">Students</a>
+            <a class="mi-linkbtn" :class="{ active: activeTab === 'students' }" id="pills-contact-tab" data-toggle="pill" href="#pills-students" @click="manageTab('students')" role="tab" aria-controls="pills-students" aria-selected="false">{{$t('nav.students')}}</a>
           </li>
           <li class="nav-item" role="presentation">
-            <a class="mi-linkbtn" :class="{ active: activeTab === 'attendance' }" id="pills-contact-tab" data-toggle="pill" href="#pills-attendance" @click="manageTab('attendance')" role="tab" aria-controls="pills-attendance" aria-selected="false">Attendance</a>
+            <a class="mi-linkbtn" :class="{ active: activeTab === 'attendance' }" id="pills-contact-tab" data-toggle="pill" href="#pills-attendance" @click="manageTab('attendance')" role="tab" aria-controls="pills-attendance" aria-selected="false">{{$t('nav.attendance')}}</a>
           </li>
         </ul>
       </div>
@@ -26,11 +26,11 @@
           <div class="card-body">
             <div class="row">
               <div class="col-lg-6 col-sm-12 col-xs-12">
-                <h5 class="card-title">Course Messages</h5>
+                <h5 class="card-title">{{ $t('hdr.coursemessages') }}</h5>
               </div>
               <div class="col-lg-6 col-sm-12 col-xs-12 text-right">
                 <button id="addcoursemessage" class="btn mi-linkbtn" @click="showModal('courseMessageModal', 'add', initialCourseMessage)" :aria-expanded="showAddCourseMessageModal ? 'true':'false'">
-                  <i class="fas fa-plus"/> ADD COURSE ANNOUNCEMENT</button>
+                  <i class="fas fa-plus"/> {{$t('btn.addcourseannouncement')}}</button>
               </div>
             </div>
             <ul class="list-unstyled">
@@ -47,9 +47,9 @@
                      aria-expanded="false"> <i class="fas fa-ellipsis-v"></i>
                   </a>
                   <div class="dropdown-menu dropdown-menu-right mi-dropdown-menu " aria-labelledby="dropdownMenuButton">
-                    <button class="dropdown-item" name="edit" @click="showModal('courseMessageModal', 'update', courseMessage)" :aria-expanded="showAddCourseMessageModal ? 'true':'false'"><i class="fas fa-pen pr-1"/> Edit</button>
+                    <button class="dropdown-item" name="edit" @click="showModal('courseMessageModal', 'update', courseMessage)" :aria-expanded="showAddCourseMessageModal ? 'true':'false'"><i class="fas fa-pen pr-1"/> {{ $t('btn.edit') }}</button>
                     <hr>
-                    <button class="dropdown-item" name="delete"><i class="fas fa-ban pr-1"/> Delete</button>
+                    <button class="dropdown-item" name="delete"><i class="fas fa-ban pr-1"/> {{ $t('btn.delete') }}</button>
                   </div>
                 </div>
               </li>
@@ -63,11 +63,11 @@
           <div class="card-body">
             <div class="row">
               <div class="col-lg-6 col-sm-12 col-xs-12">
-                <h5 class="card-title">Course Work</h5>
+                <h5 class="card-title">{{ $t('hdr.coursework') }}</h5>
               </div>
               <div class="col-lg-6 col-sm-12 col-xs-12 text-right">
                 <button id="createclasswork" class="btn mi-linkbtn" @click="showModal('courseWorkModal', 'add', initialCourseWork)" :aria-expanded="showAddCourseWorkModal ? 'true':'false'">
-                  <i class="fas fa-plus"/> CREATE CLASS WORK</button>
+                  <i class="fas fa-plus"/> {{$t('btn.addcoursework')}}</button>
               </div>
             </div>
 
@@ -85,8 +85,8 @@
                      aria-expanded="false"> <i class="fas fa-ellipsis-v"></i>
                   </a>
                   <div class="dropdown-menu dropdown-menu-right mi-dropdown-menu " aria-labelledby="courseWorkDropdownMenuButton">
-                    <button class="dropdown-item" name="copy" @click="showModal('courseWorkModal', 'update', courseWork)"><i class="fas fa-pen pr-1"/> Edit</button>
-                    <button class="dropdown-item" name="edit" @click="showModal('courseWorkModal', 'delete', courseWork)"><i class="fas fa-info-circle pr-1"/> Delete</button>
+                    <button class="dropdown-item" name="copy" @click="showModal('courseWorkModal', 'update', courseWork)"><i class="fas fa-pen pr-1"/> {{ $t('btn.edit') }}</button>
+                    <button class="dropdown-item" name="edit" @click="showModal('courseWorkModal', 'delete', courseWork)"><i class="fas fa-info-circle pr-1"/> {{ $t('btn.delete') }}</button>
                   </div>
                 </div>
               </div>
@@ -114,7 +114,7 @@
       <div class="tab-pane fade" :class="{ 'active show': activeTab === 'students' }" id="pills-students" role="tabpanel" aria-labelledby="pills-students-tab">
         <div class="card mi-card h-100">
           <div class="card-body">
-            <h5 class="card-title">Students</h5>
+            <h5 class="card-title">{{ $t('hdr.students') }}</h5>
             <MiTable :columns-headers="studentTableColumnsHeaders" :data-list="studentList" :row-actions="studentTableRowActions" :table-actions="studentTableActions" :show-row-check-box="true"
                      @rowAaction="tableRowAction" @tableAction="tableAction"></MiTable>
           </div>
@@ -126,16 +126,15 @@
           <div class="card-body">
             <div class="row">
               <div class="col-lg-6 col-sm-12 col-xs-12">
-                <h5 class="card-title">Course Attendance</h5>
+                <h5 class="card-title">{{ $t('hdr.courseattendance') }}</h5>
               </div>
               <div class="col-lg-6 col-sm-12 col-xs-12 text-right">
                 <input type="date"  :data-date="moment().format('DD MMM YYYY')" data-date-format="DD MMMM YYYY" id="attendanceDate"
                        :min="moment().subtract(30, 'days').format('YYYY-MM-DD')"
                        :max="moment().format('YYYY-MM-DD')"
                        v-model="attendanceDate">
-
                 <button id="createclasswork" class="btn mi-linkbtn" @click="showModal('addAttendanceModal', 'add', initialCourseWork)" :aria-expanded="showAddAttendanceModal ? 'true':'false'">
-                  <i class="fas fa-plus"/> TAKE ATTENDANCE</button>
+                  <i class="fas fa-plus"/> {{ $t('btn.takeattendance') }}</button>
               </div>
             </div>
 
@@ -162,7 +161,7 @@
             <table class="table table-sm table-bordered table-hover" id="attendancebystudent">
               <thead>
               <tr>
-                <th>Student</th>
+                <th>{{ $t('tbl.student')}}</th>
                 <th v-for="date in availableDates" :key="date">{{moment(date).format('MMM DD, ddd')}}</th>
                 <th>P</th>
                 <th>L</th>
@@ -195,7 +194,7 @@
     <!--Modal Components-->
     <AddCourseMessage v-if="showAddCourseMessageModal" @close="close" :message="courseMessage" :action="action" @addMessage="addCourseMessage"></AddCourseMessage>
     <AddClassWork v-if="showAddCourseWorkModal" @close="close" :course-work="courseWork" :action="action" @AddCourseWork="addCourseWork"></AddClassWork>
-    <AddAttendance v-if="showAddAttendanceModal" @close="close" :student-list="studentList" :course="course" :attendance-date="attendanceDate" :action="action" @AddAttendance="addAttendance"></AddAttendance>
+    <AddAttendance v-if="showAddAttendanceModal" @close="close" :student-list="studentList" :course="course" :courseATData="courseATDataForADate" :attendance-date="attendanceDate" :action="action" @AddAttendance="addAttendance"></AddAttendance>
     <AddStudentToCourse v-if="showAddStudentToCourseModal" @close="close" :course="course" :action="action" @AddStudentToCourse="addStudentToCourse"></AddStudentToCourse>
     <ConfirmModal v-if="showConfirmModal" @close="close" :title="cModalTitle" :warning-message="cModalWarningMessage" @confirm="modalConfirm"></ConfirmModal>
     <!--Toast-->
@@ -211,6 +210,7 @@ import AddStudentToCourse from "@/components/modals/AddStudentToCourse";
 import ConfirmModal from "@/components/modals/ConfirmModal";
 import AddAttendance from "@/components/modals/AddAttendance";
 
+import $ from 'jquery';
 export default {
   name: "Course",
   components: {
@@ -283,16 +283,17 @@ export default {
         { title: "status", sortKey: "status", sortOrder: 1, selectedFilters: [],},
       ],
       studentTableRowActions: [
-        { title: "View Student", name: "viewstudent", icon: "fa-info-circle"},
+        { title: "viewstudent", name: "viewstudent", icon: "fa-info-circle"},
         /*{ title: "Edit Student", name: "editstudent", icon: "fa-pen"},*/
-        { title: "Delete Student", name: "deletestudent", icon: "fa-trash"},
+        { title: "deletestudent", name: "deletestudent", icon: "fa-trash"},
       ],
       studentTableActions: [
         { title: "addstudent", name: "addstudent", icon: "fa-plus"},
         { title: "deletestudent", name: "deletestudent", icon: "fa-trash"},
       ],
       attendanceDate: this.moment().format('YYYY-MM-DD'),
-      courseAttendanceData: []
+      courseAttendanceData: [],
+      courseATDataForADate: [],
     }
   },
   created() {
@@ -538,11 +539,32 @@ export default {
       } else if(modalName == 'addStudentToCourse') {
         this.showAddStudentToCourseModal = true;
       } else if (modalName == 'addAttendanceModal') {
-        //TODO: Overwrite this date for edit attendance;
         this.moment(vm.attendanceDate).format('YYYY-MM-DD');
+        let filteredATDataByDate = vm.courseAttendanceData.filter(item => {
+          return item.attendancePK.attendanceDate.indexOf(vm.attendanceDate) > -1
+        })
+        vm.courseATDataForADate = [];
+        vm.studentList.forEach(student => {
+            let obj = filteredATDataByDate.find(o => o.attendancePK.studentId === student.username);
+            if(typeof obj === "undefined") {
+              vm.courseATDataForADate.push({ firstName: student.firstName, lastName: student.lastName, attendancePK: {studentId: student.username, courseId: vm.course.id, attendanceDate:vm.attendanceDate },
+                attendanceStatus: "",
+                comments: ""})
+            } else {
+              obj.firstName = student.firstName;
+              obj.lastName = student.lastName;
+              vm.courseATDataForADate.push(obj);
+            }
+            console.log("The student that searched is: "+ student.username);
+            console.log("the value of the object is: "+obj);
+        })
+
+        vm.courseATDataForADate.forEach(data => {
+          console.log("The filterd data is: " + data.firstName + data.lastName + data.attendancePK.studentId + data.attendancePK.courseId + data.attendancePK.attendanceDate + data.attendanceStatus + data.comments);
+        });
+
         this.showAddAttendanceModal = true;
       }
-
     },
     close() {
       this.showAddCourseMessageModal = false;
@@ -550,7 +572,7 @@ export default {
       this.showAddAttendanceModal = false;
       this.showAddStudentToCourseModal = false;
       this.showConfirmModal = false;
-    }
+    },
   }
 }
 </script>
@@ -562,4 +584,18 @@ export default {
   .media-body {
     /*border-bottom: 1px solid #9aa2a87d !important;*/
   }
+
+  input[type="date"] {
+    position: relative;
+    padding: 5px;
+  }
+
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    color: #6200EE !important;;
+  }
+
+  .btn .tooltip{
+    font-size:10px;
+  }
+
 </style>

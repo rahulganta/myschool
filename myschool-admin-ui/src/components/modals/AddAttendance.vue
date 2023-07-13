@@ -25,12 +25,12 @@
           </tr>
           </thead>
           <tbody>
-          <tr v-for="(student, index) in studentList">
+          <tr v-for="(student, index) in courseATData">
             <td :id="student.firstName" @click="viewSchool(index, rowData)"><a class="mi-text-primary">{{ student.firstName }}</a></td>
             <td :id="student.lastName" class="d-md-block d-none">{{ student.lastName }}</td>
             <td>
               <label class="sr-only" for="instructor">Attendance Statu</label>
-              <select class="form-control" id="instructor" v-model="attendanceStatus[index]">
+              <select class="form-control" id="instructor" v-model="student.attendanceStatus">
                 <option value="">Select</option>
                 <option value="P" selected>P</option>
                 <option value="U" selected>U</option>
@@ -41,7 +41,7 @@
             <!--This column will be hidden on xs and sm screens-->
             <td>
               <label class="sr-only" for="comments">comments</label>
-              <input type="text" class="form-control" v-model.trim="comments[index]"/>
+              <input type="text" class="form-control" v-model.trim="student.comments"/>
             </td>
           </tr>
           </tbody>
@@ -70,6 +70,10 @@ export default {
   },
   props: {
     studentList: {
+      type: Array,
+      required: true
+    },
+    courseATData: {
       type: Array,
       required: true
     },
@@ -113,13 +117,13 @@ export default {
   methods: {
     addAttendance() {
       let vm = this;
-      for(let i = 0; i < this.studentList.length; i ++) {
+      /*for(let i = 0; i < this.studentList.length; i ++) {
         console.log("the attendance data is: "+ vm.studentList[i].username + " status: "+vm.attendanceStatus[i]+" comments: "+ vm.comments[i] );
         vm.attendanceDataList.push({ attendancePK: {studentId: vm.studentList[i].username, courseId: vm.course.id, attendanceDate:vm.attendanceDate },
           attendanceStatus: vm.attendanceStatus[i],
           comments: vm.comments[i]});
-      }
-      this.axios.post(this.$constants().BASE_URL+ "addattendance", vm.attendanceDataList, this.restCallHeaders()).then(
+      }*/
+      this.axios.post(this.$constants().BASE_URL+ "addattendance", vm.courseATData, this.restCallHeaders()).then(
           response => {
             //Clear the form data
             /*event.target.reset();*/

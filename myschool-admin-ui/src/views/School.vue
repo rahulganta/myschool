@@ -105,10 +105,10 @@
                  aria-expanded="false"> <i class="fas fa-ellipsis-v"></i>
               </a>
               <div class="dropdown-menu dropdown-menu-right mi-dropdown-menu " aria-labelledby="dropdownMenuButton">
-                <button class="dropdown-item" name="copy" @click="showModal('courseModal', 'update', course)"><i class="fas fa-pen pr-1"/> Edit Course</button>
-                <button class="dropdown-item" name="edit" @click="navToCourse(course)"><i class="fas fa-info-circle pr-1"/> View Course</button>
+                <button class="dropdown-item" name="edit" @click="navToCourse(course)"><i class="fas fa-info-circle pr-1"/> {{$t('btn.viewcourse')}}</button>
+                <button class="dropdown-item" name="copy" @click="showModal('courseModal', 'update', course)"><i class="fas fa-pen pr-1"/> {{$t('btn.editcourse')}}</button>
                 <hr>
-                <button class="dropdown-item" name="delete"><i class="fas fa-ban pr-1"/> Inactivate Course</button>
+                <button class="dropdown-item" name="delete"><i class="fas fa-ban pr-1"/> {{$t('btn.inactivatecourse')}}</button>
               </div>
             </div>
           </div>

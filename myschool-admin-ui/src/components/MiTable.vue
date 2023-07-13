@@ -13,7 +13,7 @@
         <!--<button class="btn mi-linkbtn" @click="showFilters = !showFilters"><i class="fas fa-filter align-self-center"></i></button>-->
       </div>
       <div class="col-lg-6 col-sm-12 col-xs-12 text-right">
-        <span class="mr-4" v-if="selectedTableRows.length > 0">{{ selectedTableRows.length }} item(s) selected</span>
+        <span class="mr-4" v-if="selectedTableRows.length > 0">{{ $tc('label.itemsselected', selectedTableRows.length, { n: selectedTableRows.length }) }}</span>
 
         <button v-for="(tAction, index) in tableActions" :id="tAction.name" class="btn mi-linkbtn" @click="tableAction(tAction.name, selectedTableRows)">
           <i class="fas" :class="tAction.icon"/>{{ $t(`btn.${tAction.title}`) }}</button>
@@ -55,8 +55,8 @@
                aria-expanded="false"> <i class="fas fa-ellipsis-v"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-right mi-dropdown-menu " aria-labelledby="dropdownMenuButton">
-              <button v-for="action in rowActions" class="dropdown-item" :name="action.name" @click="rowAction(action.name, rowData, index)">
-                <i class="fas" :class="action.icon"/> {{ action.title}}</button>
+              <button v-for="rAction in rowActions" class="dropdown-item" :name="rAction.name" @click="rowAction(rAction.name, rowData, index)">
+                <i class="fas" :class="rAction.icon"/> {{ $t(`btn.${rAction.title}`) }}</button>
             </div>
           </div>
         </td>

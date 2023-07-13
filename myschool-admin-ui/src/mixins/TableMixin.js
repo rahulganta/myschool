@@ -45,12 +45,7 @@ export default {
                     console.log("the keys are: " + Object.keys(row));
                     return Object.keys(row).some(function(key) {
                         console.log("The key is: " + key);
-
-                        return (
-                            String(row[key])
-                                .toLowerCase()
-                                .indexOf(filterString) > -1
-                        );
+                        return (String(row[key]).toLowerCase().indexOf(filterString) > -1);
                     });
                 });
             }

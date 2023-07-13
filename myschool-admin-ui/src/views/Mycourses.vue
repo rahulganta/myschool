@@ -1,6 +1,6 @@
 <template>
   <div class="mycourses">
-    <h3 class="mi-page-title">My courses</h3>
+    <h3 class="mi-page-title">{{$t('hdr.mycourses')}}</h3>
     <div class="row row-cols-sm-1 row-cols-md-2 row-cols-lg-3">
       <div class="col-sm-12 mb-4" v-for="(course, index) in courses">
         <div class="card mi-card h-100"> <!--v-bind:style="{backgroundColor:'#F9AA33',color: '#FFF' }"-->
@@ -12,8 +12,8 @@
                    aria-expanded="false"> <i class="fas fa-ellipsis-v"></i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right mi-dropdown-menu " aria-labelledby="dropdownMenuButton">
-                  <button class="dropdown-item" name="copy" @click="showModal('courseModal', 'update', course)"><i class="fas fa-pen pr-1"/> {{$t('btn.editcourse')}}</button>
                   <button class="dropdown-item" name="edit" @click="navToCourse(course)"><i class="fas fa-info-circle pr-1"/> {{$t('btn.viewcourse')}}</button>
+                  <button class="dropdown-item" name="copy" @click="showModal('courseModal', 'update', course)"><i class="fas fa-pen pr-1"/> {{$t('btn.editcourse')}}</button>
                   <hr>
                   <button class="dropdown-item" name="delete"><i class="fas fa-ban pr-1"/> {{$t('btn.inactivatecourse')}}</button>
                 </div>

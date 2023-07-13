@@ -37,9 +37,9 @@ export default {
         { title: "status", sortKey: "status", sortOrder: 1, selectedFilters: [],},
       ],
       studentTableRowActions: [
-        { title: "View Student", name: "viewstudent", icon: "fa-info-circle"},
-        { title: "Edit Student", name: "editstudent", icon: "fa-pen"},
-        { title: "Delete Student", name: "deletestudent", icon: "fa-trash"},
+        { title: "viewstudent", name: "viewstudent", icon: "fa-info-circle"},
+        { title: "editstudent", name: "editstudent", icon: "fa-pen"},
+        { title: "deletestudent", name: "deletestudent", icon: "fa-trash"},
       ],
       studentTableActions: [
         { title: "addstudent", name: "addstudent", icon: "fa-plus"},
