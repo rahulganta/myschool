@@ -142,6 +142,7 @@ const messages = {
         state: 'రాష్ట్రం',
         zip: 'జిప్ / పోస్టల్ కోడ్',
         message: 'సందేశం',
+        date: 'తేదీ',
 
         displayname: 'ప్రదర్శన పేరు',
         franchisename: 'ఫ్రాంచైజ్ పేరు',

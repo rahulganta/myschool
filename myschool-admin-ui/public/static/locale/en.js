@@ -145,7 +145,7 @@ const messages = {
             state: 'State',
             zip: 'Zip/Postal Code',
             message: 'Message',
-
+            date: 'Date',
             displayname: 'Display Name',
             franchisename: 'Franchise Name',
             correspondent: 'Correspondent',
