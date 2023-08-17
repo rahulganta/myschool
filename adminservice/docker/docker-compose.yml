@@ -1,0 +1,8 @@
+version: '3.7'
+services:
+  myschool-web-service:
+    build:
+      context: ../
+      dockerfile: ./docker/Dockerfile
+    ports:
+      - "9191:9191"
