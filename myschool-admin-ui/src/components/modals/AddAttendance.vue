@@ -5,7 +5,7 @@
       <div slot="header" class="mi-custom-header">
         <div class="row no-gutters">
           <h4 class="col-10 title"><span v-if="action =='update'">Update</span><span v-else>Take</span> Attendance
-            <small>(Course:<b> {{course.name}}</b>, Date:<b> {{moment(attendanceDate).format('ddd MMM DD, YYYY')}}</b>)</small>
+            <small>({{ $t('label.course') }}:<b> {{course.name}}</b>, {{ $t('label.date') }}:<b> {{moment(attendanceDate).format('ddd MMM DD, YYYY')}}</b>)</small>
           </h4>
           <div class="col-2 text-right">
             <a class="btn mi-linkbtn" @click="close"><i class="fas fa-times"/></a>
@@ -21,7 +21,7 @@
             <th>First Name</th>
             <th class="d-md-block d-none">LastName</th>
             <th style="width: 100px">Status</th>
-            <th >Comments</th>
+            <th>Comments</th>
           </tr>
           </thead>
           <tbody>
@@ -49,8 +49,8 @@
 
       </template>
       <div slot="footer">
-        <button type="button" class="btn mi-linkbtn mx-3" @click="close" id="cancel-button">Cancel</button>
-        <button type="button" class="btn mi-primarybtn" id="add-button" @click="addAttendance">Submit</button>
+        <button type="button" class="btn mi-linkbtn mx-3" @click="close" id="cancel-button">{{ $t('btn.cancel') }}</button>
+        <button type="button" class="btn mi-primarybtn" id="add-button" @click="addAttendance">{{ $t('btn.submit')}}</button>
       </div>
     </modal>
   </form>
@@ -159,24 +159,5 @@ export default {
   width: 100%;
   height: 100%;
   max-height: 100%;
-}
-.filenameInput {
-  background-color: #e9ecef;
-  border: none;
-}
-
-.uploadFileBtn {
-  background-color: $onPrimary;
-  border: 1px solid $primaryColor;
-  border-radius: 4px;
-  font-family: 'Roboto Bold', 'Roboto Regular', 'Roboto', sans-serif;
-  font-weight: 700;
-  font-style: normal;
-  color: $primaryColor;
-}
-
-.uploadFileBtn:hover {
-  background-color: $onPrimary;
-  color: $primaryVariant;
 }
 </style>

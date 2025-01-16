@@ -2,7 +2,7 @@ server:
   port: ${PORT:9095}
 spring:
   profiles:
-    active: myschool-postgres
+    active: myschool-localpostgres
   jpa:
     hibernate:
       ddl-auto: update

@@ -188,7 +188,9 @@ const messages = {
             nothing: 'Nothing to show here.' ,
             allrights: 'All Rights Reserved',
         },
-
+        error: {
+           passwordnotmatching: 'the password and confirmpassword is not matching',
+        },
         option: {
             defaulttheme: "Default Theme",
             darktheme: "Dark Theme",

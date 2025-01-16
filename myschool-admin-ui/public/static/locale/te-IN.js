@@ -184,6 +184,9 @@ const messages = {
         nothing: 'ఇక్కడ చూపించడానికి ఏమీ లేదు.' ,
         allrights: 'All Rights Reserved',
     },
+    error: {
+        passwordnotmatching: 'పాస్వర్డ్ మరియు ధ్రువీకరణ పాస్వర్డ్ సరిపోలడం లేదు',
+    },
 
     option: {
         defaulttheme: "డిఫాల్ట్ థీమ్",
@@ -196,7 +199,7 @@ const messages = {
     linked: '@:message.hello, Welcome to @:appname, your id has been created successfully',
 };
 export const dateTimeFormats = {
-    es: {
+    te: {
         shortdate: {
             year: 'numeric', month: 'short', day: 'numeric'
         },

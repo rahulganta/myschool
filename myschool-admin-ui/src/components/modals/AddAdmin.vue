@@ -12,6 +12,7 @@
       </div>
       <template slot="body">
         <ErrorMessage :error-message="errorMsg"></ErrorMessage>
+        <ErrorMessage :error-message="$t(uiErrorMsg)"></ErrorMessage>
 
         <div class="form-group">
           <label for="username">Username *  <small id="usernamehelp" class="form-text text-muted">User login id</small></label>
@@ -123,6 +124,7 @@ export default {
     return {
       error: false,
       errorMsg: '',
+      uiErrorMsg:'',
       confirmPassword: '',
       showPassword: false,
     }
@@ -151,7 +153,7 @@ export default {
       } else {
         if(vm.admin.password != vm.confirmPassword) {
           vm.error = true;
-          vm.errorMsg = "the password and confirmpassword is not matching";
+          vm.uiErrorMsg = "error.passwordnotmatching";
           return;
         }
         this.axios.post(API_URL+ "addadmin", vm.admin, this.restCallHeaders()).then(

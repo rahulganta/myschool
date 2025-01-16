@@ -129,6 +129,7 @@
                 <h5 class="card-title">{{ $t('hdr.courseattendance') }}</h5>
               </div>
               <div class="col-lg-6 col-sm-12 col-xs-12 text-right">
+                <input type="text" class="datefield" v-model.trim="moment(attendanceDate).format('ddd, DD MMM YYYY')" readonly/>
                 <input type="date"  :data-date="moment().format('DD MMM YYYY')" data-date-format="DD MMMM YYYY" id="attendanceDate"
                        :min="moment().subtract(30, 'days').format('YYYY-MM-DD')"
                        :max="moment().format('YYYY-MM-DD')"
@@ -170,17 +171,17 @@
               </tr>
               </thead>
               <tbody>
-              <tr v-for="(hours, employee) in attendanceByStudent" :key="employee">
-                <td>{{ employee }}</td>
-                <td v-for="date in availableDates" :key="date">{{ hours[date] && hours[date].attendanceStatus}}
-                  <button v-if="hours[date] && hours[date].comments" type="button" class="btn mi-linkbtn" data-toggle="tooltip" data-placement="left" :title="hours[date] && hours[date].comments">
+              <tr v-for="(dateList, student) in attendanceByStudent" :key="student">
+                <td>{{ student }}</td>
+                <td v-for="date in availableDates" :key="date">{{ dateList[date] && dateList[date].attendanceStatus}}
+                  <button v-if="dateList[date] && dateList[date].comments" type="button" class="btn mi-linkbtn" data-toggle="tooltip" data-placement="left" :title="dateList[date] && dateList[date].comments">
                     <i class="fas fa-info-circle"/>
                   </button>
                 </td>
-                <td>{{ hours.totalPresent }}</td>
-                <td>{{ hours.totalLate }}</td>
-                <td>{{ hours.totalExcusedAbsence }}</td>
-                <td>{{ hours.totalUnExcusedAbsence }}</td>
+                <td>{{ dateList.totalPresent }}</td>
+                <td>{{ dateList.totalLate }}</td>
+                <td>{{ dateList.totalExcusedAbsence }}</td>
+                <td>{{ dateList.totalUnExcusedAbsence }}</td>
               </tr>
               </tbody>
             </table>
