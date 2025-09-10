@@ -1,12 +1,16 @@
 package com.myschool.adminservice.services;
 
+import com.myschool.adminservice.exceptions.EntityAlreadyExistsException;
 import com.myschool.adminservice.model.User;
 import com.myschool.adminservice.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import static java.lang.Boolean.TRUE;
@@ -18,13 +22,16 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-    public User createUser(User user) {
+    public User createUser(User user){
         /*TODO do all the preliminary checks throw error*/
         if(!user.isActive()) {
             user.setActive(TRUE);
         }
+        if(getUser(user.getUsername()).isPresent()) {
+            Object[] args = {user.getUsername()};
+            throw new EntityAlreadyExistsException("user.alreadyexists", "User is already present in the system.", "Err_UserExists", args);
+        }
         User createdUser = userRepository.save(user);
-
         return createdUser;
     }
 
@@ -37,7 +44,7 @@ public class UserService {
             User createdUser = userRepository.save(user);
             return createdUser;
         } else {
-            throw new Exception("User: "+ user.getUsername()+ "does not exist ");
+            throw new RuntimeException("user.notfound");
         }
 
     }

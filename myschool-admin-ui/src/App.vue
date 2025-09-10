@@ -76,6 +76,7 @@
                       <option value="te-IN">{{$t('localeoption.telugu')}}</option>
                       <option value="hi-IN">{{$t('localeoption.hindi')}}</option>
                       <option value="es">{{$t('localeoption.spanish')}}</option>
+                      <option value="fr">{{$t('localeoption.french')}}</option>
                     </select>
                   </form>
 
@@ -186,6 +187,9 @@ export default {
 
 #appheader .navbar-brand {
   color: $textColor;
+}
+#appheader .navbar {
+  padding: 0rem 1rem;
 }
 
 #appheader .navbar-toggler {

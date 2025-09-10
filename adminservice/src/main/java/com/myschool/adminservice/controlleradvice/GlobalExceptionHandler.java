@@ -1,10 +1,14 @@
 package com.myschool.adminservice.controlleradvice;
 
+import com.myschool.adminservice.exceptions.EntityAlreadyExistsException;
 import com.myschool.adminservice.model.ApiError;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.NoSuchMessageException;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.core.annotation.Order;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -23,18 +27,27 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-@ControllerAdvice
+@RestControllerAdvice
 @Slf4j
+@Order(1)
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @Autowired
     ResourceBundleMessageSource messageSource;
 
-    @ExceptionHandler(Exception.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    @ResponseBody
-    public ApiError handleAllExceptions(Exception ex, WebRequest request) {
-        return new ApiError(LocalDateTime.now(), "", ex.getMessage(), ex.getLocalizedMessage(), request.getDescription(false), Collections.emptyMap());
+    @ExceptionHandler(EntityAlreadyExistsException.class)
+    public ResponseEntity<Object> handleEntityAlreadyExistsException(EntityAlreadyExistsException ex, WebRequest request) {
+        Locale locale = LocaleContextHolder.getLocale();
+        Object[] args = ex.getArgs();
+        String errorMessage = " ";
+        try {
+            errorMessage = messageSource.getMessage(ex.getErrorKey(), args, locale);
+        } catch (NoSuchMessageException e) {
+            errorMessage = ex.getLocalizedMessage(); // Fallback message if the key is not found
+        }
+        ApiError apiError = new ApiError(LocalDateTime.now(), ex.getErrorCode(), errorMessage, ex.getLocalizedMessage(), request.getDescription(false), Collections.emptyMap());
+        log.error("Error: " + ex.getMessage(), ex);
+        return new ResponseEntity<>(apiError, HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler(AuthenticationException.class)
@@ -78,12 +91,26 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
         Map<String, String> errorList = new HashMap<>();
         ex.getBindingResult().getAllErrors().forEach((error) -> {
-            Object [] obj = error.getArguments();
             String fieldName = ((FieldError) error).getField();
+            Object [] obj = error.getArguments();
             String eMessage = messageSource.getMessage(error.getDefaultMessage(), obj, error.getDefaultMessage(), locale);
             errorList.put(fieldName, eMessage);
         });
         ApiError apiError = new ApiError(LocalDateTime.now(), "", firstErrorMessage, ex.getLocalizedMessage(), request.getDescription(false), errorList);
         return new ResponseEntity<>(apiError, status);
+    }
+
+    @ExceptionHandler(Exception.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ResponseBody
+    public ApiError handleAllExceptions(Exception ex, WebRequest request) {
+        Locale locale = LocaleContextHolder.getLocale();
+        String errorMessage = " ";
+        try {
+            errorMessage = messageSource.getMessage(ex.getMessage(), null, locale);
+        } catch (NoSuchMessageException e) {
+            errorMessage = ex.getMessage(); // Fallback message if the key is not found
+        }
+        return new ApiError(LocalDateTime.now(), "", errorMessage, ex.getLocalizedMessage(), request.getDescription(false), Collections.emptyMap());
     }
 }

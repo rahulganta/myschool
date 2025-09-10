@@ -1,4 +1,4 @@
-//  Translated Locale Messages to Telugu
+    //  Translated Locale Messages to Telugu
 const messages = {
     appname: 'మై స్కూల్',
     nav: {
@@ -192,11 +192,12 @@ const messages = {
         defaulttheme: "డిఫాల్ట్ థీమ్",
         darktheme: "డార్క్ థీమ్",
     },
-
+    // Other
+    companyname: 'KOMUR TECHNOLOGIES LLC',
     copyright: 'కాపీ హక్కులు © 2020 @:appname .  అన్ని హక్కులూ ప్రత్యేకించుకోవడమైనది.',
     user: 'User | Users',
     items: 'No Items | one Item | {count} Items',
-    linked: '@:message.hello, Welcome to @:appname, your id has been created successfully',
+    linked: '@:message.hello, Welcome to @:companyname, your id has been created successfully',
 };
 export const dateTimeFormats = {
     te: {

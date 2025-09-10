@@ -188,9 +188,7 @@ const messages = {
             nothing: 'Nothing to show here.' ,
             allrights: 'All Rights Reserved',
         },
-        error: {
-           passwordnotmatching: 'the password and confirmpassword is not matching',
-        },
+
         option: {
             defaulttheme: "Default Theme",
             darktheme: "Dark Theme",
@@ -208,10 +206,12 @@ const messages = {
             telugu: 'తెలుగు',
             spanish: 'Español',
             hindi: 'हिंदी',
+            french: 'French'
         },
-
+        //OTHERS
+        companyname: 'KOMUR TECHNOLOGIES LLC',
         SCHOOLNAME: 'School Name',
-        copyright: 'Copyright © 2020 @:appname .  All Rights Reserved.',
+        copyright: 'Copyright © 2020 @:companyname .  All Rights Reserved.',
         items: 'No Items | one Item | {count} Items',
         linked: '@:message.hello, Welcome to @:nav.ourmission, your id has been created successfully',
     }
